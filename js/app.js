@@ -717,6 +717,7 @@ function checkStrategyAlerts() {
     box.style.borderColor = 'var(--green-neon)';
     box.style.boxShadow = 'var(--glow-green)';
     box.style.background = 'rgba(0, 230, 118, 0.08)';
+  }
 }
 
 // --- MATHEMATICAL PATTERN & TRAP DETECTOR ENGINE ---
