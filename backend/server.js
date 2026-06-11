@@ -23,7 +23,7 @@ let securityLogs = [
 
 
 
-// Threat Signatures Regex
+// Threat Signatures Regex (Advanced SQLi, XSS, and command injections)
 const threatSignatures = [
   /<script>/i,
   /eval\(/i,
@@ -33,15 +33,40 @@ const threatSignatures = [
   /onclick/i,
   /document\.cookie/i,
   /alert\(/i,
-  /union select/i,
-  /drop table/i,
-  /or 1=1/i
+  /union\s+select/i,
+  /drop\s+table/i,
+  /or\s+1\s*=\s*1/i,
+  /select\s+.*\s+from/i,
+  /insert\s+into/i,
+  /delete\s+from/i,
+  /--/,
+  /\/\*/,
+  /xp_cmdshell/i,
+  /exec\s*\(/i,
+  /src\s*=\s*['"]?javascript:/i,
+  /<iframe/i,
+  /<object/i,
+  /<embed/i
 ];
 
-// Scan input data for threats
+// Scan input data for standard string signatures
 function scanForThreats(input) {
   if (!input || typeof input !== 'string') return false;
   return threatSignatures.some(sig => sig.test(input));
+}
+
+// Recursive NoSQL Injection operator scanner (Blocks keys starting with $ or containing dots)
+function hasNoSQLInjection(obj) {
+  if (!obj || typeof obj !== 'object') return false;
+  for (let key in obj) {
+    if (key.startsWith('$') || key.includes('.')) {
+      return true;
+    }
+    if (typeof obj[key] === 'object') {
+      if (hasNoSQLInjection(obj[key])) return true;
+    }
+  }
+  return false;
 }
 
 // Log security event
@@ -71,19 +96,38 @@ app.use(cors({
 // Body parser
 app.use(express.json());
 
+// IP Ban List (IP -> Ban Expiration Timestamp)
+const bannedIPs = new Map();
+
 // Terminator Firewall (WAF) Request Scanner
 app.use((req, res, next) => {
+  const clientIP = req.ip;
+  if (bannedIPs.has(clientIP)) {
+    const expire = bannedIPs.get(clientIP);
+    if (Date.now() < expire) {
+      return res.status(403).json({
+        status: "BANNED",
+        error: "TERMINATOR BACKEND SHIELD: Your IP has been temporarily blacklisted due to security policy violations."
+      });
+    } else {
+      bannedIPs.delete(clientIP);
+    }
+  }
+
   // Scan URL query params and body for injection attacks
   const rawQuery = JSON.stringify(req.query);
   const rawBody = JSON.stringify(req.body);
   
-  if (scanForThreats(rawQuery) || scanForThreats(rawBody)) {
-    logSecurityEvent("[HTTP INTRUSION]", `Malicious payload blocked from IP ${req.ip}`);
-    shieldStrength = Math.max(50, shieldStrength - 15);
+  if (scanForThreats(rawQuery) || scanForThreats(rawBody) || hasNoSQLInjection(req.query) || hasNoSQLInjection(req.body)) {
+    logSecurityEvent("[HTTP INTRUSION]", `Malicious payload blocked from IP ${clientIP}`);
+    shieldStrength = Math.max(40, shieldStrength - 20);
+    
+    // Set 5-minute temporary ban
+    bannedIPs.set(clientIP, Date.now() + 5 * 60 * 1000);
     
     return res.status(400).json({
       status: "BLOCKED",
-      error: "TERMINATOR BACKEND SHIELD: Malicious payload signature detected. Threat neutralized."
+      error: "TERMINATOR BACKEND SHIELD: Malicious payload signature or unauthorized NoSQL operator detected. Threat neutralized."
     });
   }
   next();
