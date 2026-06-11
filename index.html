@@ -184,111 +184,143 @@
 
       <!-- 2. Middle Panel: Multi-type Chart & Patterns Logs -->
       <div>
-        <!-- Charting Card -->
-        <div class="panel-card">
-          <div class="chart-controls-panel">
-            <!-- Dual Chart Toggle -->
-            <div class="chart-type-selector" id="chartViewSelector" style="border: 1px solid var(--cyan-dim);">
-              <button class="chart-type-btn active" id="btnViewCustom" onclick="switchChartView('custom')">CUSTOM</button>
-              <button class="chart-type-btn" id="btnViewTV" onclick="switchChartView('tv')">TRADINGVIEW</button>
-            </div>
+        <div id="chartPanelWrapper">
+          <!-- Charting Card -->
+          <div class="panel-card">
+            <div class="chart-controls-panel">
+              <!-- Dual Chart Toggle -->
+              <div class="chart-type-selector" id="chartViewSelector" style="border: 1px solid var(--cyan-dim);">
+                <button class="chart-type-btn active" id="btnViewCustom" onclick="switchChartView('custom')">CUSTOM</button>
+                <button class="chart-type-btn" id="btnViewTV" onclick="switchChartView('tv')">TRADINGVIEW</button>
+              </div>
 
-            <!-- Chart type toggle controls -->
-            <div class="chart-type-selector" id="customTypeSelector">
-              <button class="chart-type-btn active" id="btnTypeLine" onclick="setChartType('line')">LINE</button>
-              <button class="chart-type-btn" id="btnTypeCandle" onclick="setChartType('candle')">CANDLE</button>
-              <button class="chart-type-btn" id="btnTypeArea" onclick="setChartType('area')">AREA</button>
-              <button class="chart-type-btn" id="btnTypeBar" onclick="setChartType('bar')">BAR</button>
+              <!-- Chart type toggle controls -->
+              <div class="chart-type-selector" id="customTypeSelector">
+                <button class="chart-type-btn active" id="btnTypeLine" onclick="setChartType('line')">LINE</button>
+                <button class="chart-type-btn" id="btnTypeCandle" onclick="setChartType('candle')">CANDLE</button>
+                <button class="chart-type-btn" id="btnTypeArea" onclick="setChartType('area')">AREA</button>
+                <button class="chart-type-btn" id="btnTypeBar" onclick="setChartType('bar')">BAR</button>
+              </div>
+              
+              <!-- Interactivity drawing tools & Custom settings -->
+              <div class="drawing-tools-bar" id="customDrawingBar">
+                <button class="tool-btn" id="toolTrendline" onclick="toggleDrawingTool('trendline')">Trendline</button>
+                <button class="tool-btn" id="toolFib" onclick="toggleDrawingTool('fib')">Fibonacci</button>
+                <button class="tool-btn" id="toolSupport" onclick="toggleDrawingTool('support')">S/R Line</button>
+                
+                <!-- Draw color/width selector -->
+                <span style="color: var(--border); font-size: 10px;">|</span>
+                <input type="color" id="drawingColor" value="#00f0ff" style="width: 18px; height: 18px; border: none; background: transparent; cursor: pointer; padding: 0;" title="Line Color">
+                <select id="drawingWidth" style="background: var(--surface-light); border: 1px solid var(--border); color: var(--text-primary); font-size: 9px; border-radius: 4px; padding: 2px;" title="Line Width">
+                  <option value="1">1px</option>
+                  <option value="2" selected>2px</option>
+                  <option value="3">3px</option>
+                  <option value="4">4px</option>
+                </select>
+
+                <!-- Indicators Overlay Checks -->
+                <span style="color: var(--border); font-size: 10px;">|</span>
+                <label style="font-size: 9.5px; display: flex; align-items: center; gap: 3px; color: var(--text-secondary); cursor: pointer;">
+                  <input type="checkbox" id="cbBB" checked onchange="drawChart()">
+                  <span>BB</span>
+                </label>
+                <label style="font-size: 9.5px; display: flex; align-items: center; gap: 3px; color: var(--text-secondary); cursor: pointer;">
+                  <input type="checkbox" id="cbEMA20" onchange="drawChart()">
+                  <span>EMA20</span>
+                </label>
+                <label style="font-size: 9.5px; display: flex; align-items: center; gap: 3px; color: var(--text-secondary); cursor: pointer;">
+                  <input type="checkbox" id="cbEMA50" onchange="drawChart()">
+                  <span>EMA50</span>
+                </label>
+
+                <!-- Replay Trigger -->
+                <span style="color: var(--border); font-size: 10px;">|</span>
+                <button class="tool-btn" id="btnReplay" onclick="toggleReplayMode()" style="border-color: var(--gold-accent); color: var(--gold-accent);">Replay</button>
+                
+                <button class="tool-btn" onclick="clearDrawings()" style="border-color: rgba(255,23,68,0.3); color: var(--red-neon);">Clear</button>
+              </div>
             </div>
             
-            <!-- Interactivity drawing tools & Custom settings -->
-            <div class="drawing-tools-bar" id="customDrawingBar">
-              <button class="tool-btn" id="toolTrendline" onclick="toggleDrawingTool('trendline')">Trendline</button>
-              <button class="tool-btn" id="toolFib" onclick="toggleDrawingTool('fib')">Fibonacci</button>
-              <button class="tool-btn" id="toolSupport" onclick="toggleDrawingTool('support')">S/R Line</button>
-              
-              <!-- Draw color/width selector -->
-              <span style="color: var(--border); font-size: 10px;">|</span>
-              <input type="color" id="drawingColor" value="#00f0ff" style="width: 18px; height: 18px; border: none; background: transparent; cursor: pointer; padding: 0;" title="Line Color">
-              <select id="drawingWidth" style="background: var(--surface-light); border: 1px solid var(--border); color: var(--text-primary); font-size: 9px; border-radius: 4px; padding: 2px;" title="Line Width">
-                <option value="1">1px</option>
-                <option value="2" selected>2px</option>
-                <option value="3">3px</option>
-                <option value="4">4px</option>
-              </select>
+            <!-- Graph frame & Go Live snapshot handler -->
+            <div class="chart-container" id="chartFrame">
+              <canvas id="liveChartCanvas"></canvas>
+              <div id="tradingview_chart_container" style="width: 100%; height: 100%; display: none; position: relative;">
+                <div id="tvSymbolIndicator" style="position: absolute; top: 10px; left: 10px; background: rgba(13, 14, 21, 0.9); color: var(--gold-accent); font-family: 'Orbitron', sans-serif; font-size: 8px; font-weight: bold; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; z-index: 99; pointer-events: none;">Symbol: NSE:NIFTY</div>
+                <div id="tradingview_chart" style="width: 100%; height: 100%;"></div>
+              </div>
 
-              <!-- Indicators Overlay Checks -->
-              <span style="color: var(--border); font-size: 10px;">|</span>
-              <label style="font-size: 9.5px; display: flex; align-items: center; gap: 3px; color: var(--text-secondary); cursor: pointer;">
-                <input type="checkbox" id="cbBB" checked onchange="drawChart()">
-                <span>BB</span>
-              </label>
-              <label style="font-size: 9.5px; display: flex; align-items: center; gap: 3px; color: var(--text-secondary); cursor: pointer;">
-                <input type="checkbox" id="cbEMA20" onchange="drawChart()">
-                <span>EMA20</span>
-              </label>
-              <label style="font-size: 9.5px; display: flex; align-items: center; gap: 3px; color: var(--text-secondary); cursor: pointer;">
-                <input type="checkbox" id="cbEMA50" onchange="drawChart()">
-                <span>EMA50</span>
-              </label>
+              <!-- Replay overlay toolbar controls -->
+              <div id="replayControlBar" class="replay-toolbar" style="display: none; position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: rgba(13, 14, 21, 0.95); border: 1px solid var(--gold); padding: 6px 16px; border-radius: 24px; gap: 10px; align-items: center; z-index: 10; box-shadow: var(--glow-gold);">
+                <span style="font-size: 8.5px; font-weight: bold; font-family: 'Orbitron', sans-serif; color: var(--gold-accent); letter-spacing: 1px;">REPLAY</span>
+                <button class="chart-type-btn" id="btnReplayPlay" onclick="replayPlay()" style="border-color: var(--green-neon); color: var(--green-neon);">PLAY</button>
+                <button class="chart-type-btn" id="btnReplayStep" onclick="replayStep()">STEP ▷</button>
+                <button class="chart-type-btn exit" onclick="toggleReplayMode()" style="border-color: var(--red-neon); color: var(--red-neon);">EXIT</button>
+              </div>
 
-              <!-- Replay Trigger -->
-              <span style="color: var(--border); font-size: 10px;">|</span>
-              <button class="tool-btn" id="btnReplay" onclick="toggleReplayMode()" style="border-color: var(--gold-accent); color: var(--gold-accent);">Replay</button>
-              
-              <button class="tool-btn" onclick="clearDrawings()" style="border-color: rgba(255,23,68,0.3); color: var(--red-neon);">Clear</button>
+              <button id="btnGoLive" onclick="snapToLive()" 
+                style="position: absolute; bottom: 15px; right: 15px; background: rgba(13, 14, 21, 0.85); border: 1.5px solid var(--cyan); color: var(--cyan); padding: 6px 12px; border-radius: 20px; font-family: 'Orbitron', sans-serif; font-size: 9px; font-weight: 800; cursor: pointer; display: none; box-shadow: var(--glow-cyan); transition: all 0.2s ease; z-index: 10;"
+                onmouseover="this.style.background='var(--cyan)'; this.style.color='#000';"
+                onmouseout="this.style.background='rgba(13, 14, 21, 0.85)'; this.style.color='var(--cyan)';">
+                GO LIVE ◉
+              </button>
+            </div>
+
+            <!-- Live Indicator Badges -->
+            <div class="indicators-row">
+              <div class="indicator-badge">
+                <div class="indicator-label" id="lblRsi">RSI (14)</div>
+                <div class="indicator-value" id="rsiVal" style="color: var(--cyan);">54.0</div>
+              </div>
+              <div class="indicator-badge">
+                <div class="indicator-label" id="lblMacd">MACD</div>
+                <div class="indicator-value" id="macdVal" style="color: var(--green-neon);">0.12</div>
+              </div>
+              <div class="indicator-badge">
+                <div class="indicator-label" id="lblSignal">SIGNAL</div>
+                <div class="indicator-value" id="signalVal" style="color: var(--text-secondary);">0.08</div>
+              </div>
             </div>
           </div>
-          
-          <!-- Graph frame & Go Live snapshot handler -->
-          <div class="chart-container" id="chartFrame">
-            <canvas id="liveChartCanvas"></canvas>
-            <div id="tradingview_chart_container" style="width: 100%; height: 100%; display: none; position: relative;">
-              <div id="tvSymbolIndicator" style="position: absolute; top: 10px; left: 10px; background: rgba(13, 14, 21, 0.9); color: var(--gold-accent); font-family: 'Orbitron', sans-serif; font-size: 8px; font-weight: bold; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; z-index: 99; pointer-events: none;">Symbol: NSE:NIFTY</div>
-              <div id="tradingview_chart" style="width: 100%; height: 100%;"></div>
-            </div>
 
-            <!-- Replay overlay toolbar controls -->
-            <div id="replayControlBar" class="replay-toolbar" style="display: none; position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: rgba(13, 14, 21, 0.95); border: 1px solid var(--gold); padding: 6px 16px; border-radius: 24px; gap: 10px; align-items: center; z-index: 10; box-shadow: var(--glow-gold);">
-              <span style="font-size: 8.5px; font-weight: bold; font-family: 'Orbitron', sans-serif; color: var(--gold-accent); letter-spacing: 1px;">REPLAY</span>
-              <button class="chart-type-btn" id="btnReplayPlay" onclick="replayPlay()" style="border-color: var(--green-neon); color: var(--green-neon);">PLAY</button>
-              <button class="chart-type-btn" id="btnReplayStep" onclick="replayStep()">STEP ▷</button>
-              <button class="chart-type-btn exit" onclick="toggleReplayMode()" style="border-color: var(--red-neon); color: var(--red-neon);">EXIT</button>
+          <!-- Pattern / Trap Scanner Logs -->
+          <div class="panel-card" style="margin-bottom: 0px;">
+            <div class="watchlist-header">
+              <span id="lblScannerHeader">Institutional Trap & Pattern Scanner</span>
+              <span id="scannerAccuracy" style="color: var(--gold-accent); font-weight: bold; text-shadow: var(--glow-gold);">ACCURACY: 98.9%</span>
             </div>
-
-            <button id="btnGoLive" onclick="snapToLive()" 
-              style="position: absolute; bottom: 15px; right: 15px; background: rgba(13, 14, 21, 0.85); border: 1.5px solid var(--cyan); color: var(--cyan); padding: 6px 12px; border-radius: 20px; font-family: 'Orbitron', sans-serif; font-size: 9px; font-weight: 800; cursor: pointer; display: none; box-shadow: var(--glow-cyan); transition: all 0.2s ease; z-index: 10;"
-              onmouseover="this.style.background='var(--cyan)'; this.style.color='#000';"
-              onmouseout="this.style.background='rgba(13, 14, 21, 0.85)'; this.style.color='var(--cyan)';">
-              GO LIVE ◉
-            </button>
-          </div>
-
-          <!-- Live Indicator Badges -->
-          <div class="indicators-row">
-            <div class="indicator-badge">
-              <div class="indicator-label" id="lblRsi">RSI (14)</div>
-              <div class="indicator-value" id="rsiVal" style="color: var(--cyan);">54.0</div>
-            </div>
-            <div class="indicator-badge">
-              <div class="indicator-label" id="lblMacd">MACD</div>
-              <div class="indicator-value" id="macdVal" style="color: var(--green-neon);">0.12</div>
-            </div>
-            <div class="indicator-badge">
-              <div class="indicator-label" id="lblSignal">SIGNAL</div>
-              <div class="indicator-value" id="signalVal" style="color: var(--text-secondary);">0.08</div>
+            <div class="scanner-logs-panel" id="scannerLogs">
+              <!-- Simulated Logs appear here -->
             </div>
           </div>
         </div>
 
-        <!-- Pattern / Trap Scanner Logs -->
-        <div class="panel-card" style="margin-bottom: 0px;">
-          <div class="watchlist-header">
-            <span id="lblScannerHeader">Institutional Trap & Pattern Scanner</span>
-            <span id="scannerAccuracy" style="color: var(--gold-accent); font-weight: bold; text-shadow: var(--glow-gold);">ACCURACY: 98.9%</span>
+        <!-- AI Indian Stocks Intelligence Board -->
+        <div id="indianStocksDashboardWrapper" style="display: none;">
+          <!-- Main AI Catalog Card -->
+          <div class="panel-card" style="margin-bottom: 16px;">
+            <div class="watchlist-header" style="border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 15px;">
+              <div>
+                <span style="font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: bold; color: var(--cyan); letter-spacing: 1.5px; text-transform: uppercase;" id="lblIndianDashboardTitle">AI EQUITIES INTELLIGENCE BOARD</span>
+                <div style="font-size: 8.5px; color: var(--text-muted); font-family: 'Orbitron'; margin-top: 2px;">REAL-TIME AI ANALYTICS & MARKET AUDITS</div>
+              </div>
+              <span class="scan-status-indicator" id="lblScannerLiveBadge">SCANNING NSE/BSE LIVE</span>
+            </div>
+
+            <!-- Scrollable Grid Container -->
+            <div class="indian-stocks-grid" id="indianStocksCatalog" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; max-height: 330px; overflow-y: auto; padding-right: 4px;">
+              <!-- Populated dynamically by app.js -->
+            </div>
           </div>
-          <div class="scanner-logs-panel" id="scannerLogs">
-            <!-- Simulated Logs appear here -->
+
+          <!-- AI Discovery Console Card -->
+          <div class="panel-card" style="margin-bottom: 0;">
+            <div class="watchlist-header">
+              <span id="lblDiscoveryFeedTitle">AI REAL-TIME DISCOVERY & INGESTION CONSOLE</span>
+              <span id="lblDiscoveryCount" style="color: var(--gold-accent); font-weight: bold; font-family: 'Orbitron'; font-size: 8.5px;">ACTIVE AUDITS: 4 STOCKS</span>
+            </div>
+            <div class="stock-discovery-feed" id="stockDiscoveryLogs" style="height: 110px; font-size: 8.5px; background: rgba(3, 3, 7, 0.95); margin-top: 8px; overflow-y: auto; font-family: 'Orbitron', monospace; border: 1.5px solid var(--border); border-radius: 8px; padding: 10px; box-shadow: inset 0 0 10px rgba(0,0,0,0.8); display: flex; flex-direction: column; gap: 4px;">
+              <!-- Simulated Discovery Logs appear here -->
+            </div>
           </div>
         </div>
       </div>

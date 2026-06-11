@@ -1438,6 +1438,140 @@ footer {
   transform: none; /* Override standard panel hover */
 }
 
+/* AI Indian Stocks Dashboard Custom Styles */
+.stock-profile-card {
+  background: rgba(13, 14, 21, 0.55);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.stock-profile-card:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.stock-profile-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0.6;
+}
+
+.stock-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.stock-card-ticker {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.stock-card-name {
+  font-size: 8px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+.stock-card-badge {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 7px;
+  font-weight: bold;
+  padding: 1px 4px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+}
+
+.stock-card-badge.discovered {
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--gold-accent);
+  border-color: rgba(255, 215, 0, 0.3);
+  animation: scanPulse 1.5s infinite alternate;
+}
+
+.stock-card-badge.core {
+  background: rgba(0, 240, 255, 0.08);
+  color: var(--cyan);
+  border-color: rgba(0, 240, 255, 0.25);
+}
+
+.stock-card-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.stock-card-price {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.stock-card-change {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9.5px;
+  font-weight: bold;
+}
+
+.stock-card-ai-analysis {
+  font-size: 9px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-style: italic;
+  min-height: 40px;
+}
+
+.stock-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 8px;
+  color: var(--text-muted);
+  border-top: 1px dashed rgba(255, 255, 255, 0.05);
+  padding-top: 6px;
+}
+
+@keyframes scanPulse {
+  0% { box-shadow: 0 0 2px rgba(255, 215, 0, 0.2); }
+  100% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.5); }
+}
+
+.stock-discovery-feed .log-row {
+  animation: logSlideIn 0.3s ease-out;
+}
+
+@keyframes logSlideIn {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 
 
 </style>
@@ -1613,111 +1747,143 @@ footer {
 
       <!-- 2. Middle Panel: Multi-type Chart & Patterns Logs -->
       <div>
-        <!-- Charting Card -->
-        <div class="panel-card">
-          <div class="chart-controls-panel">
-            <!-- Dual Chart Toggle -->
-            <div class="chart-type-selector" id="chartViewSelector" style="border: 1px solid var(--cyan-dim);">
-              <button class="chart-type-btn active" id="btnViewCustom" onclick="switchChartView('custom')">CUSTOM</button>
-              <button class="chart-type-btn" id="btnViewTV" onclick="switchChartView('tv')">TRADINGVIEW</button>
-            </div>
+        <div id="chartPanelWrapper">
+          <!-- Charting Card -->
+          <div class="panel-card">
+            <div class="chart-controls-panel">
+              <!-- Dual Chart Toggle -->
+              <div class="chart-type-selector" id="chartViewSelector" style="border: 1px solid var(--cyan-dim);">
+                <button class="chart-type-btn active" id="btnViewCustom" onclick="switchChartView('custom')">CUSTOM</button>
+                <button class="chart-type-btn" id="btnViewTV" onclick="switchChartView('tv')">TRADINGVIEW</button>
+              </div>
 
-            <!-- Chart type toggle controls -->
-            <div class="chart-type-selector" id="customTypeSelector">
-              <button class="chart-type-btn active" id="btnTypeLine" onclick="setChartType('line')">LINE</button>
-              <button class="chart-type-btn" id="btnTypeCandle" onclick="setChartType('candle')">CANDLE</button>
-              <button class="chart-type-btn" id="btnTypeArea" onclick="setChartType('area')">AREA</button>
-              <button class="chart-type-btn" id="btnTypeBar" onclick="setChartType('bar')">BAR</button>
+              <!-- Chart type toggle controls -->
+              <div class="chart-type-selector" id="customTypeSelector">
+                <button class="chart-type-btn active" id="btnTypeLine" onclick="setChartType('line')">LINE</button>
+                <button class="chart-type-btn" id="btnTypeCandle" onclick="setChartType('candle')">CANDLE</button>
+                <button class="chart-type-btn" id="btnTypeArea" onclick="setChartType('area')">AREA</button>
+                <button class="chart-type-btn" id="btnTypeBar" onclick="setChartType('bar')">BAR</button>
+              </div>
+              
+              <!-- Interactivity drawing tools & Custom settings -->
+              <div class="drawing-tools-bar" id="customDrawingBar">
+                <button class="tool-btn" id="toolTrendline" onclick="toggleDrawingTool('trendline')">Trendline</button>
+                <button class="tool-btn" id="toolFib" onclick="toggleDrawingTool('fib')">Fibonacci</button>
+                <button class="tool-btn" id="toolSupport" onclick="toggleDrawingTool('support')">S/R Line</button>
+                
+                <!-- Draw color/width selector -->
+                <span style="color: var(--border); font-size: 10px;">|</span>
+                <input type="color" id="drawingColor" value="#00f0ff" style="width: 18px; height: 18px; border: none; background: transparent; cursor: pointer; padding: 0;" title="Line Color">
+                <select id="drawingWidth" style="background: var(--surface-light); border: 1px solid var(--border); color: var(--text-primary); font-size: 9px; border-radius: 4px; padding: 2px;" title="Line Width">
+                  <option value="1">1px</option>
+                  <option value="2" selected>2px</option>
+                  <option value="3">3px</option>
+                  <option value="4">4px</option>
+                </select>
+
+                <!-- Indicators Overlay Checks -->
+                <span style="color: var(--border); font-size: 10px;">|</span>
+                <label style="font-size: 9.5px; display: flex; align-items: center; gap: 3px; color: var(--text-secondary); cursor: pointer;">
+                  <input type="checkbox" id="cbBB" checked onchange="drawChart()">
+                  <span>BB</span>
+                </label>
+                <label style="font-size: 9.5px; display: flex; align-items: center; gap: 3px; color: var(--text-secondary); cursor: pointer;">
+                  <input type="checkbox" id="cbEMA20" onchange="drawChart()">
+                  <span>EMA20</span>
+                </label>
+                <label style="font-size: 9.5px; display: flex; align-items: center; gap: 3px; color: var(--text-secondary); cursor: pointer;">
+                  <input type="checkbox" id="cbEMA50" onchange="drawChart()">
+                  <span>EMA50</span>
+                </label>
+
+                <!-- Replay Trigger -->
+                <span style="color: var(--border); font-size: 10px;">|</span>
+                <button class="tool-btn" id="btnReplay" onclick="toggleReplayMode()" style="border-color: var(--gold-accent); color: var(--gold-accent);">Replay</button>
+                
+                <button class="tool-btn" onclick="clearDrawings()" style="border-color: rgba(255,23,68,0.3); color: var(--red-neon);">Clear</button>
+              </div>
             </div>
             
-            <!-- Interactivity drawing tools & Custom settings -->
-            <div class="drawing-tools-bar" id="customDrawingBar">
-              <button class="tool-btn" id="toolTrendline" onclick="toggleDrawingTool('trendline')">Trendline</button>
-              <button class="tool-btn" id="toolFib" onclick="toggleDrawingTool('fib')">Fibonacci</button>
-              <button class="tool-btn" id="toolSupport" onclick="toggleDrawingTool('support')">S/R Line</button>
-              
-              <!-- Draw color/width selector -->
-              <span style="color: var(--border); font-size: 10px;">|</span>
-              <input type="color" id="drawingColor" value="#00f0ff" style="width: 18px; height: 18px; border: none; background: transparent; cursor: pointer; padding: 0;" title="Line Color">
-              <select id="drawingWidth" style="background: var(--surface-light); border: 1px solid var(--border); color: var(--text-primary); font-size: 9px; border-radius: 4px; padding: 2px;" title="Line Width">
-                <option value="1">1px</option>
-                <option value="2" selected>2px</option>
-                <option value="3">3px</option>
-                <option value="4">4px</option>
-              </select>
+            <!-- Graph frame & Go Live snapshot handler -->
+            <div class="chart-container" id="chartFrame">
+              <canvas id="liveChartCanvas"></canvas>
+              <div id="tradingview_chart_container" style="width: 100%; height: 100%; display: none; position: relative;">
+                <div id="tvSymbolIndicator" style="position: absolute; top: 10px; left: 10px; background: rgba(13, 14, 21, 0.9); color: var(--gold-accent); font-family: 'Orbitron', sans-serif; font-size: 8px; font-weight: bold; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; z-index: 99; pointer-events: none;">Symbol: NSE:NIFTY</div>
+                <div id="tradingview_chart" style="width: 100%; height: 100%;"></div>
+              </div>
 
-              <!-- Indicators Overlay Checks -->
-              <span style="color: var(--border); font-size: 10px;">|</span>
-              <label style="font-size: 9.5px; display: flex; align-items: center; gap: 3px; color: var(--text-secondary); cursor: pointer;">
-                <input type="checkbox" id="cbBB" checked onchange="drawChart()">
-                <span>BB</span>
-              </label>
-              <label style="font-size: 9.5px; display: flex; align-items: center; gap: 3px; color: var(--text-secondary); cursor: pointer;">
-                <input type="checkbox" id="cbEMA20" onchange="drawChart()">
-                <span>EMA20</span>
-              </label>
-              <label style="font-size: 9.5px; display: flex; align-items: center; gap: 3px; color: var(--text-secondary); cursor: pointer;">
-                <input type="checkbox" id="cbEMA50" onchange="drawChart()">
-                <span>EMA50</span>
-              </label>
+              <!-- Replay overlay toolbar controls -->
+              <div id="replayControlBar" class="replay-toolbar" style="display: none; position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: rgba(13, 14, 21, 0.95); border: 1px solid var(--gold); padding: 6px 16px; border-radius: 24px; gap: 10px; align-items: center; z-index: 10; box-shadow: var(--glow-gold);">
+                <span style="font-size: 8.5px; font-weight: bold; font-family: 'Orbitron', sans-serif; color: var(--gold-accent); letter-spacing: 1px;">REPLAY</span>
+                <button class="chart-type-btn" id="btnReplayPlay" onclick="replayPlay()" style="border-color: var(--green-neon); color: var(--green-neon);">PLAY</button>
+                <button class="chart-type-btn" id="btnReplayStep" onclick="replayStep()">STEP ▷</button>
+                <button class="chart-type-btn exit" onclick="toggleReplayMode()" style="border-color: var(--red-neon); color: var(--red-neon);">EXIT</button>
+              </div>
 
-              <!-- Replay Trigger -->
-              <span style="color: var(--border); font-size: 10px;">|</span>
-              <button class="tool-btn" id="btnReplay" onclick="toggleReplayMode()" style="border-color: var(--gold-accent); color: var(--gold-accent);">Replay</button>
-              
-              <button class="tool-btn" onclick="clearDrawings()" style="border-color: rgba(255,23,68,0.3); color: var(--red-neon);">Clear</button>
+              <button id="btnGoLive" onclick="snapToLive()" 
+                style="position: absolute; bottom: 15px; right: 15px; background: rgba(13, 14, 21, 0.85); border: 1.5px solid var(--cyan); color: var(--cyan); padding: 6px 12px; border-radius: 20px; font-family: 'Orbitron', sans-serif; font-size: 9px; font-weight: 800; cursor: pointer; display: none; box-shadow: var(--glow-cyan); transition: all 0.2s ease; z-index: 10;"
+                onmouseover="this.style.background='var(--cyan)'; this.style.color='#000';"
+                onmouseout="this.style.background='rgba(13, 14, 21, 0.85)'; this.style.color='var(--cyan)';">
+                GO LIVE ◉
+              </button>
+            </div>
+
+            <!-- Live Indicator Badges -->
+            <div class="indicators-row">
+              <div class="indicator-badge">
+                <div class="indicator-label" id="lblRsi">RSI (14)</div>
+                <div class="indicator-value" id="rsiVal" style="color: var(--cyan);">54.0</div>
+              </div>
+              <div class="indicator-badge">
+                <div class="indicator-label" id="lblMacd">MACD</div>
+                <div class="indicator-value" id="macdVal" style="color: var(--green-neon);">0.12</div>
+              </div>
+              <div class="indicator-badge">
+                <div class="indicator-label" id="lblSignal">SIGNAL</div>
+                <div class="indicator-value" id="signalVal" style="color: var(--text-secondary);">0.08</div>
+              </div>
             </div>
           </div>
-          
-          <!-- Graph frame & Go Live snapshot handler -->
-          <div class="chart-container" id="chartFrame">
-            <canvas id="liveChartCanvas"></canvas>
-            <div id="tradingview_chart_container" style="width: 100%; height: 100%; display: none; position: relative;">
-              <div id="tvSymbolIndicator" style="position: absolute; top: 10px; left: 10px; background: rgba(13, 14, 21, 0.9); color: var(--gold-accent); font-family: 'Orbitron', sans-serif; font-size: 8px; font-weight: bold; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; z-index: 99; pointer-events: none;">Symbol: NSE:NIFTY</div>
-              <div id="tradingview_chart" style="width: 100%; height: 100%;"></div>
-            </div>
 
-            <!-- Replay overlay toolbar controls -->
-            <div id="replayControlBar" class="replay-toolbar" style="display: none; position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: rgba(13, 14, 21, 0.95); border: 1px solid var(--gold); padding: 6px 16px; border-radius: 24px; gap: 10px; align-items: center; z-index: 10; box-shadow: var(--glow-gold);">
-              <span style="font-size: 8.5px; font-weight: bold; font-family: 'Orbitron', sans-serif; color: var(--gold-accent); letter-spacing: 1px;">REPLAY</span>
-              <button class="chart-type-btn" id="btnReplayPlay" onclick="replayPlay()" style="border-color: var(--green-neon); color: var(--green-neon);">PLAY</button>
-              <button class="chart-type-btn" id="btnReplayStep" onclick="replayStep()">STEP ▷</button>
-              <button class="chart-type-btn exit" onclick="toggleReplayMode()" style="border-color: var(--red-neon); color: var(--red-neon);">EXIT</button>
+          <!-- Pattern / Trap Scanner Logs -->
+          <div class="panel-card" style="margin-bottom: 0px;">
+            <div class="watchlist-header">
+              <span id="lblScannerHeader">Institutional Trap & Pattern Scanner</span>
+              <span id="scannerAccuracy" style="color: var(--gold-accent); font-weight: bold; text-shadow: var(--glow-gold);">ACCURACY: 98.9%</span>
             </div>
-
-            <button id="btnGoLive" onclick="snapToLive()" 
-              style="position: absolute; bottom: 15px; right: 15px; background: rgba(13, 14, 21, 0.85); border: 1.5px solid var(--cyan); color: var(--cyan); padding: 6px 12px; border-radius: 20px; font-family: 'Orbitron', sans-serif; font-size: 9px; font-weight: 800; cursor: pointer; display: none; box-shadow: var(--glow-cyan); transition: all 0.2s ease; z-index: 10;"
-              onmouseover="this.style.background='var(--cyan)'; this.style.color='#000';"
-              onmouseout="this.style.background='rgba(13, 14, 21, 0.85)'; this.style.color='var(--cyan)';">
-              GO LIVE ◉
-            </button>
-          </div>
-
-          <!-- Live Indicator Badges -->
-          <div class="indicators-row">
-            <div class="indicator-badge">
-              <div class="indicator-label" id="lblRsi">RSI (14)</div>
-              <div class="indicator-value" id="rsiVal" style="color: var(--cyan);">54.0</div>
-            </div>
-            <div class="indicator-badge">
-              <div class="indicator-label" id="lblMacd">MACD</div>
-              <div class="indicator-value" id="macdVal" style="color: var(--green-neon);">0.12</div>
-            </div>
-            <div class="indicator-badge">
-              <div class="indicator-label" id="lblSignal">SIGNAL</div>
-              <div class="indicator-value" id="signalVal" style="color: var(--text-secondary);">0.08</div>
+            <div class="scanner-logs-panel" id="scannerLogs">
+              <!-- Simulated Logs appear here -->
             </div>
           </div>
         </div>
 
-        <!-- Pattern / Trap Scanner Logs -->
-        <div class="panel-card" style="margin-bottom: 0px;">
-          <div class="watchlist-header">
-            <span id="lblScannerHeader">Institutional Trap & Pattern Scanner</span>
-            <span id="scannerAccuracy" style="color: var(--gold-accent); font-weight: bold; text-shadow: var(--glow-gold);">ACCURACY: 98.9%</span>
+        <!-- AI Indian Stocks Intelligence Board -->
+        <div id="indianStocksDashboardWrapper" style="display: none;">
+          <!-- Main AI Catalog Card -->
+          <div class="panel-card" style="margin-bottom: 16px;">
+            <div class="watchlist-header" style="border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 15px;">
+              <div>
+                <span style="font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: bold; color: var(--cyan); letter-spacing: 1.5px; text-transform: uppercase;" id="lblIndianDashboardTitle">AI EQUITIES INTELLIGENCE BOARD</span>
+                <div style="font-size: 8.5px; color: var(--text-muted); font-family: 'Orbitron'; margin-top: 2px;">REAL-TIME AI ANALYTICS & MARKET AUDITS</div>
+              </div>
+              <span class="scan-status-indicator" id="lblScannerLiveBadge">SCANNING NSE/BSE LIVE</span>
+            </div>
+
+            <!-- Scrollable Grid Container -->
+            <div class="indian-stocks-grid" id="indianStocksCatalog" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; max-height: 330px; overflow-y: auto; padding-right: 4px;">
+              <!-- Populated dynamically by app.js -->
+            </div>
           </div>
-          <div class="scanner-logs-panel" id="scannerLogs">
-            <!-- Simulated Logs appear here -->
+
+          <!-- AI Discovery Console Card -->
+          <div class="panel-card" style="margin-bottom: 0;">
+            <div class="watchlist-header">
+              <span id="lblDiscoveryFeedTitle">AI REAL-TIME DISCOVERY & INGESTION CONSOLE</span>
+              <span id="lblDiscoveryCount" style="color: var(--gold-accent); font-weight: bold; font-family: 'Orbitron'; font-size: 8.5px;">ACTIVE AUDITS: 4 STOCKS</span>
+            </div>
+            <div class="stock-discovery-feed" id="stockDiscoveryLogs" style="height: 110px; font-size: 8.5px; background: rgba(3, 3, 7, 0.95); margin-top: 8px; overflow-y: auto; font-family: 'Orbitron', monospace; border: 1.5px solid var(--border); border-radius: 8px; padding: 10px; box-shadow: inset 0 0 10px rgba(0,0,0,0.8); display: flex; flex-direction: column; gap: 4px;">
+              <!-- Simulated Discovery Logs appear here -->
+            </div>
           </div>
         </div>
       </div>
@@ -2052,7 +2218,11 @@ const langDb = {
     thAdvisoryTimeframe: "TIMEFRAME",
     thAdvisoryRationale: "RATIONALE",
     btnLiveAIScan: "RUN LIVE AI SCAN",
-    lblAIScanStatus: "Scanning markets with AI..."
+    lblAIScanStatus: "Scanning markets with AI...",
+    lblIndianDashboardTitle: "AI EQUITIES INTELLIGENCE BOARD",
+    lblScannerLiveBadge: "SCANNING NSE/BSE LIVE",
+    lblDiscoveryFeedTitle: "AI REAL-TIME DISCOVERY & INGESTION CONSOLE",
+    lblDiscoveryCount: "ACTIVE AUDITS: "
   },
   mr: {
     title: "वाईजमन ॲनालिटिक्स",
@@ -2147,7 +2317,11 @@ const langDb = {
     thAdvisoryTimeframe: "कालावधी",
     thAdvisoryRationale: "स्पष्टीकरण",
     btnLiveAIScan: "थेट AI स्कॅनिंग सुरू करा",
-    lblAIScanStatus: "AI द्वारे मार्केट स्कॅन सुरू आहे..."
+    lblAIScanStatus: "AI द्वारे मार्केट स्कॅन सुरू आहे...",
+    lblIndianDashboardTitle: "AI शेअर्स इंटेलिजन्स बोर्ड",
+    lblScannerLiveBadge: "NSE/BSE लाइव्ह स्कॅनिंग सुरू",
+    lblDiscoveryFeedTitle: "AI रिअल-टाइम शोध आणि डेटा फीड",
+    lblDiscoveryCount: "सक्रिय ऑडिट्स: "
   },
   hi: {
     title: "वाइजमैन एनालिटिक्स",
@@ -2242,7 +2416,11 @@ const langDb = {
     thAdvisoryTimeframe: "समय सीमा",
     thAdvisoryRationale: "तर्क",
     btnLiveAIScan: "सक्रिय AI स्कैन शुरू करें",
-    lblAIScanStatus: "AI द्वारा बाजार स्कैन जारी..."
+    lblAIScanStatus: "AI द्वारा बाजार स्कैन जारी...",
+    lblIndianDashboardTitle: "AI शेयर्स इंटेलिजेंस बोर्ड",
+    lblScannerLiveBadge: "NSE/BSE लाइव स्कैन जारी",
+    lblDiscoveryFeedTitle: "AI रियल-टाइम खोज और डेटा फीड",
+    lblDiscoveryCount: "सक्रिय ऑडिट: "
   },
   es: {
     title: "WISEMAN ANALYTICS",
@@ -2337,7 +2515,11 @@ const langDb = {
     thAdvisoryTimeframe: "MARCO DE TIEMPO",
     thAdvisoryRationale: "RAZÓN",
     btnLiveAIScan: "INICIAR ESCANEO DE IA",
-    lblAIScanStatus: "Escaneando mercados con IA..."
+    lblAIScanStatus: "Escaneando mercados con IA...",
+    lblIndianDashboardTitle: "PANEL DE INTELIGENCIA DE ACCIONES DE IA",
+    lblScannerLiveBadge: "ESCANEO DE NSE/BSE EN VIVO",
+    lblDiscoveryFeedTitle: "CONSOLA DE DESCUBRIMIENTO Y REGISTRO EN TIEMPO REAL DE IA",
+    lblDiscoveryCount: "AUDITORÍAS ACTIVAS: "
   }
 };
 
@@ -2502,7 +2684,10 @@ function translateUI(lang) {
     thAdvisoryHoldClass: dict.thAdvisoryHoldClass,
     thAdvisoryTimeframe: dict.thAdvisoryTimeframe,
     thAdvisoryRationale: dict.thAdvisoryRationale,
-    btnLiveAIScan: dict.btnLiveAIScan
+    btnLiveAIScan: dict.btnLiveAIScan,
+    lblIndianDashboardTitle: dict.lblIndianDashboardTitle,
+    lblScannerLiveBadge: dict.lblScannerLiveBadge,
+    lblDiscoveryFeedTitle: dict.lblDiscoveryFeedTitle
   };
 
   for (const [id, value] of Object.entries(mappings)) {
@@ -4556,6 +4741,21 @@ window.translateUI = function(lang) {
 // --- START app.js ---
 // Wiseman Analytics Core Orchestrator & Coordinator
 
+// Active Indian Equities for the AI board
+let indianEquitiesDatabase = [
+  { key: "reliance", name: "Reliance Industries", sector: "Energy & Telecom", price: 2890.00, change: 1.25, cap: "Large Cap", pE: "24.5", desc: "Consolidating near 50 EMA. Institutional accumulation block detected at 2850.", lastAnalysis: "Bullish consolidation near major support block. Est. target 2980." },
+  { key: "tata", name: "Tata Motors Limited", sector: "Automotive", price: 945.00, change: -0.85, cap: "Large Cap", pE: "18.2", desc: "EMA 20 crossover failed. Local distribution detected. Wait for 930 sweep.", lastAnalysis: "Short-term bearish sweep under key pivot. Avoid entry until support test." },
+  { key: "tata_tech", name: "Tata Tech Limited", sector: "IT Services & ER&D", price: 880.00, change: 0.15, cap: "Mid Cap", pE: "45.1", desc: "Accumulation block active at 875. Low retail interest. Volume building.", lastAnalysis: "Range bound oscillations between 870 and 910. Safe swing hold." },
+  { key: "hdfc", name: "HDFC Bank Limited", sector: "Banking & Financials", price: 1450.00, change: 1.85, cap: "Large Cap", pE: "19.8", desc: "Double bottom breakout confirmed. High FII buying logs recorded.", lastAnalysis: "Strong institutional inflow block. Target 1520 in swing horizon." }
+];
+
+let discoveryCandidates = [
+  { key: "sbin", name: "State Bank of India", sector: "Banking", price: 815.00, change: 2.15, cap: "Large Cap", pE: "12.4", desc: "Breakout above major daily resistance block. FII buying sweeps active.", lastAnalysis: "Bullish trend expansion confirmed. Target 850. Stop loss 798." },
+  { key: "tcs", name: "Tata Consultancy Services", sector: "IT Services", price: 3820.00, change: -1.45, cap: "Large Cap", pE: "28.5", desc: "Bearish engulfing candle on hourly frame. Profit booking sweep active.", lastAnalysis: "Bearish distribution block near 3900. Retracement expected to 3750." },
+  { key: "adanient", name: "Adani Enterprises", sector: "Conglomerate", price: 3120.00, change: 4.80, cap: "Large Cap", pE: "92.1", desc: "Liquidity grab completed below 3050. Sudden volume spike on block deals.", lastAnalysis: "Aggressive bullish momentum. Sweep target 3250. High volatility risk." },
+  { key: "coalindia", name: "Coal India Limited", sector: "Mining & Power", price: 470.00, change: 0.65, cap: "Mid Cap", pE: "9.2", desc: "High dividend yield support. Low risk range consolidation.", lastAnalysis: "Stable dividend accumulation play. Strong target support at 462." }
+];
+
 // System Global States
 let activeMarket = 'indianStocks';
 let activeTickerKey = 'nifty';
@@ -4602,6 +4802,7 @@ function init() {
   startWatchlistScanner();
   populateNewsTicker();
   startRealTimeNewsEngine();
+  startAIDiscoveryEngine();
 
   if (typeof switchChartView === 'function') {
     switchChartView('custom');
@@ -4636,6 +4837,19 @@ function switchMarket(marketKey) {
     else t.classList.remove('active');
   });
   populateWatchlist();
+
+  // Show/Hide Indian Stocks Dashboard vs Chart Panel
+  const chartWrap = document.getElementById('chartPanelWrapper');
+  const indianWrap = document.getElementById('indianStocksDashboardWrapper');
+  if (marketKey === 'indianStocks') {
+    if (chartWrap) chartWrap.style.display = 'none';
+    if (indianWrap) indianWrap.style.display = 'block';
+    renderIndianStocksDashboard();
+  } else {
+    if (chartWrap) chartWrap.style.display = 'block';
+    if (indianWrap) indianWrap.style.display = 'none';
+  }
+
   const firstTicker = marketTickers[marketKey][0];
   selectTicker(firstTicker.key);
 }
@@ -4864,6 +5078,31 @@ function startSimulator() {
         }
       });
     });
+
+    // Update Indian Equities database prices in simulator loop
+    indianEquitiesDatabase.forEach(stock => {
+      const volatility = stock.key === 'adanient' ? 0.0025 : 0.0006;
+      const change = (Math.random() - 0.495) * volatility;
+      stock.price = stock.price * (1 + change);
+      stock.change = stock.change + change * 100;
+    });
+    
+    // If we are currently showing the Indian Stocks dashboard, refresh the card contents dynamically
+    if (activeMarket === 'indianStocks') {
+      indianEquitiesDatabase.forEach(stock => {
+        const card = document.querySelector(`.stock-profile-card[data-key="${stock.key}"]`);
+        if (card) {
+          const priceEl = card.querySelector('.stock-card-price');
+          const changeEl = card.querySelector('.stock-card-change');
+          if (priceEl) priceEl.innerText = stock.price.toFixed(2);
+          if (changeEl) {
+            const sign = stock.change >= 0 ? '+' : '';
+            changeEl.innerText = `${sign}${stock.change.toFixed(2)}%`;
+            changeEl.style.color = stock.change >= 0 ? 'var(--green-neon)' : 'var(--red-neon)';
+          }
+        }
+      });
+    }
 
     const currentActiveConfig = marketTickers[activeMarket].find(t => t.key === activeTickerKey);
     
@@ -5721,6 +5960,189 @@ function triggerAICoachNewsReaction(newsItem) {
 }
 
 // Local browser storage trade persistence and database sync methods removed as this is a pure analysis & advisory platform
+
+// --- AI INDIAN STOCKS BOARD & AUTO-DISCOVERY FEED ---
+function renderIndianStocksDashboard() {
+  const container = document.getElementById('indianStocksCatalog');
+  const countBadge = document.getElementById('lblDiscoveryCount');
+  const dict = langDb[currentLang] || langDb['en'];
+  if (!container) return;
+
+  container.innerHTML = '';
+  
+  if (countBadge) {
+    countBadge.innerText = `${dict.lblDiscoveryCount}${indianEquitiesDatabase.length} STOCKS`;
+  }
+
+  indianEquitiesDatabase.forEach(stock => {
+    const card = document.createElement('div');
+    card.className = 'stock-profile-card';
+    card.setAttribute('data-key', stock.key);
+    card.onclick = () => openStockDetailModal(stock);
+
+    const isNew = stock.key === 'sbin' || stock.key === 'tcs' || stock.key === 'adanient' || stock.key === 'coalindia';
+    const badgeText = isNew ? (currentLang === 'mr' ? 'नवीन' : 'DISCOVERED') : (currentLang === 'mr' ? 'मुख्य' : 'CORE INDEX');
+    const badgeClass = isNew ? 'discovered' : 'core';
+    const sign = stock.change >= 0 ? '+' : '';
+    const changeColor = stock.change >= 0 ? 'var(--green-neon)' : 'var(--red-neon)';
+
+    card.innerHTML = `
+      <div>
+        <div class="stock-card-header">
+          <div>
+            <div class="stock-card-ticker">${stock.key.toUpperCase()}</div>
+            <div class="stock-card-name">${stock.name}</div>
+          </div>
+          <span class="stock-card-badge ${badgeClass}">${badgeText}</span>
+        </div>
+
+        <div class="stock-card-price-row">
+          <span class="stock-card-price">${stock.price.toFixed(2)}</span>
+          <span class="stock-card-change" style="color: ${changeColor};">${sign}${stock.change.toFixed(2)}%</span>
+        </div>
+
+        <div class="stock-card-ai-analysis">
+          ${stock.desc}
+        </div>
+      </div>
+
+      <div class="stock-card-footer">
+        <span>SECTOR: ${stock.sector}</span>
+        <span>P/E: ${stock.pE}</span>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function openStockDetailModal(stock) {
+  const modal = document.getElementById('sentimentModal');
+  const headline = document.getElementById('modalSentimentHeadline');
+  const badge = document.getElementById('modalSentimentBadge');
+  const time = document.getElementById('modalSentimentTime');
+  const analysis = document.getElementById('modalSentimentAnalysis');
+  const impact = document.getElementById('modalSentimentImpact');
+  const title = document.getElementById('lblSentimentTitle');
+
+  if (modal && headline && badge && time && analysis && impact) {
+    if (title) title.innerText = currentLang === 'mr' ? 'AI स्टॉक क्वांटिटेटिव ऑडिट' : 'AI QUANTITATIVE STOCK AUDIT';
+    headline.innerText = `${stock.name} (${stock.key.toUpperCase()})`;
+    badge.innerText = `${stock.sector} • ${stock.cap}`;
+    badge.style.background = 'rgba(0, 240, 255, 0.15)';
+    badge.style.color = 'var(--cyan)';
+    badge.style.borderColor = 'var(--cyan)';
+
+    time.innerText = `P/E Ratio: ${stock.pE}`;
+    analysis.innerHTML = `<strong style="color: var(--gold-accent);">AI Heuristics Analysis:</strong><br>${stock.lastAnalysis}<br><br><strong style="color: var(--cyan);">Market Profile:</strong><br>${stock.desc}`;
+    
+    const sign = stock.change >= 0 ? '+' : '';
+    const color = stock.change >= 0 ? 'var(--green-neon)' : 'var(--red-neon)';
+    impact.innerText = `LAST PRICE: ₹${stock.price.toFixed(2)} (${sign}${stock.change.toFixed(2)}%)`;
+    impact.style.color = color;
+    impact.style.borderColor = color.replace('var(--', 'rgba(').replace(')', ', 0.3)');
+
+    modal.style.display = 'flex';
+  }
+}
+
+function startAIDiscoveryEngine() {
+  // Initial fill of logs
+  const logsPanel = document.getElementById('stockDiscoveryLogs');
+  if (logsPanel) {
+    const defaultSecs = [
+      { tag: "[INGESTION]", msg: "Reliance Industries data pipeline connected." },
+      { tag: "[INGESTION]", msg: "Tata Motors Limited data pipeline connected." },
+      { tag: "[INGESTION]", msg: "HDFC Bank Limited data pipeline connected." },
+      { tag: "[INGESTION]", msg: "Tata Tech Limited data pipeline connected." }
+    ];
+    defaultSecs.forEach((item, idx) => {
+      setTimeout(() => {
+        const row = document.createElement('div');
+        row.className = 'log-row';
+        row.innerHTML = `
+          <span class="log-time" style="color: var(--text-muted); margin-right: 6px;">[${new Date(Date.now() - (4 - idx) * 60000).toLocaleTimeString()}]</span>
+          <span class="log-tag" style="color: var(--green-neon); font-weight: bold; margin-right: 6px;">${item.tag}</span>
+          <span class="log-desc" style="color: var(--text-secondary);">${item.msg}</span>
+        `;
+        logsPanel.insertBefore(row, logsPanel.firstChild);
+      }, idx * 100);
+    });
+  }
+
+  setInterval(() => {
+    if (activeMarket !== 'indianStocks') return;
+    if (discoveryCandidates.length === 0) return;
+
+    // Pick candidate and ingest it
+    const newStock = discoveryCandidates.shift();
+    indianEquitiesDatabase.push(newStock);
+
+    // Render discovery log
+    logStockDiscovery(newStock);
+
+    // Refresh dashboard
+    renderIndianStocksDashboard();
+  }, 25000);
+}
+
+function logStockDiscovery(stock) {
+  const logsPanel = document.getElementById('stockDiscoveryLogs');
+  if (!logsPanel) return;
+
+  const timeStr = new Date().toLocaleTimeString();
+  const logRow = document.createElement('div');
+  logRow.className = 'log-row';
+  
+  let logText = "";
+  if (currentLang === 'mr') {
+    logText = `एआय स्कॅनरने नवीन स्टॉक शोधला: <strong>${stock.name} (${stock.key.toUpperCase()})</strong>. प्रोफाइल समाविष्ट केले.`;
+  } else if (currentLang === 'hi') {
+    logText = `एआई स्कैनर ने नया स्टॉक खोजा: <strong>${stock.name} (${stock.key.toUpperCase()})</strong>. प्रोफाइल शामिल किया गया।`;
+  } else if (currentLang === 'es') {
+    logText = `El escáner de IA descubrió: <strong>${stock.name} (${stock.key.toUpperCase()})</strong>. Perfil cuantitativo integrado.`;
+  } else {
+    logText = `AI scanner discovered new liquidity pool: <strong>${stock.name} (${stock.key.toUpperCase()})</strong>. Inflow sweeps active.`;
+  }
+
+  logRow.innerHTML = `
+    <span class="log-time" style="color: var(--text-muted); margin-right: 6px;">[${timeStr}]</span>
+    <span class="log-tag" style="color: var(--gold-accent); font-weight: bold; margin-right: 6px;">[NEW STOCK]</span>
+    <span class="log-desc" style="color: var(--text-primary);">${logText}</span>
+  `;
+  
+  logsPanel.insertBefore(logRow, logsPanel.firstChild);
+  if (logsPanel.children.length > 15) logsPanel.removeChild(logsPanel.lastChild);
+
+  triggerDiscoveryAlert(stock);
+}
+
+function triggerDiscoveryAlert(stock) {
+  const chat = document.getElementById('chatHistory');
+  if (chat) {
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble bubble-ai';
+    bubble.style.borderColor = 'var(--gold-accent)';
+    bubble.style.background = 'rgba(255, 215, 0, 0.05)';
+    
+    let chatMsg = "";
+    if (currentLang === 'mr') {
+      chatMsg = `नवीन शेअर्स शोध अहवाल, सर! मी आताच <strong>${stock.name} (${stock.key.toUpperCase()})</strong> कंपनी शोधली आहे आणि तिच्या तांत्रिक विश्लेषणाची नोंद केली आहे.`;
+    } else if (currentLang === 'hi') {
+      chatMsg = `नया शेयर्स खोज रिपोर्ट, सर! मैंने अभी <strong>${stock.name} (${stock.key.toUpperCase()})</strong> कंपनी खोजी है और उसके तकनीकी विश्लेषण की रिपोर्ट तैयार की है।`;
+    } else if (currentLang === 'es') {
+      chatMsg = `Informe de descubrimiento de acciones, Señor. He localizado y agregado <strong>${stock.name} (${stock.key.toUpperCase()})</strong> al panel de control con auditorías de volumen completas.`;
+    } else {
+      chatMsg = `New asset discovery report, Sir. I have scanned the NSE and ingested <strong>${stock.name} (${stock.key.toUpperCase()})</strong>. Inflow sweeps are active.`;
+    }
+    
+    bubble.innerHTML = `
+      <strong style="color: var(--gold-accent); font-family: 'Orbitron', sans-serif;">🛡️ AI SCANNER REPORT:</strong><br>
+      ${chatMsg}
+    `;
+    chat.appendChild(bubble);
+    chat.scrollTop = chat.scrollHeight;
+  }
+}
 
 // Bootstrap execution
 window.addEventListener('DOMContentLoaded', init);

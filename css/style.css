@@ -1424,4 +1424,138 @@ footer {
   transform: none; /* Override standard panel hover */
 }
 
+/* AI Indian Stocks Dashboard Custom Styles */
+.stock-profile-card {
+  background: rgba(13, 14, 21, 0.55);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.stock-profile-card:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.stock-profile-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0.6;
+}
+
+.stock-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.stock-card-ticker {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.stock-card-name {
+  font-size: 8px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+.stock-card-badge {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 7px;
+  font-weight: bold;
+  padding: 1px 4px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+}
+
+.stock-card-badge.discovered {
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--gold-accent);
+  border-color: rgba(255, 215, 0, 0.3);
+  animation: scanPulse 1.5s infinite alternate;
+}
+
+.stock-card-badge.core {
+  background: rgba(0, 240, 255, 0.08);
+  color: var(--cyan);
+  border-color: rgba(0, 240, 255, 0.25);
+}
+
+.stock-card-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.stock-card-price {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.stock-card-change {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9.5px;
+  font-weight: bold;
+}
+
+.stock-card-ai-analysis {
+  font-size: 9px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-style: italic;
+  min-height: 40px;
+}
+
+.stock-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 8px;
+  color: var(--text-muted);
+  border-top: 1px dashed rgba(255, 255, 255, 0.05);
+  padding-top: 6px;
+}
+
+@keyframes scanPulse {
+  0% { box-shadow: 0 0 2px rgba(255, 215, 0, 0.2); }
+  100% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.5); }
+}
+
+.stock-discovery-feed .log-row {
+  animation: logSlideIn 0.3s ease-out;
+}
+
+@keyframes logSlideIn {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 

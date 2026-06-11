@@ -147,7 +147,11 @@ const langDb = {
     thAdvisoryTimeframe: "TIMEFRAME",
     thAdvisoryRationale: "RATIONALE",
     btnLiveAIScan: "RUN LIVE AI SCAN",
-    lblAIScanStatus: "Scanning markets with AI..."
+    lblAIScanStatus: "Scanning markets with AI...",
+    lblIndianDashboardTitle: "AI EQUITIES INTELLIGENCE BOARD",
+    lblScannerLiveBadge: "SCANNING NSE/BSE LIVE",
+    lblDiscoveryFeedTitle: "AI REAL-TIME DISCOVERY & INGESTION CONSOLE",
+    lblDiscoveryCount: "ACTIVE AUDITS: "
   },
   mr: {
     title: "वाईजमन ॲनालिटिक्स",
@@ -242,7 +246,11 @@ const langDb = {
     thAdvisoryTimeframe: "कालावधी",
     thAdvisoryRationale: "स्पष्टीकरण",
     btnLiveAIScan: "थेट AI स्कॅनिंग सुरू करा",
-    lblAIScanStatus: "AI द्वारे मार्केट स्कॅन सुरू आहे..."
+    lblAIScanStatus: "AI द्वारे मार्केट स्कॅन सुरू आहे...",
+    lblIndianDashboardTitle: "AI शेअर्स इंटेलिजन्स बोर्ड",
+    lblScannerLiveBadge: "NSE/BSE लाइव्ह स्कॅनिंग सुरू",
+    lblDiscoveryFeedTitle: "AI रिअल-टाइम शोध आणि डेटा फीड",
+    lblDiscoveryCount: "सक्रिय ऑडिट्स: "
   },
   hi: {
     title: "वाइजमैन एनालिटिक्स",
@@ -337,7 +345,11 @@ const langDb = {
     thAdvisoryTimeframe: "समय सीमा",
     thAdvisoryRationale: "तर्क",
     btnLiveAIScan: "सक्रिय AI स्कैन शुरू करें",
-    lblAIScanStatus: "AI द्वारा बाजार स्कैन जारी..."
+    lblAIScanStatus: "AI द्वारा बाजार स्कैन जारी...",
+    lblIndianDashboardTitle: "AI शेयर्स इंटेलिजेंस बोर्ड",
+    lblScannerLiveBadge: "NSE/BSE लाइव स्कैन जारी",
+    lblDiscoveryFeedTitle: "AI रियल-टाइम खोज और डेटा फीड",
+    lblDiscoveryCount: "सक्रिय ऑडिट: "
   },
   es: {
     title: "WISEMAN ANALYTICS",
@@ -432,7 +444,11 @@ const langDb = {
     thAdvisoryTimeframe: "MARCO DE TIEMPO",
     thAdvisoryRationale: "RAZÓN",
     btnLiveAIScan: "INICIAR ESCANEO DE IA",
-    lblAIScanStatus: "Escaneando mercados con IA..."
+    lblAIScanStatus: "Escaneando mercados con IA...",
+    lblIndianDashboardTitle: "PANEL DE INTELIGENCIA DE ACCIONES DE IA",
+    lblScannerLiveBadge: "ESCANEO DE NSE/BSE EN VIVO",
+    lblDiscoveryFeedTitle: "CONSOLA DE DESCUBRIMIENTO Y REGISTRO EN TIEMPO REAL DE IA",
+    lblDiscoveryCount: "AUDITORÍAS ACTIVAS: "
   }
 };
 
@@ -597,7 +613,10 @@ function translateUI(lang) {
     thAdvisoryHoldClass: dict.thAdvisoryHoldClass,
     thAdvisoryTimeframe: dict.thAdvisoryTimeframe,
     thAdvisoryRationale: dict.thAdvisoryRationale,
-    btnLiveAIScan: dict.btnLiveAIScan
+    btnLiveAIScan: dict.btnLiveAIScan,
+    lblIndianDashboardTitle: dict.lblIndianDashboardTitle,
+    lblScannerLiveBadge: dict.lblScannerLiveBadge,
+    lblDiscoveryFeedTitle: dict.lblDiscoveryFeedTitle
   };
 
   for (const [id, value] of Object.entries(mappings)) {

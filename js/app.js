@@ -1,5 +1,20 @@
 // Wiseman Analytics Core Orchestrator & Coordinator
 
+// Active Indian Equities for the AI board
+let indianEquitiesDatabase = [
+  { key: "reliance", name: "Reliance Industries", sector: "Energy & Telecom", price: 2890.00, change: 1.25, cap: "Large Cap", pE: "24.5", desc: "Consolidating near 50 EMA. Institutional accumulation block detected at 2850.", lastAnalysis: "Bullish consolidation near major support block. Est. target 2980." },
+  { key: "tata", name: "Tata Motors Limited", sector: "Automotive", price: 945.00, change: -0.85, cap: "Large Cap", pE: "18.2", desc: "EMA 20 crossover failed. Local distribution detected. Wait for 930 sweep.", lastAnalysis: "Short-term bearish sweep under key pivot. Avoid entry until support test." },
+  { key: "tata_tech", name: "Tata Tech Limited", sector: "IT Services & ER&D", price: 880.00, change: 0.15, cap: "Mid Cap", pE: "45.1", desc: "Accumulation block active at 875. Low retail interest. Volume building.", lastAnalysis: "Range bound oscillations between 870 and 910. Safe swing hold." },
+  { key: "hdfc", name: "HDFC Bank Limited", sector: "Banking & Financials", price: 1450.00, change: 1.85, cap: "Large Cap", pE: "19.8", desc: "Double bottom breakout confirmed. High FII buying logs recorded.", lastAnalysis: "Strong institutional inflow block. Target 1520 in swing horizon." }
+];
+
+let discoveryCandidates = [
+  { key: "sbin", name: "State Bank of India", sector: "Banking", price: 815.00, change: 2.15, cap: "Large Cap", pE: "12.4", desc: "Breakout above major daily resistance block. FII buying sweeps active.", lastAnalysis: "Bullish trend expansion confirmed. Target 850. Stop loss 798." },
+  { key: "tcs", name: "Tata Consultancy Services", sector: "IT Services", price: 3820.00, change: -1.45, cap: "Large Cap", pE: "28.5", desc: "Bearish engulfing candle on hourly frame. Profit booking sweep active.", lastAnalysis: "Bearish distribution block near 3900. Retracement expected to 3750." },
+  { key: "adanient", name: "Adani Enterprises", sector: "Conglomerate", price: 3120.00, change: 4.80, cap: "Large Cap", pE: "92.1", desc: "Liquidity grab completed below 3050. Sudden volume spike on block deals.", lastAnalysis: "Aggressive bullish momentum. Sweep target 3250. High volatility risk." },
+  { key: "coalindia", name: "Coal India Limited", sector: "Mining & Power", price: 470.00, change: 0.65, cap: "Mid Cap", pE: "9.2", desc: "High dividend yield support. Low risk range consolidation.", lastAnalysis: "Stable dividend accumulation play. Strong target support at 462." }
+];
+
 // System Global States
 let activeMarket = 'indianStocks';
 let activeTickerKey = 'nifty';
@@ -46,6 +61,7 @@ function init() {
   startWatchlistScanner();
   populateNewsTicker();
   startRealTimeNewsEngine();
+  startAIDiscoveryEngine();
 
   if (typeof switchChartView === 'function') {
     switchChartView('custom');
@@ -80,6 +96,19 @@ function switchMarket(marketKey) {
     else t.classList.remove('active');
   });
   populateWatchlist();
+
+  // Show/Hide Indian Stocks Dashboard vs Chart Panel
+  const chartWrap = document.getElementById('chartPanelWrapper');
+  const indianWrap = document.getElementById('indianStocksDashboardWrapper');
+  if (marketKey === 'indianStocks') {
+    if (chartWrap) chartWrap.style.display = 'none';
+    if (indianWrap) indianWrap.style.display = 'block';
+    renderIndianStocksDashboard();
+  } else {
+    if (chartWrap) chartWrap.style.display = 'block';
+    if (indianWrap) indianWrap.style.display = 'none';
+  }
+
   const firstTicker = marketTickers[marketKey][0];
   selectTicker(firstTicker.key);
 }
@@ -308,6 +337,31 @@ function startSimulator() {
         }
       });
     });
+
+    // Update Indian Equities database prices in simulator loop
+    indianEquitiesDatabase.forEach(stock => {
+      const volatility = stock.key === 'adanient' ? 0.0025 : 0.0006;
+      const change = (Math.random() - 0.495) * volatility;
+      stock.price = stock.price * (1 + change);
+      stock.change = stock.change + change * 100;
+    });
+    
+    // If we are currently showing the Indian Stocks dashboard, refresh the card contents dynamically
+    if (activeMarket === 'indianStocks') {
+      indianEquitiesDatabase.forEach(stock => {
+        const card = document.querySelector(`.stock-profile-card[data-key="${stock.key}"]`);
+        if (card) {
+          const priceEl = card.querySelector('.stock-card-price');
+          const changeEl = card.querySelector('.stock-card-change');
+          if (priceEl) priceEl.innerText = stock.price.toFixed(2);
+          if (changeEl) {
+            const sign = stock.change >= 0 ? '+' : '';
+            changeEl.innerText = `${sign}${stock.change.toFixed(2)}%`;
+            changeEl.style.color = stock.change >= 0 ? 'var(--green-neon)' : 'var(--red-neon)';
+          }
+        }
+      });
+    }
 
     const currentActiveConfig = marketTickers[activeMarket].find(t => t.key === activeTickerKey);
     
@@ -1165,6 +1219,189 @@ function triggerAICoachNewsReaction(newsItem) {
 }
 
 // Local browser storage trade persistence and database sync methods removed as this is a pure analysis & advisory platform
+
+// --- AI INDIAN STOCKS BOARD & AUTO-DISCOVERY FEED ---
+function renderIndianStocksDashboard() {
+  const container = document.getElementById('indianStocksCatalog');
+  const countBadge = document.getElementById('lblDiscoveryCount');
+  const dict = langDb[currentLang] || langDb['en'];
+  if (!container) return;
+
+  container.innerHTML = '';
+  
+  if (countBadge) {
+    countBadge.innerText = `${dict.lblDiscoveryCount}${indianEquitiesDatabase.length} STOCKS`;
+  }
+
+  indianEquitiesDatabase.forEach(stock => {
+    const card = document.createElement('div');
+    card.className = 'stock-profile-card';
+    card.setAttribute('data-key', stock.key);
+    card.onclick = () => openStockDetailModal(stock);
+
+    const isNew = stock.key === 'sbin' || stock.key === 'tcs' || stock.key === 'adanient' || stock.key === 'coalindia';
+    const badgeText = isNew ? (currentLang === 'mr' ? 'नवीन' : 'DISCOVERED') : (currentLang === 'mr' ? 'मुख्य' : 'CORE INDEX');
+    const badgeClass = isNew ? 'discovered' : 'core';
+    const sign = stock.change >= 0 ? '+' : '';
+    const changeColor = stock.change >= 0 ? 'var(--green-neon)' : 'var(--red-neon)';
+
+    card.innerHTML = `
+      <div>
+        <div class="stock-card-header">
+          <div>
+            <div class="stock-card-ticker">${stock.key.toUpperCase()}</div>
+            <div class="stock-card-name">${stock.name}</div>
+          </div>
+          <span class="stock-card-badge ${badgeClass}">${badgeText}</span>
+        </div>
+
+        <div class="stock-card-price-row">
+          <span class="stock-card-price">${stock.price.toFixed(2)}</span>
+          <span class="stock-card-change" style="color: ${changeColor};">${sign}${stock.change.toFixed(2)}%</span>
+        </div>
+
+        <div class="stock-card-ai-analysis">
+          ${stock.desc}
+        </div>
+      </div>
+
+      <div class="stock-card-footer">
+        <span>SECTOR: ${stock.sector}</span>
+        <span>P/E: ${stock.pE}</span>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function openStockDetailModal(stock) {
+  const modal = document.getElementById('sentimentModal');
+  const headline = document.getElementById('modalSentimentHeadline');
+  const badge = document.getElementById('modalSentimentBadge');
+  const time = document.getElementById('modalSentimentTime');
+  const analysis = document.getElementById('modalSentimentAnalysis');
+  const impact = document.getElementById('modalSentimentImpact');
+  const title = document.getElementById('lblSentimentTitle');
+
+  if (modal && headline && badge && time && analysis && impact) {
+    if (title) title.innerText = currentLang === 'mr' ? 'AI स्टॉक क्वांटिटेटिव ऑडिट' : 'AI QUANTITATIVE STOCK AUDIT';
+    headline.innerText = `${stock.name} (${stock.key.toUpperCase()})`;
+    badge.innerText = `${stock.sector} • ${stock.cap}`;
+    badge.style.background = 'rgba(0, 240, 255, 0.15)';
+    badge.style.color = 'var(--cyan)';
+    badge.style.borderColor = 'var(--cyan)';
+
+    time.innerText = `P/E Ratio: ${stock.pE}`;
+    analysis.innerHTML = `<strong style="color: var(--gold-accent);">AI Heuristics Analysis:</strong><br>${stock.lastAnalysis}<br><br><strong style="color: var(--cyan);">Market Profile:</strong><br>${stock.desc}`;
+    
+    const sign = stock.change >= 0 ? '+' : '';
+    const color = stock.change >= 0 ? 'var(--green-neon)' : 'var(--red-neon)';
+    impact.innerText = `LAST PRICE: ₹${stock.price.toFixed(2)} (${sign}${stock.change.toFixed(2)}%)`;
+    impact.style.color = color;
+    impact.style.borderColor = color.replace('var(--', 'rgba(').replace(')', ', 0.3)');
+
+    modal.style.display = 'flex';
+  }
+}
+
+function startAIDiscoveryEngine() {
+  // Initial fill of logs
+  const logsPanel = document.getElementById('stockDiscoveryLogs');
+  if (logsPanel) {
+    const defaultSecs = [
+      { tag: "[INGESTION]", msg: "Reliance Industries data pipeline connected." },
+      { tag: "[INGESTION]", msg: "Tata Motors Limited data pipeline connected." },
+      { tag: "[INGESTION]", msg: "HDFC Bank Limited data pipeline connected." },
+      { tag: "[INGESTION]", msg: "Tata Tech Limited data pipeline connected." }
+    ];
+    defaultSecs.forEach((item, idx) => {
+      setTimeout(() => {
+        const row = document.createElement('div');
+        row.className = 'log-row';
+        row.innerHTML = `
+          <span class="log-time" style="color: var(--text-muted); margin-right: 6px;">[${new Date(Date.now() - (4 - idx) * 60000).toLocaleTimeString()}]</span>
+          <span class="log-tag" style="color: var(--green-neon); font-weight: bold; margin-right: 6px;">${item.tag}</span>
+          <span class="log-desc" style="color: var(--text-secondary);">${item.msg}</span>
+        `;
+        logsPanel.insertBefore(row, logsPanel.firstChild);
+      }, idx * 100);
+    });
+  }
+
+  setInterval(() => {
+    if (activeMarket !== 'indianStocks') return;
+    if (discoveryCandidates.length === 0) return;
+
+    // Pick candidate and ingest it
+    const newStock = discoveryCandidates.shift();
+    indianEquitiesDatabase.push(newStock);
+
+    // Render discovery log
+    logStockDiscovery(newStock);
+
+    // Refresh dashboard
+    renderIndianStocksDashboard();
+  }, 25000);
+}
+
+function logStockDiscovery(stock) {
+  const logsPanel = document.getElementById('stockDiscoveryLogs');
+  if (!logsPanel) return;
+
+  const timeStr = new Date().toLocaleTimeString();
+  const logRow = document.createElement('div');
+  logRow.className = 'log-row';
+  
+  let logText = "";
+  if (currentLang === 'mr') {
+    logText = `एआय स्कॅनरने नवीन स्टॉक शोधला: <strong>${stock.name} (${stock.key.toUpperCase()})</strong>. प्रोफाइल समाविष्ट केले.`;
+  } else if (currentLang === 'hi') {
+    logText = `एआई स्कैनर ने नया स्टॉक खोजा: <strong>${stock.name} (${stock.key.toUpperCase()})</strong>. प्रोफाइल शामिल किया गया।`;
+  } else if (currentLang === 'es') {
+    logText = `El escáner de IA descubrió: <strong>${stock.name} (${stock.key.toUpperCase()})</strong>. Perfil cuantitativo integrado.`;
+  } else {
+    logText = `AI scanner discovered new liquidity pool: <strong>${stock.name} (${stock.key.toUpperCase()})</strong>. Inflow sweeps active.`;
+  }
+
+  logRow.innerHTML = `
+    <span class="log-time" style="color: var(--text-muted); margin-right: 6px;">[${timeStr}]</span>
+    <span class="log-tag" style="color: var(--gold-accent); font-weight: bold; margin-right: 6px;">[NEW STOCK]</span>
+    <span class="log-desc" style="color: var(--text-primary);">${logText}</span>
+  `;
+  
+  logsPanel.insertBefore(logRow, logsPanel.firstChild);
+  if (logsPanel.children.length > 15) logsPanel.removeChild(logsPanel.lastChild);
+
+  triggerDiscoveryAlert(stock);
+}
+
+function triggerDiscoveryAlert(stock) {
+  const chat = document.getElementById('chatHistory');
+  if (chat) {
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble bubble-ai';
+    bubble.style.borderColor = 'var(--gold-accent)';
+    bubble.style.background = 'rgba(255, 215, 0, 0.05)';
+    
+    let chatMsg = "";
+    if (currentLang === 'mr') {
+      chatMsg = `नवीन शेअर्स शोध अहवाल, सर! मी आताच <strong>${stock.name} (${stock.key.toUpperCase()})</strong> कंपनी शोधली आहे आणि तिच्या तांत्रिक विश्लेषणाची नोंद केली आहे.`;
+    } else if (currentLang === 'hi') {
+      chatMsg = `नया शेयर्स खोज रिपोर्ट, सर! मैंने अभी <strong>${stock.name} (${stock.key.toUpperCase()})</strong> कंपनी खोजी है और उसके तकनीकी विश्लेषण की रिपोर्ट तैयार की है।`;
+    } else if (currentLang === 'es') {
+      chatMsg = `Informe de descubrimiento de acciones, Señor. He localizado y agregado <strong>${stock.name} (${stock.key.toUpperCase()})</strong> al panel de control con auditorías de volumen completas.`;
+    } else {
+      chatMsg = `New asset discovery report, Sir. I have scanned the NSE and ingested <strong>${stock.name} (${stock.key.toUpperCase()})</strong>. Inflow sweeps are active.`;
+    }
+    
+    bubble.innerHTML = `
+      <strong style="color: var(--gold-accent); font-family: 'Orbitron', sans-serif;">🛡️ AI SCANNER REPORT:</strong><br>
+      ${chatMsg}
+    `;
+    chat.appendChild(bubble);
+    chat.scrollTop = chat.scrollHeight;
+  }
+}
 
 // Bootstrap execution
 window.addEventListener('DOMContentLoaded', init);
