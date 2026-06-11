@@ -1900,7 +1900,7 @@ footer {
 // Wiseman Analytics Global Configurations & Localizations
 let currentLang = 'en';
 const RENDER_BACKEND_URL = "https://wiseman-backend.onrender.com"; // Replace with your actual Render URL if different
-const BACKEND_API_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+const BACKEND_API_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "")
   ? "http://localhost:5000/api"
   : `${RENDER_BACKEND_URL}/api`;
 

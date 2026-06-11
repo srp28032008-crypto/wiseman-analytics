@@ -86,11 +86,21 @@ function logSecurityEvent(tag, desc) {
 // Helmet configuration for secure headers
 app.use(helmet());
 
-// CORS Configuration - Restrict allowed origins to local development
+// CORS Configuration - Allow local development, null, and file:// origins
 app.use(cors({
-  origin: ['http://localhost:8000', 'http://127.0.0.1:8000', 'http://localhost:3000'],
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: function (origin, callback) {
+    if (!origin || 
+        origin === 'null' ||
+        origin.startsWith('http://localhost') || 
+        origin.startsWith('http://127.0.0.1') || 
+        origin.startsWith('file://')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-api-key']
 }));
 
 // Body parser
@@ -114,11 +124,15 @@ app.use((req, res, next) => {
     }
   }
 
-  // Scan URL query params and body for injection attacks
+  // Scan URL query params and body (excluding passwords) for injection attacks
   const rawQuery = JSON.stringify(req.query);
-  const rawBody = JSON.stringify(req.body);
   
-  if (scanForThreats(rawQuery) || scanForThreats(rawBody) || hasNoSQLInjection(req.query) || hasNoSQLInjection(req.body)) {
+  // Clone request body and exclude password from threat scan to prevent false positives on secure passwords
+  const bodyCopy = { ...req.body };
+  if (bodyCopy.password) delete bodyCopy.password;
+  const rawBody = JSON.stringify(bodyCopy);
+  
+  if (scanForThreats(rawQuery) || scanForThreats(rawBody) || hasNoSQLInjection(req.query) || hasNoSQLInjection(bodyCopy)) {
     logSecurityEvent("[HTTP INTRUSION]", `Malicious payload blocked from IP ${clientIP}`);
     shieldStrength = Math.max(40, shieldStrength - 20);
     
