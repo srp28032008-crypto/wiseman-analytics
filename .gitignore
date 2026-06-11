@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+backend/node_modules/
+
+# Local Portable Runtimes
+node-bin/
+node.zip
+
+# Sensitive API Keys & Configs
+.env
+backend/.env
+
+# Local Database Test Data
+backend/data/
+data/
+
+# OS/IDE Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.tmp

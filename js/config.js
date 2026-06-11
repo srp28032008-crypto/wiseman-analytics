@@ -1,0 +1,620 @@
+// Wiseman Analytics Global Configurations & Localizations
+let currentLang = 'en';
+const RENDER_BACKEND_URL = "https://wiseman-backend.onrender.com"; // Replace with your actual Render URL if different
+const BACKEND_API_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+  ? "http://localhost:5000/api"
+  : `${RENDER_BACKEND_URL}/api`;
+
+const newsDatabase = [
+  {
+    id: 1,
+    headline: "US Federal Reserve hints at interest rate cuts in upcoming monetary policy review",
+    category: "Forex",
+    impact: "BULLISH",
+    time: "10 mins ago",
+    analysis: "The Federal Reserve's dovish pivot suggests an upcoming injection of liquidity into global markets. Lower interest rates typically weaken the US Dollar index (DXY) while boosting risk assets like equities and cryptocurrencies.",
+    summary: "EXPECTED IMPACT: High positive volatility for BTC, EUR/USD, and Nifty 50."
+  },
+  {
+    id: 2,
+    headline: "Binance receives regulatory clearance in European jurisdictions, boosting volume metrics",
+    category: "Crypto",
+    impact: "BULLISH",
+    time: "25 mins ago",
+    analysis: "European compliance clears regulatory bottlenecks for institutional flow. This increases retail confidence and ensures steady capital inflows into core trading pools for BTC, ETH, and SOL.",
+    summary: "EXPECTED IMPACT: Strongly Bullish for Crypto markets."
+  },
+  {
+    id: 3,
+    headline: "Reliance Industries announces massive green energy expansion project with key global partners",
+    category: "Stocks",
+    impact: "BULLISH",
+    time: "45 mins ago",
+    analysis: "This capital-efficient green project positions Reliance as a key ESG leader. FII (Foreign Institutional Investor) allocations are expected to increase over the next fiscal quarter, creating strong buy orders.",
+    summary: "EXPECTED IMPACT: Bullish for RELIANCE shares."
+  },
+  {
+    id: 4,
+    headline: "Inflation numbers report beats consensus expectations, triggering tight monetary fear concerns",
+    category: "Forex",
+    impact: "BEARISH",
+    time: "1 hour ago",
+    analysis: "Higher-than-expected inflation metrics force central banks to maintain restrictive higher-for-longer interest rates. This decreases retail credit flows and triggers stock market distributions.",
+    summary: "EXPECTED IMPACT: Bearish pressure on Nifty 50 and BTC."
+  },
+  {
+    id: 5,
+    headline: "Securities regulator initiates compliance sweeps on high-frequency algorithmic desks",
+    category: "Stocks",
+    impact: "NEUTRAL",
+    time: "2 hours ago",
+    analysis: "Strict audits of HFT desks will limit short-term spreads and reduce flash-crash risks. While liquidity will be slightly lower during the sweep, long-term market structure remains intact.",
+    summary: "EXPECTED IMPACT: Neutral short-term consolidation for Indian stocks."
+  }
+];
+
+const langDb = {
+  en: {
+    title: "WISEMAN ANALYTICS",
+    subtitle: "REAL-TIME QUANTITATIVE ENGINE",
+    tabStocks: "INDIAN STOCKS",
+    tabCrypto: "CRYPTO 24/7",
+    tabForex: "FOREX MARKET",
+    lblTickers: "Market Tickers",
+    lblChartTitle: "LIVE CHARTS & INTERACTIVE INDICATORS",
+    lblCoachName: "WISEMAN AI COACH",
+    lblCoachSub: "REAL-TIME HEURISTICS",
+    lblConfidence: "CONFIDENCE PROFILE",
+    lblRationale: "Signal Rationale",
+    lblRiskTitle: "SMART RISK CALCULATOR",
+    btnLong: "BUY / LONG",
+    btnShort: "SELL / SHORT",
+    lblEntryPrice: "Entry Price",
+    lblVolatility: "Volatility Buffer",
+    lblStopMargin: "Dynamic Stop Margin",
+    lblStopLoss: "Stop Loss",
+    lblTarget1: "Target 1 (1:2 R:R)",
+    lblTarget2: "Target 2 (1:3 R:R)",
+    lblTerminalTitle: "TRADE EXECUTION TERMINAL",
+    lblTradeSize: "Trade Size",
+    lblExecType: "Execution Type",
+    lblLivePos: "Live Open Positions",
+    thSymbol: "Symbol",
+    thType: "Type",
+    thEntry: "Entry",
+    thPnL: "PnL",
+    thAction: "Action",
+    emptyPos: "No active executions",
+    lblFooter: "Wiseman Analytics Pro Hub • A Black Dragon Product",
+    tickerLabel: "ALPHA FEED",
+    lblVolume: "VOLUME: ",
+    lblRsi: "RSI (14)",
+    lblMacd: "MACD",
+    lblSignal: "SIGNAL",
+    optMarket: "MARKET",
+    optLimit: "LIMIT",
+    btnExecuteBuy: "EXECUTE BUY ORDER",
+    btnExecuteSell: "EXECUTE SELL ORDER",
+    btnTableClose: "CLOSE",
+    riskAmtPrefix: "Risk Amount: ",
+    estRetPrefix: "Est. Return: ",
+    scanLabel: "SCANNING LIVE",
+    lblChatHeader: "WISEMAN AI ASSISTANT",
+    lblScannerHeader: "Institutional Trap & Pattern Scanner",
+    scannerAccuracy: "ACCURACY: ",
+    welcomeMsg: "Greetings. I am Wiseman, your algorithmic advisor (powered by Black Dragon). How may I assist you with your charting strategy or risk limits today?",
+    patternAlert: "[SCANNER] Pattern Detected on ",
+    trapAlert: "[TRAP WARNING] Liquidity Sweep detected on ",
+    statusApproved: "APPROVED",
+    statusAvoid: "AVOID",
+    statusNeutral: "NEUTRAL",
+    msgLowVol: "Market volatility is sub-optimal. Institutional players are sitting on the sidelines. Avoid execution.",
+    reasonLowVol1: "Extremely dry trading volume profile.",
+    reasonLowVol2: "Risk of high spread slippages.",
+    msgBullish: "Strong bullish reversal patterns emerging with rising institutional volume backing. High risk/reward long setup.",
+    reasonBullish1: "Bullish divergence forming on RSI.",
+    reasonBullish2: "Volume breakout confirmed.",
+    msgBearish: "Heavy distribution sweeps detected at local resistance. Selling pressure mounting. Tight stop losses advised.",
+    reasonBearish1: "RSI indicating overbought distribution.",
+    reasonBearish2: "Rejection pattern at major order block.",
+    msgNeutral: "Consolidation zone detected. Moving average indicators are flat. Range-bound oscillations.",
+    reasonNeutral1: "No clear trend breakout signal.",
+    reasonNeutral2: "Wait for key support/resistance sweep.",
+    msgConflicting: "Conflicting momentum signals on multiple timeframes. No clean trading edge at present.",
+    reasonConflicting: "RSI and MACD are flashing divergent cues.",
+    
+    // V2 Keys
+    lblSentimentTitle: "AI NEWS SENTIMENT ANALYSIS",
+    lblReplayTitle: "REPLAY MODE",
+    tabPositions: "POSITIONS",
+    tabHistory: "STATS & HISTORY",
+    tabStrategy: "STRATEGY BUILDER",
+    tabAdvisory: "AI ADVISORY",
+    statWinRate: "WIN RATE",
+    statNetProfit: "NET RETURN",
+    emptyHistory: "No closed executions",
+    lblRsiBuy: "RSI BUY TRIGGER",
+    lblMacdDir: "MACD DIRECTION",
+    lblStrategyEngine: "STRATEGY ENGINE STATUS",
+    statusMonitoring: "MONITORING FEEDS",
+    statusTriggered: "ALERT: CRITERIA SATISFIED!",
+    lblAdvisoryTableTitle: "AI STRATEGY ADVISORY RATINGS",
+    lblStrategyCardsTitle: "TRADING STRATEGY SHEET REFERENCE",
+    thAdvisoryTicker: "TICKER",
+    thAdvisoryAction: "RECOMMENDATION",
+    thAdvisoryHoldClass: "HOLD CLASS",
+    thAdvisoryTimeframe: "TIMEFRAME",
+    thAdvisoryRationale: "RATIONALE",
+    btnLiveAIScan: "RUN LIVE AI SCAN",
+    lblAIScanStatus: "Scanning markets with AI..."
+  },
+  mr: {
+    title: "वाईजमन ॲनालिटिक्स",
+    subtitle: "रिअल-टाइम क्वांटिटेटिव्ह इंजिन",
+    tabStocks: "भारतीय शेअर्स",
+    tabCrypto: "क्रिप्टो २४/७",
+    tabForex: "फॉरेक्स मार्केट",
+    lblTickers: "मार्केट टिकर्स",
+    lblChartTitle: "लाइव्ह चार्ट आणि इंडिकेटर्स",
+    lblCoachName: "वाईजमन AI कोच",
+    lblCoachSub: "रिअल-टाइम विश्लेषण",
+    lblConfidence: "विश्वासार्हता प्रोफाइल",
+    lblRationale: "सिग्नलचे कारण",
+    lblRiskTitle: "स्मार्ट रिस्क कॅल्क्युलेटर",
+    btnLong: "खरेदी / LONG",
+    btnShort: "विक्री / SHORT",
+    lblEntryPrice: "प्रवेश किंमत (Entry)",
+    lblVolatility: "व्होलॅटिलिटी बफर",
+    lblStopMargin: "डायनॅमिक स्टॉप मार्जिन",
+    lblStopLoss: "स्टॉप लॉस",
+    lblTarget1: "लक्ष्य १ (१:२ R:R)",
+    lblTarget2: "लक्ष्य २ (१:३ R:R)",
+    lblTerminalTitle: "ट्रेड एक्झिक्यूशन टर्मिनल",
+    lblTradeSize: "ट्रेड संख्या",
+    lblExecType: "ट्रेड प्रकार",
+    lblLivePos: "सक्रिय पोझिशन्स",
+    thSymbol: "चिन्ह",
+    thType: "प्रकार",
+    thEntry: "किंमत",
+    thPnL: "नफा/तोटा",
+    thAction: "कृती",
+    emptyPos: "कोणतेही सक्रिय ट्रेड्स नाहीत",
+    lblFooter: "वाईजमन ॲनालिटिक्स प्रो हब • ब्लॅक ड्रॅगन प्रॉडक्ट",
+    tickerLabel: "लाइव्ह फीड",
+    lblVolume: "व्हॉल्यूम: ",
+    lblRsi: "आरएसआय (14)",
+    lblMacd: "एमएसीडी",
+    lblSignal: "सिग्नल",
+    optMarket: "बाजार (MARKET)",
+    optLimit: "मर्यादा (LIMIT)",
+    btnExecuteBuy: "खरेदी ऑर्डर पूर्ण करा",
+    btnExecuteSell: "विक्री ऑर्डर पूर्ण करा",
+    btnTableClose: "बंद करा",
+    riskAmtPrefix: "जोखीम रक्कम: ",
+    estRetPrefix: "अंदाजे परतावा: ",
+    scanLabel: "लाइव्ह स्कॅनिंग सुरू",
+    lblChatHeader: "वाईजमन AI सहाय्यक",
+    lblScannerHeader: "ट्रॅप आणि चार्ट पॅटर्न स्कॅनर",
+    scannerAccuracy: "अचूकता: ",
+    welcomeMsg: "नमस्कार. मी वाईजमन आहे (ब्लॅक ड्रॅगन द्वारे समर्थित). आज तुम्हाला ट्रेडिंग आणि रिस्क व्यवस्थापनात काय मदत हवी आहे?",
+    patternAlert: "[स्कॅनर] चार्ट पॅटर्न आढळला - ",
+    trapAlert: "[चेतावणी] लिक्विडिटी ट्रॅप आढळला - ",
+    statusApproved: "मंजूर (BUY)",
+    statusAvoid: "टाळा (AVOID)",
+    statusNeutral: "तटस्थ (NEUTRAL)",
+    msgLowVol: "बाजारातील चढ-उतार कमी आहे. संस्थात्मक गुंतवणूकदार सक्रिय नाहीत. नवीन ट्रेड घेणे टाळा.",
+    reasonLowVol1: "अत्यंत कमी ट्रेडिंग व्हॉल्यूम प्रोफाइल.",
+    reasonLowVol2: "स्लिपेज आणि स्प्रेडचा धोका जास्त आहे.",
+    msgBullish: "वाढत्या व्हॉल्यूमच्या पाठिंब्यासह तेजीचे रिव्हर्सल संकेत. चांगला खरेदीचा (Long) सेटअप.",
+    reasonBullish1: "आरएसआय (RSI) वर तेजीचे संकेत (Bullish divergence).",
+    reasonBullish2: "व्हॉल्यूम ब्रेकआऊट निश्चित झाला आहे.",
+    msgBearish: "स्थानिक रेझिस्टन्सवर मोठ्या प्रमाणात विक्रीचे संकेत. स्टॉप लॉस अत्यंत कडक ठेवा.",
+    reasonBearish1: "आरएसआय ओव्हरबॉट झोन दाखवत आहे.",
+    reasonBearish2: "महत्वाच्या ऑर्डर ब्लॉकवर विक्रीचा दबाव.",
+    msgNeutral: "मार्केट एकाच रेंजमध्ये फिरत आहे. मूव्हिंग ॲव्हरेज सपाट आहेत.",
+    reasonNeutral1: "ट्रेन्ड ब्रेकआऊटचे स्पष्ट संकेत नाहीत.",
+    reasonNeutral2: "महत्वाच्या सपोर्ट/रेझिस्टन्स लेव्हलची वाट पहा.",
+    msgConflicting: "वेगवेगळ्या टाईमफ्रेमवर परस्परविरोधी संकेत आहेत. सध्या कोणताही स्पष्ट ट्रेड नाही.",
+    reasonConflicting: "आरएसआय आणि एमएसीडी वेगवेगळे संकेत देत आहेत.",
+    
+    // V2 Keys
+    lblSentimentTitle: "AI बातम्यांचे विश्लेषण",
+    lblReplayTitle: "बॅकटेस्टिंग रिप्ले",
+    tabPositions: "ट्रेड्स (LIVE)",
+    tabHistory: "इतिहास आणि आकडेवारी",
+    tabStrategy: "स्ट्रॅटेजी बिल्डर",
+    tabAdvisory: "AI सल्लागार आणि रणनीती",
+    statWinRate: "विन रेट (WIN %)",
+    statNetProfit: "एकूण नफा",
+    emptyHistory: "कोणतेही बंद ट्रेड्स नाहीत",
+    lblRsiBuy: "RSI खरेदी मर्यादा",
+    lblMacdDir: "MACD दिशा",
+    lblStrategyEngine: "स्ट्रॅटेजी इंजिन स्थिती",
+    statusMonitoring: "मार्केट स्कॅनिंग सुरू...",
+    statusTriggered: "इशारा: खरेदीचे संकेत!",
+    lblAdvisoryTableTitle: "AI ट्रेडिंग सल्लागार रेटिंग",
+    lblStrategyCardsTitle: "ट्रेडिंग धोरण संदर्भ (STRATEGY SHEET)",
+    thAdvisoryTicker: "टिकर",
+    thAdvisoryAction: "शिफारस",
+    thAdvisoryHoldClass: "होल्डिंग प्रकार",
+    thAdvisoryTimeframe: "कालावधी",
+    thAdvisoryRationale: "स्पष्टीकरण",
+    btnLiveAIScan: "थेट AI स्कॅनिंग सुरू करा",
+    lblAIScanStatus: "AI द्वारे मार्केट स्कॅन सुरू आहे..."
+  },
+  hi: {
+    title: "वाइजमैन एनालिटिक्स",
+    subtitle: "रियल-टाइम क्वांटिटेटिव इंजन",
+    tabStocks: "भारतीय स्टॉक्स",
+    tabCrypto: "क्रिप्टो २४/७",
+    tabForex: "फॉरेक्स संकेत",
+    lblTickers: "Market Tickers",
+    lblChartTitle: "लाइव चार्ट और इंडिकेटर्स",
+    lblCoachName: "वाइजमैन AI कोच",
+    lblCoachSub: "रियल-टाइम विश्लेषण",
+    lblConfidence: "विश्वसनीयता प्रोफाइल",
+    lblRationale: "सिग्नल का कारण",
+    lblRiskTitle: "स्मार्ट रिस्क कैलकुलेटर",
+    btnLong: "खरीदें / LONG",
+    btnShort: "बेचें / SHORT",
+    lblEntryPrice: "प्रवेश मूल्य (Entry)",
+    lblVolatility: "वोलैटिलिटी बफर",
+    lblStopMargin: "डायनेमिक स्टॉप मार्जिन",
+    lblStopLoss: "स्टॉप लॉस",
+    lblTarget1: "लक्ष्य १ (१:२ R:R)",
+    lblTarget2: "लक्ष्य २ (१:३ R:R)",
+    lblTerminalTitle: "ट्रेड निष्पादन टर्मिनल",
+    lblTradeSize: "ट्रेड मात्रा",
+    lblExecType: "ट्रेड का प्रकार",
+    lblLivePos: "सक्रिय पोजीशन्स",
+    thSymbol: "प्रतीक",
+    thType: "प्रकार",
+    thEntry: "प्रवेश",
+    thPnL: "लाभ/हानि",
+    thAction: "कार्रवाई",
+    emptyPos: "कोई सक्रिय ट्रेड नहीं हैं",
+    lblFooter: "वाइजमैन एनालिटिक्स प्रो हब • ब्लैक ड्रैगन प्रॉडक्ट",
+    tickerLabel: "लाइव फीड",
+    lblVolume: "वॉल्यूम: ",
+    lblRsi: "आरसआई (14)",
+    lblMacd: "एमएसीडी",
+    lblSignal: "सिग्नल",
+    optMarket: "बाजार (MARKET)",
+    optLimit: "सीमा (LIMIT)",
+    btnExecuteBuy: "खरीद ऑर्डर पूर्ण करें",
+    btnExecuteSell: "बिक्री ऑर्डर पूर्ण करें",
+    btnTableClose: "बंद करें",
+    riskAmtPrefix: "जोखिम राशि: ",
+    estRetPrefix: "अनुमानित लाभ: ",
+    scanLabel: "लाइव स्कैनिंग सक्रिय",
+    lblChatHeader: "वाइजमैन AI सहायक",
+    lblScannerHeader: "ट्रैप और चार्ट पैटर्न स्कैनर",
+    scannerAccuracy: "सटीकता: ",
+    welcomeMsg: "नमस्कार। मैं वाइजमैन हूँ (ब्लैक ड्रैगन द्वारा संचालित)। आज चार्टिंग रणनीतियों और जोखिम नियंत्रण में आपको मुझसे क्या सलाह चाहिए?",
+    patternAlert: "[स्कैनर] चार्ट पैटर्न मिला - ",
+    trapAlert: "[चेतावनी] लिक्विडिटी ट्रैप मिला - ",
+    statusApproved: "स्वीकृत (BUY)",
+    statusAvoid: "बचें (AVOID)",
+    statusNeutral: "तटस्थ (NEUTRAL)",
+    msgLowVol: "बाजार में उतार-चढ़ाव काफी कम है। बड़े संस्थागत खरीदार अभी सक्रिय नहीं हैं। ट्रेड करने से बचें।",
+    reasonLowVol1: "ट्रेडिंग वॉल्यूम का स्तर बहुत ही सामान्य है।",
+    reasonLowVol2: "बड़ी स्लिपेज का जोखिम बना हुआ है।",
+    msgBullish: "बढ़ते वॉल्यूम के समर्थन के साथ मजबूत तेजी (Bullish Reversal) के संकेत। खरीदारी का बेहतरीन मौका।",
+    reasonBullish1: "RSI पर तेजी का डायवर्जेंस बन रहा है।",
+    reasonBullish2: "वॉल्यूम突破 की पुष्टि हो चुकी है।",
+    msgBearish: "रेसिस्टेंस स्तर पर बिकवाली का दबाव देखा जा रहा है। सख्त स्टॉप लॉस लगाने की सलाह दी जाती है।",
+    reasonBearish1: "RSI ओवरबॉट वितरण की ओर इशारा कर रहा है।",
+    reasonBearish2: "मुख्य ऑर्डर ब्लॉक पर रिजेक्शन पैटर्न।",
+    msgNeutral: "बाजार कंसोलिडेशन जोन में है। मूविंग एवरेज सपाट बने हुए हैं।",
+    reasonNeutral1: "स्पष्ट ट्रेंड ब्रेकआउट का कोई संकेत नहीं।",
+    reasonNeutral2: "महत्वपूर्ण सपोर्ट या रेसिस्टेंस ब्रेक होने का इंतजार करें।",
+    msgConflicting: "विभिन्न टाइमफ्रेम पर परस्पर विरोधी संकेत। वर्तमान में कोई स्पष्ट ट्रेड संकेत नहीं है।",
+    reasonConflicting: "RSI और MACD अलग-अलग संकेत दे रहे हैं।",
+    
+    // V2 Keys
+    lblSentimentTitle: "AI समाचार विश्लेषण",
+    lblReplayTitle: "बैकटेस्टिंग रीप्ले",
+    tabPositions: "ट्रेड्स (LIVE)",
+    tabHistory: "इतिहास और आंकड़े",
+    tabStrategy: "रणनीति बिल्डर",
+    tabAdvisory: "AI सलाहकार",
+    statWinRate: "जीत दर (WIN %)",
+    statNetProfit: "कुल लाभ",
+    emptyHistory: "कोई बंद ट्रेड नहीं हैं",
+    lblRsiBuy: "RSI खरीद सीमा",
+    lblMacdDir: "MACD दिशा",
+    lblStrategyEngine: "रणनीति इंजन स्थिति",
+    statusMonitoring: "बाजार स्कैनिंग जारी...",
+    statusTriggered: "चेतावनी: खरीद संकेत!",
+    lblAdvisoryTableTitle: "AI ट्रेडिंग सलाहकार रेटिंग",
+    lblStrategyCardsTitle: "ट्रेडिंग रणनीति संदर्भ पत्रक",
+    thAdvisoryTicker: "टिकर",
+    thAdvisoryAction: "सिफारिश",
+    thAdvisoryHoldClass: "होल्डिंग प्रकार",
+    thAdvisoryTimeframe: "समय सीमा",
+    thAdvisoryRationale: "तर्क",
+    btnLiveAIScan: "सक्रिय AI स्कैन शुरू करें",
+    lblAIScanStatus: "AI द्वारा बाजार स्कैन जारी..."
+  },
+  es: {
+    title: "WISEMAN ANALYTICS",
+    subtitle: "MOTOR CUANTITATIVO EN TIEMPO REAL",
+    tabStocks: "ACCIONES INDIAS",
+    tabCrypto: "CRIPTOMONEDAS 24/7",
+    tabForex: "MERCADO FOREX",
+    lblTickers: "Cotizaciones",
+    lblChartTitle: "GRÁFICOS EN VIVO E INDICADORES INTERACTIVOS",
+    lblCoachName: "ENTRENADOR DE IA WISEMAN",
+    lblCoachSub: "HEURÍSTICA EN TIEMPO REAL",
+    lblConfidence: "PERFIL DE CONFIANZA",
+    lblRationale: "Razonamiento de Señal",
+    lblRiskTitle: "CALCULADORA DE RIESGO INTELIGENTE",
+    btnLong: "COMPRA / LARGO",
+    btnShort: "VENTA / CORTO",
+    lblEntryPrice: "Precio de Entrada",
+    lblVolatility: "Buffer de Volatilidad",
+    lblStopMargin: "Margen de Stop Dinámico",
+    lblStopLoss: "Límite de Pérdida (SL)",
+    lblTarget1: "Objetivo 1 (1:2 R:R)",
+    lblTarget2: "Objetivo 2 (1:3 R:R)",
+    lblTerminalTitle: "TERMINAL DE EJECUCIÓN DE TRADES",
+    lblTradeSize: "Tamaño del Trade",
+    lblExecType: "Tipo de Ejecución",
+    lblLivePos: "Posiciones Abiertas en Vivo",
+    thSymbol: "Símbolo",
+    thType: "Tipo",
+    thEntry: "Entrada",
+    thPnL: "Ganancia/Pérdida",
+    thAction: "Acción",
+    emptyPos: "Sin posiciones activas",
+    lblFooter: "Wiseman Analytics Pro Hub • Un Producto de Black Dragon",
+    tickerLabel: "NOTICIAS",
+    lblVolume: "VOLUMEN: ",
+    lblRsi: "RSI (14)",
+    lblMacd: "MACD",
+    lblSignal: "SEÑAL",
+    optMarket: "MERCADO",
+    optLimit: "LÍMITE",
+    btnExecuteBuy: "EJECUTAR COMPRA",
+    btnExecuteSell: "EJECUTAR VENTA",
+    btnTableClose: "CERRAR",
+    riskAmtPrefix: "Monto de Riesgo: ",
+    estRetPrefix: "Retorno Est.: ",
+    scanLabel: "ESCANEO EN VIVO",
+    lblChatHeader: "ASISTENTE DE IA WISEMAN",
+    lblScannerHeader: "Escáner de Trampas y Patrones",
+    scannerAccuracy: "PRECISIÓN: ",
+    welcomeMsg: "Saludos. Soy Wiseman, su asesor financiero (con tecnología de Black Dragon). ¿En qué puedo ayudarle hoy con sus límites de riesgo o análisis?",
+    patternAlert: "[ESCÁNER] Patrón detectado en ",
+    trapAlert: "[ALERTA] Barrido de liquidez en ",
+    statusApproved: "APROBADO",
+    statusAvoid: "EVITAR",
+    statusNeutral: "NEUTRAL",
+    msgLowVol: "La volatilidad del mercado es baja. Los participantes institucionales están al margen. Evite operar.",
+    reasonLowVol1: "Perfil de volumen extremadamente bajo.",
+    reasonLowVol2: "Riesgo de deslizamientos por spreads altos.",
+    msgBullish: "Patrones de reversión alcista con aumento de volumen institucional. Configuración óptima para compra.",
+    reasonBullish1: "Divergencia alcista formándose en el RSI.",
+    reasonBullish2: "Ruptura de volumen confirmada.",
+    msgBearish: "Fuerte distribución detectada en la resistencia local. Presión de venta aumentando. Se sugieren stop loss ajustados.",
+    reasonBearish1: "RSI indica distribución de sobrecompra.",
+    reasonBearish2: "Patrón de rechazo en bloque de órdenes clave.",
+    msgNeutral: "Zona de consolidación detectada. Los promedios móviles se mantienen planos.",
+    reasonNeutral1: "Sin señal clara de ruptura de tendencia.",
+    reasonNeutral2: "Espere el barrido de soporte/resistencia clave.",
+    msgConflicting: "Señales de impulso en conflicto en múltiples marcos temporales. Sin ventaja operativa clara.",
+    reasonConflicting: "RSI y MACD muestran señales divergentes.",
+    
+    // V2 Keys
+    lblSentimentTitle: "ANÁLISIS DE SENTIMIENTO DE IA",
+    lblReplayTitle: "MODO DE REPRODUCCIÓN",
+    tabPositions: "POSICIONES (LIVE)",
+    tabHistory: "HISTORIAL Y ESTADÍSTICAS",
+    tabStrategy: "CREADOR DE ESTRATEGIAS",
+    tabAdvisory: "ASESORÍA DE IA",
+    statWinRate: "TASA DE GANANCIA",
+    statNetProfit: "RETORNO NETO",
+    emptyHistory: "Sin ejecuciones cerradas",
+    lblRsiBuy: "LÍMITE DE COMPRA RSI",
+    lblMacdDir: "DIRECCIÓN MACD",
+    lblStrategyEngine: "ESTADO DEL MOTOR DE ESTRATEGIA",
+    statusMonitoring: "MONITOREANDO FEEDS",
+    statusTriggered: "ALERTA: ¡CRITERIO SATISFECHO!",
+    lblAdvisoryTableTitle: "CALIFICACIONES DE ASESORÍA DE IA",
+    lblStrategyCardsTitle: "HOJA DE ESTRATEGIAS DE TRADING",
+    thAdvisoryTicker: "TICKER",
+    thAdvisoryAction: "RECOMENDACIÓN",
+    thAdvisoryHoldClass: "CLASE DE MANTENIMIENTO",
+    thAdvisoryTimeframe: "MARCO DE TIEMPO",
+    thAdvisoryRationale: "RAZÓN",
+    btnLiveAIScan: "INICIAR ESCANEO DE IA",
+    lblAIScanStatus: "Escaneando mercados con IA..."
+  }
+};
+
+const tickerNamesTranslated = {
+  en: {
+    nifty: 'Nifty 50 Index', reliance: 'Reliance Industries', tata: 'Tata Motors Limited',
+    btc: 'Bitcoin / US Dollar', eth: 'Ethereum / US Dollar', sol: 'Solana / US Dollar',
+    eur: 'Euro / US Dollar', gbp: 'Pound / US Dollar', jpy: 'US Dollar / Yen',
+    tata_tech: 'Tata Tech Limited', sol_jup: 'Jupiter Token / SOL', usd_chf: 'US Dollar / Franc'
+  },
+  mr: {
+    nifty: 'निफ्टी ५० इंडेक्स', reliance: 'रिलायन्स इंडस्ट्रीज', tata: 'टाटा मोटर्स लिमिटेड',
+    btc: 'बिटकॉइन / यूएस डॉलर', eth: 'इथेरियम / यूएस डॉलर', sol: 'सोलाना / यूएस डॉलर',
+    eur: 'युरो / यूएस डॉलर', gbp: 'पाउंड / यूएस डॉलर', jpy: 'यूएस डॉलर / येन',
+    tata_tech: 'टाटा टेक लिमिटेड', sol_jup: 'ज्युपिटर टोकन / SOL', usd_chf: 'यूएस डॉलर / फ्रँक'
+  },
+  hi: {
+    nifty: 'निफ्टी ५० इंडेक्स', reliance: 'रिलायंस इंडस्ट्रीज', tata: 'टाटा मोटर्स लिमिटेड',
+    btc: 'बिटकॉइन / यूएस डॉलर', eth: 'इथेरियम / यूएस डॉलर', sol: 'सोलाना / यूएस डॉलर',
+    eur: 'यूरो / यूएस डॉलर', gbp: 'पाउंड / यूएस डॉलर', jpy: 'यूएस डॉलर / येन',
+    tata_tech: 'टाटा टेक लिमिटेड', sol_jup: 'जुपिटर टोकन / SOL', usd_chf: 'यूएस डॉलर / फ्रैंक'
+  },
+  es: {
+    nifty: 'Índice Nifty 50', reliance: 'Reliance Industries', tata: 'Tata Motors Limitada',
+    btc: 'Bitcoin / Dólar US', eth: 'Ethereum / Dólar US', sol: 'Solana / Dólar US',
+    eur: 'Euro / Dólar US', gbp: 'Libra / Dólar US', jpy: 'Dólar US / Yen',
+    tata_tech: 'Tata Tech Limitada', sol_jup: 'Token Jupiter / SOL', usd_chf: 'Dólar US / Franco'
+  }
+};
+
+const marketTickers = {
+  indianStocks: [
+    { key: 'nifty', symbol: 'NIFTY_50', name: 'Nifty 50 Index', basePrice: 22450.00, decimals: 2, currentPrice: 22450.00, change: 0.25, wsStream: null },
+    { key: 'reliance', symbol: 'RELIANCE', name: 'Reliance Industries', basePrice: 2890.00, decimals: 2, currentPrice: 2890.00, change: -0.42, wsStream: null },
+    { key: 'tata', symbol: 'TATA_MOTORS', name: 'Tata Motors Limited', basePrice: 945.00, decimals: 2, currentPrice: 945.00, change: 1.85, wsStream: null }
+  ],
+  crypto: [
+    { key: 'btc', symbol: 'BTC_USDT', name: 'Bitcoin / US Dollar', basePrice: 67500.00, decimals: 2, currentPrice: 67500.00, change: 1.15, wsStream: 'btcusdt@ticker' },
+    { key: 'eth', symbol: 'ETH_USDT', name: 'Ethereum / US Dollar', basePrice: 3820.00, decimals: 2, currentPrice: 3820.00, change: -0.78, wsStream: 'ethusdt@ticker' },
+    { key: 'sol', symbol: 'SOL_USDT', name: 'Solana / US Dollar', basePrice: 165.50, decimals: 2, currentPrice: 165.50, change: 4.12, wsStream: 'solusdt@ticker' }
+  ],
+  forex: [
+    { key: 'eur', symbol: 'EUR_USD', name: 'Euro / US Dollar', basePrice: 1.08500, decimals: 5, currentPrice: 1.08500, change: 0.04, wsStream: 'eurusdt@ticker' },
+    { key: 'gbp', symbol: 'GBP_USD', name: 'Pound / US Dollar', basePrice: 1.27200, decimals: 5, currentPrice: 1.27200, change: -0.12, wsStream: 'gbpusdt@ticker' },
+    { key: 'jpy', symbol: 'USD_JPY', name: 'US Dollar / Yen', basePrice: 156.40, decimals: 3, currentPrice: 156.40, change: 0.18, wsStream: 'usdtjpy@ticker' }
+  ]
+};
+
+const marketVols = {
+  indianStocks: { vol: 0.0005, riskPct: 1.5, volMult: 25.4 },
+  crypto: { vol: 0.0018, riskPct: 4.5, volMult: 120.5 },
+  forex: { vol: 0.0001, riskPct: 0.4, volMult: 12.2 }
+};
+
+const advisoryDatabase = {
+  en: [
+    { ticker: "RELIANCE", action: "BUY", holdClass: "SWING", timeframe: "1-2 Weeks", rationale: "RSI divergence combined with strong volume breakout at key support level." },
+    { ticker: "TATA_MOTORS", action: "SELL", holdClass: "INTRADAY", timeframe: "15m - 1h", rationale: "Severe overhead resistance block met on high volume, potential pullback expected." },
+    { ticker: "NIFTY_50", action: "BUY", holdClass: "LONG-TERM", timeframe: "Holding", rationale: "FII inflows accelerating, bullish macro backdrop with positive rate cut expectations." },
+    { ticker: "TATA_TECH", action: "HOLD", holdClass: "SWING", timeframe: "Consolidating", rationale: "Moving averages are flat. Awaiting volume sweep of the recent trading range." }
+  ],
+  mr: [
+    { ticker: "RELIANCE", action: "खरेदी (BUY)", holdClass: "स्विंग (SWING)", timeframe: "१-२ आठवडे", rationale: "महत्वाच्या सपोर्ट लेव्हलवर वाढत्या व्हॉल्यूमसह आरएसआय तेजीचे संकेत (RSI divergence)." },
+    { ticker: "TATA_MOTORS", action: "विक्री (SELL)", holdClass: "इंट्राडे (INTRADAY)", timeframe: "१५ मि. - १ तास", rationale: "उच्च व्हॉल्यूमवर वरच्या स्तरावर जोरदार रेझिस्टन्स ब्लॉक, लहान पुलबॅकची अपेक्षा." },
+    { ticker: "NIFTY_50", action: "खरेदी (BUY)", holdClass: "दीर्घकालीन (LONG-TERM)", timeframe: "होल्डिंग", rationale: "FII गुंतवणूक वाढत आहे, व्याजदर कपातीची शक्यता असल्याने मार्केटमध्ये तेजीचे वातावरण." },
+    { ticker: "TATA_TECH", action: "तटस्थ (HOLD)", holdClass: "स्विंग (SWING)", timeframe: "कंसॉलिडेशन", rationale: "मूव्हिंग ॲव्हरेज सपाट आहेत. ट्रेडिंग रेंजच्या ब्रेकआऊटची वाट पहावी." }
+  ],
+  hi: [
+    { ticker: "RELIANCE", action: "खरीदें (BUY)", holdClass: "स्विंग (SWING)", timeframe: "1-2 सप्ताह", rationale: "महत्वपूर्ण सपोर्ट स्तर पर वोल्यूम ब्रेकआउट और RSI डायवर्जेंस।" },
+    { ticker: "TATA_MOTORS", action: "बेचें (SELL)", holdClass: "इंट्राडे (INTRADAY)", timeframe: "15मि - 1घंटा", rationale: "उच्च स्तर पर भारी बिकवाली का दबाव, छोटा पुलबैक संभावित है।" },
+    { ticker: "NIFTY_50", action: "खरीदें (BUY)", holdClass: "दीर्घकालीन (LONG-TERM)", timeframe: "होल्डिंग", rationale: "FII प्रवाह बढ़ रहा है, अनुकूल वृहद आर्थिक कारकों से बाजार में तेजी।" },
+    { ticker: "TATA_TECH", action: "होल्ड (HOLD)", holdClass: "स्विंग (SWING)", timeframe: "कंसॉलिडेशन", rationale: "मूविंग एवरेज सपाट हैं। नई रेंज के ब्रेकआउट की प्रतीक्षा करें।" }
+  ],
+  es: [
+    { ticker: "RELIANCE", action: "COMPRAR", holdClass: "SWING", timeframe: "1-2 Semanas", rationale: "Divergencia alcista del RSI combinada con ruptura de volumen en soporte clave." },
+    { ticker: "TATA_MOTORS", action: "VENDER", holdClass: "INTRADAY", timeframe: "15m - 1h", rationale: "Fuerte resistencia superior detectada con alto volumen, se espera retroceso." },
+    { ticker: "NIFTY_50", action: "COMPRAR", holdClass: "LARGO PLAZO", timeframe: "Mantener", rationale: "Entrada de capital institucional acelerándose, entorno macroeconómico alcista." },
+    { ticker: "TATA_TECH", action: "MANTENER", holdClass: "SWING", timeframe: "Consolidando", rationale: "Promedios móviles planos. Esperando ruptura del rango actual." }
+  ]
+};
+
+const strategyDatabase = {
+  en: [
+    { name: "Scalping", timeframe: "1m / 5m", indicators: "Volume + Order Flow", desc: "Ultra-fast execution targeting micro-movements. Requires strict discipline." },
+    { name: "Intraday Trading", timeframe: "15m / 1h", indicators: "VWAP + Bollinger Bands", desc: "Day trading strategy opening and closing all positions within the market hours." },
+    { name: "Swing Trading", timeframe: "4h / 1d", indicators: "RSI Divergence + MAs", desc: "Captures price swings over several days to weeks. Excellent for retail traders." },
+    { name: "Positional (Hold)", timeframe: "Weekly / Monthly", indicators: "FII Flows + Macro Trends", desc: "Long-term investment targeting major structural trends. Fundamental strength." }
+  ],
+  mr: [
+    { name: "स्कॅल्पिंग (Scalping)", timeframe: "१ मि. / ५ मि.", indicators: "व्हॉल्यूम + ऑर्डर फ्लो", desc: "बाजारातील अगदी सूक्ष्म हालचालींवरून जलद गतीने नफा मिळवण्याचे धोरण. कडक शिस्त आवश्यक." },
+    { name: "इंट्राडे ट्रेडिंग (Intraday)", timeframe: "१५ मि. / १ तास", indicators: "VWAP + बोलिंगर बँड्स", desc: "बाजार सुरू असतानाच सर्व व्यवहार उघडून बंद करणे. दैनंदिन व्हॉलॅटिलिटीवर आधारित." },
+    { name: "स्विंग ट्रेडिंग (Swing)", timeframe: "४ तास / १ दिवस", indicators: "RSI डायव्हर्जेंस + MAs", desc: "काही दिवस ते आठवड्यांच्या कालावधीत किंमतीतील चढ-उतार पकडणे. सतत वॉच न करणाऱ्यांसाठी योग्य." },
+    { name: "पोझिशनल होल्ड (Positional)", timeframe: "साप्ताहिक / मासिक", indicators: "FII फ्लो + मॅक्रो ट्रेन्ड्स", desc: "दीर्घकालीन गुंतवणूक जी प्रमुख रचनात्मक ट्रेन्ड्सवर लक्ष केंद्रित करते." }
+  ],
+  hi: [
+    { name: "स्कैल्पिंग (Scalping)", timeframe: "1मि / 5मि", indicators: "वॉल्यूम + ऑर्डर फ्लो", desc: "सूक्ष्म-मूवमेंट को लक्षित करने वाले तीव्र ट्रेड। सख्त अनुशासन की आवश्यकता होती है।" },
+    { name: "इंट्राडे ट्रेडिंग (Intraday)", timeframe: "15मि / 1घंटा", indicators: "VWAP + बोलिंजर बैंड्स", desc: "बाजार के समय के भीतर सभी पोजीशन खोलना और बंद करना। दैनिक उतार-चढ़ाव पर निर्भर।" },
+    { name: "स्विंग ट्रेडिंग (Swing)", timeframe: "4घंटा / 1दिन", indicators: "RSI डायवर्जेंस + MAs", desc: "कई दिनों से हफ्तों तक के मूल्य स्विंग्स को किसे भी समय कैप्चर करना।" },
+    { name: "पोजीशनल होल्ड (Positional)", timeframe: "साप्ताहिक / मासिक", indicators: "FII प्रवाह + व्यापक आर्थिक रुझान", desc: "दीर्घकालिक निवेश जो प्रमुख संरचनात्मक रुझानों को लक्षित करता है।" }
+  ],
+  es: [
+    { name: "Scalping", timeframe: "1m / 5m", indicators: "Volumen + Flujo de Órdenes", desc: "Ejecución ultrarrápida dirigida a micro-movimientos. Requiere estricta disciplina." },
+    { name: "Trading Intradía", timeframe: "15m / 1h", indicators: "VWAP + Bandas de Bollinger", desc: "Estrategia de trading diario que abre y cierra todas las posiciones en el mismo día." },
+    { name: "Trading de Swing", timeframe: "4h / 1d", indicators: "Divergencia RSI + MAs", desc: "Captura oscilaciones de precios durante varios días o semanas. Excelente para minoristas." },
+    { name: "Posicional (Mantener)", timeframe: "Semanal / Mensual", indicators: "Flujos FII + Tendencias Macro", desc: "Inversión a largo plazo dirigida a grandes tendencias estructurales de mercado." }
+  ]
+};
+
+function translateUI(lang) {
+  currentLang = lang;
+  const dict = langDb[lang];
+  if (!dict) return;
+
+  const mappings = {
+    lblTitle: dict.title,
+    lblSubtitle: dict.subtitle,
+    tabStocks: dict.tabStocks,
+    tabCrypto: dict.tabCrypto,
+    tabForex: dict.tabForex,
+    lblTickers: dict.lblTickers,
+    lblChartTitle: dict.lblChartTitle,
+    lblCoachName: dict.lblCoachName,
+    lblCoachSub: dict.lblCoachSub,
+    lblConfidence: dict.lblConfidence,
+    lblRationale: dict.lblRationale,
+    lblRiskTitle: dict.lblRiskTitle,
+    btnLong: dict.btnLong,
+    btnShort: dict.btnShort,
+    lblEntryPrice: dict.lblEntryPrice,
+    lblVolatility: dict.lblVolatility,
+    lblStopMargin: dict.lblStopMargin,
+    lblStopLoss: dict.lblStopLoss,
+    lblTarget1: dict.lblTarget1,
+    lblTarget2: dict.lblTarget2,
+    lblTerminalTitle: dict.lblTerminalTitle,
+    lblTradeSize: dict.lblTradeSize,
+    lblExecType: dict.lblExecType,
+    lblLivePos: dict.lblLivePos,
+    thSymbol: dict.thSymbol,
+    thType: dict.thType,
+    thEntry: dict.thEntry,
+    thPnL: dict.thPnL,
+    thAction: dict.thAction,
+    lblFooter: dict.lblFooter,
+    tickerLabel: dict.tickerLabel,
+    lblRsi: dict.lblRsi,
+    lblMacd: dict.lblMacd,
+    lblSignal: dict.lblSignal,
+    scanLabel: dict.scanLabel,
+    lblChatHeader: dict.lblChatHeader,
+    lblScannerHeader: dict.lblScannerHeader,
+    scannerAccuracy: dict.scannerAccuracy + (typeof scannerAccuracyValue !== 'undefined' ? scannerAccuracyValue.toFixed(2) : "98.9") + "%",
+    tabPositions: dict.tabPositions,
+    tabHistory: dict.tabHistory,
+    tabStrategy: dict.tabStrategy,
+    tabAdvisory: dict.tabAdvisory,
+    lblAdvisoryTableTitle: dict.lblAdvisoryTableTitle,
+    lblStrategyCardsTitle: dict.lblStrategyCardsTitle,
+    thAdvisoryTicker: dict.thAdvisoryTicker,
+    thAdvisoryAction: dict.thAdvisoryAction,
+    thAdvisoryHoldClass: dict.thAdvisoryHoldClass,
+    thAdvisoryTimeframe: dict.thAdvisoryTimeframe,
+    thAdvisoryRationale: dict.thAdvisoryRationale,
+    btnLiveAIScan: dict.btnLiveAIScan
+  };
+
+  for (const [id, value] of Object.entries(mappings)) {
+    const el = document.getElementById(id);
+    if (el && value) el.innerText = value;
+  }
+
+  const execSelect = document.getElementById('execType');
+  if (execSelect) {
+    execSelect.innerHTML = `
+      <option value="market">${dict.optMarket}</option>
+      <option value="limit">${dict.optLimit}</option>
+    `;
+  }
+
+  const welcome = document.getElementById('chatWelcomeMsg');
+  if (welcome) {
+    welcome.innerText = dict.welcomeMsg;
+  }
+
+  if (typeof populateWatchlist === 'function') populateWatchlist();
+  if (typeof updateIndicatorsAndCoach === 'function') updateIndicatorsAndCoach(volume);
+  if (typeof renderAdvisoryPanel === 'function') renderAdvisoryPanel();
+}
+

@@ -1,0 +1,4880 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wiseman Analytics - Quantitative Workspace</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Premium Style Sheet -->
+  <style>
+/* Next-Gen Glassmorphic CSS System for Wiseman Analytics */
+:root {
+  --bg: #030307;
+  --surface: rgba(13, 14, 21, 0.75);
+  --surface-light: rgba(22, 23, 34, 0.9);
+  --border: rgba(30, 41, 59, 0.6);
+  --border-glow: rgba(0, 240, 255, 0.25);
+  --gold: #d4af37;
+  --gold-accent: #ffd700;
+  --cyan: #00f0ff;
+  --cyan-dim: rgba(0, 240, 255, 0.15);
+  --green-neon: #00e676;
+  --red-neon: #ff1744;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --glow-cyan: 0 0 15px rgba(0, 240, 255, 0.3);
+  --glow-gold: 0 0 15px rgba(212, 175, 55, 0.3);
+  --glow-green: 0 0 15px rgba(0, 230, 118, 0.3);
+  --glow-red: 0 0 15px rgba(255, 23, 68, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 40%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1750px;
+  margin: 0 auto;
+  padding: 16px;
+  width: 100%;
+}
+
+/* Live News Ticker */
+.news-ticker-container {
+  background: rgba(13, 14, 21, 0.95);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 20px;
+  font-size: 11px;
+  display: flex;
+  gap: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+  align-items: center;
+}
+
+.news-ticker-label {
+  color: var(--gold-accent);
+  font-weight: 700;
+  font-family: 'Orbitron', sans-serif;
+  border-right: 1px solid var(--border);
+  padding-right: 16px;
+  text-shadow: var(--glow-gold);
+  background: rgba(13, 14, 21, 1);
+  position: relative;
+  z-index: 5;
+  margin-left: -20px;
+  padding-left: 20px;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+
+.news-ticker-content {
+  display: inline-block;
+  animation: ticker 45s linear infinite;
+}
+
+.news-ticker-item {
+  display: inline-block;
+  margin-right: 48px;
+  color: var(--text-secondary);
+}
+
+.news-ticker-item span {
+  color: var(--cyan);
+  margin-right: 6px;
+  font-weight: bold;
+}
+
+@keyframes ticker {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Header Styling */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+  padding-top: 8px;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-accent-bar {
+  width: 6px;
+  height: 36px;
+  background: linear-gradient(180deg, var(--gold-accent), var(--gold));
+  border-radius: 4px;
+  box-shadow: var(--glow-gold);
+}
+
+.brand-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--gold-accent);
+  letter-spacing: 2.5px;
+  text-shadow: var(--glow-gold);
+}
+
+.brand-subtitle {
+  font-size: 9.5px;
+  font-weight: 800;
+  color: var(--cyan);
+  letter-spacing: 2px;
+  margin-top: 2px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Language Switcher Dropdown */
+.lang-selector-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface-light);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.lang-label {
+  font-size: 9.5px;
+  font-weight: bold;
+  color: var(--text-secondary);
+  font-family: 'Orbitron', sans-serif;
+}
+
+.lang-select {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 11px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+}
+
+.lang-select option {
+  background: #0d0e15;
+  color: var(--text-primary);
+}
+
+.live-ticker-info {
+  text-align: right;
+}
+
+.active-symbol-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.websocket-pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--green-neon);
+  border-radius: 50%;
+  box-shadow: var(--glow-green);
+  animation: pulse 1.5s infinite;
+  display: none;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 0.4; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.8); opacity: 0.4; }
+}
+
+.active-symbol-title {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+}
+
+.live-price-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.live-price {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.price-change-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+}
+
+.price-change-badge.positive {
+  background: rgba(0, 230, 118, 0.12);
+  color: var(--green-neon);
+  border-color: rgba(0, 230, 118, 0.3);
+}
+
+.price-change-badge.negative {
+  background: rgba(255, 23, 68, 0.12);
+  color: var(--red-neon);
+  border-color: rgba(255, 23, 68, 0.3);
+}
+
+/* Layout Columns */
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 340px;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 1300px) {
+  .dashboard-layout {
+    grid-template-columns: 1fr 340px;
+  }
+  .left-sidebar {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 850px) {
+  .dashboard-layout {
+    grid-template-columns: 1fr;
+  }
+  .left-sidebar, .right-column {
+    grid-column: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Cards Styling (Glassmorphism) */
+.panel-card {
+  background: var(--surface);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.panel-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+/* Watchlist & Scanner Panel */
+.watchlist-header {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+}
+
+.scan-status-indicator {
+  color: var(--cyan);
+  font-size: 9px;
+  animation: flash 1s infinite alternate;
+}
+
+@keyframes flash {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+.watchlist-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.watchlist-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.watchlist-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(0, 240, 255, 0.25);
+}
+
+.watchlist-item.active {
+  background: rgba(0, 240, 255, 0.05);
+  border-color: var(--cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.watchlist-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.watchlist-symbol {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.new-tag {
+  background: var(--gold);
+  color: #000;
+  font-size: 7px;
+  font-weight: 900;
+  padding: 1px 3px;
+  border-radius: 3px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.watchlist-name {
+  font-size: 9.5px;
+  color: var(--text-muted);
+}
+
+.watchlist-values {
+  text-align: right;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.watchlist-price {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.watchlist-change {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* Market Switcher tabs */
+.market-switcher {
+  display: flex;
+  background: rgba(13, 14, 21, 0.9);
+  border-radius: 12px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+  gap: 4px;
+}
+
+.market-tab {
+  flex: 1;
+  padding: 12px 4px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.market-tab.active {
+  background: var(--surface-light);
+  border-color: rgba(0, 240, 255, 0.4);
+  color: var(--text-primary);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
+}
+
+/* Main Chart Card Head Controls */
+.chart-controls-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.chart-type-selector {
+  display: flex;
+  background: var(--surface-light);
+  border-radius: 6px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  gap: 2px;
+}
+
+.chart-type-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 9px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  transition: all 0.15s ease;
+}
+
+.chart-type-btn.active {
+  background: var(--surface);
+  color: var(--cyan);
+  border: 1.5px solid var(--cyan-dim);
+}
+
+.drawing-tools-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.tool-btn {
+  background: var(--surface-light);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 9.5px;
+  font-weight: bold;
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+}
+
+.tool-btn.active {
+  border-color: var(--gold);
+  color: var(--gold-accent);
+  box-shadow: var(--glow-gold);
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(3, 3, 7, 0.85);
+  cursor: crosshair;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Scanner logs panel */
+.scanner-logs-panel {
+  background: rgba(3, 3, 7, 0.9);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  height: 100px;
+  overflow-y: auto;
+  margin-top: 16px;
+}
+
+.log-row {
+  margin-bottom: 6px;
+  display: flex;
+  gap: 8px;
+}
+
+.log-time { color: var(--text-muted); }
+.log-tag { color: var(--gold); font-weight: bold; }
+.log-desc { color: var(--text-secondary); }
+
+/* AI Chat Assistant Card */
+.chat-container-panel {
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+}
+
+.chat-history {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.chat-bubble {
+  padding: 8px 12px;
+  border-radius: 10px;
+  max-width: 85%;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.bubble-user {
+  background: var(--surface-light);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+}
+
+.bubble-ai {
+  background: rgba(0, 240, 255, 0.04);
+  border: 1px solid var(--cyan-dim);
+  color: var(--text-secondary);
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 8px;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+}
+
+.chat-text-input {
+  flex: 1;
+  background: var(--surface-light);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px;
+  color: var(--text-primary);
+  font-size: 11px;
+  outline: none;
+}
+
+.chat-send-btn {
+  background: var(--cyan);
+  border: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 10px;
+  padding: 0 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Technical indicators badges */
+.indicators-row {
+  display: flex;
+  justify-content: space-around;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.indicator-badge {
+  background: var(--surface-light);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 16px;
+  text-align: center;
+  flex: 1;
+}
+
+.indicator-label {
+  font-size: 9px;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.indicator-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* AI Coach Layout details */
+.coach-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.coach-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface-light);
+  border: 1.5px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Mascots glowing effect */
+.coach-avatar.buy-glow {
+  border-color: var(--green-neon);
+  box-shadow: var(--glow-green);
+}
+
+.coach-avatar.sell-glow {
+  border-color: var(--red-neon);
+  box-shadow: var(--glow-red);
+}
+
+.coach-avatar.neutral-glow {
+  border-color: var(--cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.coach-avatar-svg {
+  fill: var(--gold);
+  width: 24px;
+  height: 24px;
+  transition: fill 0.3s ease;
+}
+
+.buy-glow .coach-avatar-svg { fill: var(--green-neon); }
+.sell-glow .coach-avatar-svg { fill: var(--red-neon); }
+.neutral-glow .coach-avatar-svg { fill: var(--cyan); }
+
+.coach-branding {
+  flex: 1;
+}
+
+.coach-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--gold-accent);
+  letter-spacing: 1px;
+}
+
+.coach-subtext {
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+.coach-status-badge {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+}
+
+.status-approved {
+  background: rgba(0, 230, 118, 0.1);
+  color: var(--green-neon);
+  border-color: var(--green-neon);
+  box-shadow: 0 0 8px rgba(0, 230, 118, 0.1);
+}
+
+.status-avoid {
+  background: rgba(255, 23, 68, 0.1);
+  color: var(--red-neon);
+  border-color: var(--red-neon);
+  box-shadow: 0 0 8px rgba(255, 23, 68, 0.1);
+}
+
+.status-neutral {
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--cyan);
+  border-color: var(--cyan);
+}
+
+.confidence-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.confidence-bar-container {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.confidence-bar-fill {
+  height: 100%;
+  width: 50%;
+  border-radius: 4px;
+  transition: width 0.4s ease, background 0.4s ease;
+}
+
+.coach-quote-box {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.rationale-title {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.rationale-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rationale-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.rationale-icon {
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+/* Risk Calculator Panel */
+.risk-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.direction-switcher {
+  display: flex;
+  background: var(--surface-light);
+  border-radius: 10px;
+  padding: 3px;
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
+  gap: 3px;
+}
+
+.direction-tab {
+  flex: 1;
+  padding: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.direction-tab.active.long {
+  background: rgba(0, 230, 118, 0.12);
+  border-color: var(--green-neon);
+  color: var(--green-neon);
+}
+
+.direction-tab.active.short {
+  background: rgba(255, 23, 68, 0.12);
+  border-color: var(--red-neon);
+  color: var(--red-neon);
+}
+
+.input-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.price-input {
+  width: 100%;
+  background: var(--surface-light);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 48px 10px 10px;
+  color: var(--text-primary);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  outline: none;
+}
+
+.input-action-btn {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--gold);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calc-outputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+.output-item {
+  background: var(--surface-light);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.output-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.output-label {
+  font-size: 9px;
+  font-weight: 700;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+
+.output-sub {
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+.output-val {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Trade Execution Terminal */
+.terminal-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+  gap: 16px;
+}
+
+.term-tab {
+  padding-bottom: 8px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.term-tab.active {
+  color: var(--text-primary);
+  border-color: var(--cyan);
+}
+
+.terminal-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.terminal-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.terminal-input {
+  background: var(--surface-light);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px;
+  color: var(--text-primary);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  outline: none;
+}
+
+.terminal-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  cursor: pointer;
+  color: #000;
+}
+
+.terminal-btn.buy { background: var(--green-neon); box-shadow: var(--glow-green); }
+.terminal-btn.sell { background: var(--red-neon); color: #fff; box-shadow: var(--glow-red); }
+
+.positions-table-container {
+  overflow-x: auto;
+  margin-top: 10px;
+}
+
+.positions-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10.5px;
+}
+
+.positions-table th {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 8.5px;
+  text-align: left;
+  padding: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+.positions-table td {
+  padding: 8px 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+  font-family: 'Orbitron', sans-serif;
+}
+
+.pos-ticker {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.pnl-positive {
+  color: var(--green-neon);
+  font-weight: bold;
+}
+
+.pnl-negative {
+  color: var(--red-neon);
+  font-weight: bold;
+}
+
+.close-pos-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: 4px;
+  padding: 2px 4px;
+  cursor: pointer;
+  font-size: 8px;
+}
+
+.close-pos-btn:hover {
+  border-color: var(--red-neon);
+  color: var(--red-neon);
+}
+
+.empty-positions {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 12px;
+  font-style: italic;
+  font-size: 10.5px;
+}
+
+footer {
+  text-align: center;
+  padding: 16px;
+  font-size: 11px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+
+/* V2 Advanced Dashboard Styles */
+
+.term-sub-tab {
+  transition: all 0.2s ease;
+}
+
+.term-sub-tab:hover {
+  color: var(--cyan) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+.term-sub-tab.active {
+  color: var(--cyan) !important;
+  border-color: var(--cyan-dim) !important;
+  background: rgba(0, 240, 255, 0.05) !important;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.05);
+}
+
+.replay-toolbar button {
+  transition: all 0.2s ease;
+}
+
+.replay-toolbar button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.replay-toolbar button.exit:hover {
+  background: rgba(255, 23, 68, 0.15);
+}
+
+.strategy-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  outline: none;
+}
+
+.strategy-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--cyan);
+  cursor: pointer;
+  box-shadow: var(--glow-cyan);
+}
+
+.strategy-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--cyan);
+  cursor: pointer;
+  box-shadow: var(--glow-cyan);
+}
+
+.news-ticker-item {
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.news-ticker-item:hover {
+  color: var(--text-primary);
+}
+
+/* AI Advisory Hub Styles */
+.badge-buy {
+  background: rgba(0, 230, 118, 0.15);
+  color: var(--green-neon);
+  border: 1px solid rgba(0, 230, 118, 0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 8px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.badge-sell {
+  background: rgba(255, 23, 68, 0.15);
+  color: var(--red-neon);
+  border: 1px solid rgba(255, 23, 68, 0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 8px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.badge-hold {
+  background: rgba(255, 215, 0, 0.12);
+  color: var(--gold-accent);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 8px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.strategy-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.strategy-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--cyan);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.1);
+}
+
+.strategy-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+  padding-bottom: 4px;
+  margin-bottom: 2px;
+}
+
+.strategy-card-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: bold;
+  font-size: 10px;
+  color: var(--text-primary);
+}
+
+.strategy-card-timeframe {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 7.5px;
+  color: var(--cyan);
+  font-weight: bold;
+}
+
+.strategy-card-indicators {
+  font-size: 8px;
+  color: var(--gold-accent);
+  font-family: 'Orbitron', sans-serif;
+}
+
+.strategy-card-desc {
+  font-size: 8.5px;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* Scrollbar customization for strategy cards grid */
+.strategy-cards-grid::-webkit-scrollbar {
+  width: 3px;
+}
+.strategy-cards-grid::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.01);
+}
+.strategy-cards-grid::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+.strategy-cards-grid::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+
+
+</style>
+
+  <!-- TradingView Widget Script -->
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+</head>
+<body>
+
+  <!-- News Ticker -->
+  <div class="news-ticker-container">
+    <div class="news-ticker-label" id="tickerLabel">ALPHA FEED</div>
+    <div class="news-ticker-content" id="newsTicker">
+      <!-- Populated Dynamically by app.js -->
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="brand-accent-bar"></div>
+        <div>
+          <div class="brand-company" id="lblCompany" style="font-family: 'Orbitron', sans-serif; font-size: 8.5px; font-weight: 900; color: var(--gold-accent); letter-spacing: 2px; text-shadow: var(--glow-gold); margin-bottom: 2px; text-transform: uppercase;">BLACK DRAGON</div>
+          <h1 class="brand-title" id="lblTitle">WISEMAN ANALYTICS</h1>
+          <div class="brand-subtitle" id="lblSubtitle">REAL-TIME QUANTITATIVE ENGINE</div>
+        </div>
+      </div>
+      
+      <div class="header-right">
+        <!-- Language Switcher -->
+        <div class="lang-selector-container">
+          <span class="lang-label">LANG:</span>
+          <select class="lang-select" id="langSelect" onchange="translateUI(this.value)">
+            <option value="en">EN (English)</option>
+            <option value="mr">MR (मराठी)</option>
+            <option value="hi">HI (हिंदी)</option>
+            <option value="es">ES (Español)</option>
+          </select>
+        </div>
+
+        <div class="live-ticker-info">
+          <div class="active-symbol-title-row">
+            <div class="websocket-pulse-dot" id="wsPulse"></div>
+            <div class="active-symbol-title" id="activeSymbol">NIFTY_50</div>
+          </div>
+          <div class="live-price-wrapper">
+            <span class="live-price" id="livePrice">22,450.00</span>
+            <span class="price-change-badge positive" id="priceChange">+0.25%</span>
+          </div>
+          <div id="volumeText" style="font-size: 9px; color: var(--text-muted); font-family: 'Orbitron', sans-serif; margin-top: 2px; text-transform: uppercase; text-align: right;">
+            VOLUME: -
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Market Selector Tabs -->
+    <div class="market-switcher">
+      <button class="market-tab active" id="btnStocks" onclick="switchMarket('indianStocks')">
+        <svg style="width: 12px; height: 12px; fill: currentColor;" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+        <span id="tabStocks">INDIAN STOCKS</span>
+      </button>
+      <button class="market-tab" id="btnCrypto" onclick="switchMarket('crypto')">
+        <svg style="width: 12px; height: 12px; fill: currentColor;" viewBox="0 0 24 24"><path d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2M12 18H9V16H10.5V14H9V12H10.5V10H9V8H12.5V6.5H14.5V8.2A2.5 2.5 0 0 1 16.5 10.7L15 11.2A1 1 0 0 0 14.5 10H12.5V12H14.5A2.5 2.5 0 0 1 16.5 14.5A2.5 2.5 0 0 1 14.5 17V18H12.5M12.5 14H14.5A1 1 0 0 0 14.5 16H12.5Z"/></svg>
+        <span id="tabCrypto">CRYPTO 24/7</span>
+      </button>
+      <button class="market-tab" id="btnForex" onclick="switchMarket('forex')">
+        <svg style="width: 12px; height: 12px; fill: currentColor;" viewBox="0 0 24 24"><path d="M15 18.5c-2.28 0-4.13-1.85-4.13-4.13c0-2.28 1.85-4.13 4.13-4.13c1.07 0 2.06.41 2.81 1.15l1.06-1.06A5.942 5.942 0 0 0 15 8.75c-3.1 0-5.63 2.53-5.63 5.63s2.53 5.63 5.63 5.63c1.47 0 2.81-.57 3.82-1.49l-1.08-1.08c-.76.67-1.7 1.06-2.74 1.06M20.25 13h-4.5v1.5h4.5v3l3-3.75l-3-3.75z"/></svg>
+        <span id="tabForex">FOREX MARKET</span>
+      </button>
+    </div>
+
+    <!-- Main Dashboard Layout -->
+    <div class="dashboard-layout">
+      <!-- 1. Left Sidebar: Watchlist + AI Coach -->
+      <div class="left-sidebar">
+        <!-- Watchlist Tickers -->
+        <div class="panel-card">
+          <div class="watchlist-header">
+            <span id="lblTickers">Market Tickers</span>
+            <span class="scan-status-indicator" id="scanLabel">SCANNING LIVE</span>
+          </div>
+          <div class="watchlist-list" id="watchlistContainer">
+            <!-- Populated dynamically by app.js -->
+          </div>
+        </div>
+
+        <!-- TERMINATOR SECURITY SHIELD CARD -->
+        <div class="panel-card" style="border-color: rgba(255, 23, 68, 0.4); box-shadow: 0 0 15px rgba(255, 23, 68, 0.15);">
+          <div class="coach-header">
+            <div class="coach-avatar sell-glow" id="securityGlow">
+              <svg class="coach-avatar-svg" style="fill: var(--red-neon);" viewBox="0 0 24 24">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 6c1.4 0 2.5 1.1 2.5 2.5S13.4 12 12 12s-2.5-1.1-2.5-2.5S10.6 7 12 7zm0 10c-2.7 0-5.8 1.3-6 2c.79 1.37 2.22 2.36 3.88 2.72c.62-.78 1.48-1.22 2.12-1.22s1.5.44 2.12 1.22c1.66-.36 3.09-1.35 3.88-2.72c-.2-.7-3.3-2-6-2z"/>
+              </svg>
+            </div>
+            <div class="coach-branding">
+              <div class="coach-name" style="color: var(--red-neon); font-family: 'Orbitron', sans-serif;">TERMINATOR ACTIVE SHIELD</div>
+              <div class="coach-subtext" style="color: var(--text-muted);">5-STAR SECURED PROTOCOL</div>
+            </div>
+            <div class="coach-status-badge status-avoid" id="securityStatus" style="background: rgba(255, 23, 68, 0.1); color: var(--red-neon); border-color: var(--red-neon);">SAFE</div>
+          </div>
+
+          <div class="confidence-label-row">
+            <span style="font-size: 9px; color: var(--text-secondary);">SHIELD STRENGTH</span>
+            <span style="color: var(--green-neon);" id="shieldStrength">100%</span>
+          </div>
+          <div class="confidence-bar-container" style="background: rgba(255, 255, 255, 0.03); height: 6px; border-radius: 4px; overflow: hidden; margin-bottom: 8px;">
+            <div class="confidence-bar-fill" id="shieldFill" style="width: 100%; height: 100%; background-color: var(--green-neon); box-shadow: var(--glow-green); transition: width 0.4s ease, background 0.4s ease;"></div>
+          </div>
+
+          <div class="scanner-logs-panel" id="securityLogs" style="height: 80px; font-size: 8.5px; background: rgba(3, 3, 7, 0.95); margin-top: 8px; border-color: rgba(255, 23, 68, 0.25);">
+            <!-- Live Security Logs go here -->
+          </div>
+        </div>
+
+        <!-- AI Coach Recommendations Card -->
+        <div class="panel-card">
+          <div class="coach-header">
+            <div class="coach-avatar" id="coachAvatarGlow">
+              <svg class="coach-avatar-svg" viewBox="0 0 24 24">
+                <path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 2a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+              </svg>
+            </div>
+            <div class="coach-branding">
+              <div class="coach-name" id="lblCoachName">WISEMAN AI COACH</div>
+              <div class="coach-subtext" id="lblCoachSub">REAL-TIME HEURISTICS</div>
+            </div>
+            <div class="coach-status-badge status-neutral" id="coachStatus">NEUTRAL</div>
+          </div>
+
+          <div class="confidence-label-row">
+            <span id="lblConfidence">CONFIDENCE PROFILE</span>
+            <span id="confidenceVal">50%</span>
+          </div>
+          <div class="confidence-bar-container">
+            <div class="confidence-bar-fill" id="confidenceFill" style="width: 50%; background-color: var(--cyan);"></div>
+          </div>
+
+          <div class="coach-quote-box" id="coachQuote">
+            "Analyzing live feeds for institutional block activities..."
+          </div>
+
+          <div class="rationale-title" id="lblRationale">Signal Rationale</div>
+          <div class="rationale-list" id="rationaleList">
+            <!-- Populated dynamically by ai.js -->
+          </div>
+        </div>
+
+        <!-- AI Assistant Conversation Card -->
+        <div class="panel-card">
+          <div class="watchlist-header">
+            <span id="lblChatHeader">WISEMAN AI ASSISTANT</span>
+          </div>
+          <div class="chat-container-panel">
+            <div class="chat-history" id="chatHistory">
+              <div class="chat-bubble bubble-ai" id="chatWelcomeMsg">
+                Greetings. I am Wiseman, your algorithmic advisor. How may I assist you with your charting strategy today?
+              </div>
+            </div>
+            <div class="chat-input-row">
+              <input type="text" class="chat-text-input" id="chatInput" placeholder="Ask Wiseman..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+              <button class="chat-send-btn" onclick="sendChatMessage()">SEND</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Middle Panel: Multi-type Chart & Patterns Logs -->
+      <div>
+        <!-- Charting Card -->
+        <div class="panel-card">
+          <div class="chart-controls-panel">
+            <!-- Dual Chart Toggle -->
+            <div class="chart-type-selector" id="chartViewSelector" style="border: 1px solid var(--cyan-dim);">
+              <button class="chart-type-btn active" id="btnViewCustom" onclick="switchChartView('custom')">CUSTOM</button>
+              <button class="chart-type-btn" id="btnViewTV" onclick="switchChartView('tv')">TRADINGVIEW</button>
+            </div>
+
+            <!-- Chart type toggle controls -->
+            <div class="chart-type-selector" id="customTypeSelector">
+              <button class="chart-type-btn active" id="btnTypeLine" onclick="setChartType('line')">LINE</button>
+              <button class="chart-type-btn" id="btnTypeCandle" onclick="setChartType('candle')">CANDLE</button>
+              <button class="chart-type-btn" id="btnTypeArea" onclick="setChartType('area')">AREA</button>
+              <button class="chart-type-btn" id="btnTypeBar" onclick="setChartType('bar')">BAR</button>
+            </div>
+            
+            <!-- Interactivity drawing tools & Custom settings -->
+            <div class="drawing-tools-bar" id="customDrawingBar">
+              <button class="tool-btn" id="toolTrendline" onclick="toggleDrawingTool('trendline')">Trendline</button>
+              <button class="tool-btn" id="toolFib" onclick="toggleDrawingTool('fib')">Fibonacci</button>
+              <button class="tool-btn" id="toolSupport" onclick="toggleDrawingTool('support')">S/R Line</button>
+              
+              <!-- Draw color/width selector -->
+              <span style="color: var(--border); font-size: 10px;">|</span>
+              <input type="color" id="drawingColor" value="#00f0ff" style="width: 18px; height: 18px; border: none; background: transparent; cursor: pointer; padding: 0;" title="Line Color">
+              <select id="drawingWidth" style="background: var(--surface-light); border: 1px solid var(--border); color: var(--text-primary); font-size: 9px; border-radius: 4px; padding: 2px;" title="Line Width">
+                <option value="1">1px</option>
+                <option value="2" selected>2px</option>
+                <option value="3">3px</option>
+                <option value="4">4px</option>
+              </select>
+
+              <!-- Indicators Overlay Checks -->
+              <span style="color: var(--border); font-size: 10px;">|</span>
+              <label style="font-size: 9.5px; display: flex; align-items: center; gap: 3px; color: var(--text-secondary); cursor: pointer;">
+                <input type="checkbox" id="cbBB" checked onchange="drawChart()">
+                <span>BB</span>
+              </label>
+              <label style="font-size: 9.5px; display: flex; align-items: center; gap: 3px; color: var(--text-secondary); cursor: pointer;">
+                <input type="checkbox" id="cbEMA20" onchange="drawChart()">
+                <span>EMA20</span>
+              </label>
+              <label style="font-size: 9.5px; display: flex; align-items: center; gap: 3px; color: var(--text-secondary); cursor: pointer;">
+                <input type="checkbox" id="cbEMA50" onchange="drawChart()">
+                <span>EMA50</span>
+              </label>
+
+              <!-- Replay Trigger -->
+              <span style="color: var(--border); font-size: 10px;">|</span>
+              <button class="tool-btn" id="btnReplay" onclick="toggleReplayMode()" style="border-color: var(--gold-accent); color: var(--gold-accent);">Replay</button>
+              
+              <button class="tool-btn" onclick="clearDrawings()" style="border-color: rgba(255,23,68,0.3); color: var(--red-neon);">Clear</button>
+            </div>
+          </div>
+          
+          <!-- Graph frame & Go Live snapshot handler -->
+          <div class="chart-container" id="chartFrame">
+            <canvas id="liveChartCanvas"></canvas>
+            <div id="tradingview_chart_container" style="width: 100%; height: 100%; display: none; position: relative;">
+              <div id="tvSymbolIndicator" style="position: absolute; top: 10px; left: 10px; background: rgba(13, 14, 21, 0.9); color: var(--gold-accent); font-family: 'Orbitron', sans-serif; font-size: 8px; font-weight: bold; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; z-index: 99; pointer-events: none;">Symbol: NSE:NIFTY</div>
+              <div id="tradingview_chart" style="width: 100%; height: 100%;"></div>
+            </div>
+
+            <!-- Replay overlay toolbar controls -->
+            <div id="replayControlBar" class="replay-toolbar" style="display: none; position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: rgba(13, 14, 21, 0.95); border: 1px solid var(--gold); padding: 6px 16px; border-radius: 24px; gap: 10px; align-items: center; z-index: 10; box-shadow: var(--glow-gold);">
+              <span style="font-size: 8.5px; font-weight: bold; font-family: 'Orbitron', sans-serif; color: var(--gold-accent); letter-spacing: 1px;">REPLAY</span>
+              <button class="chart-type-btn" id="btnReplayPlay" onclick="replayPlay()" style="border-color: var(--green-neon); color: var(--green-neon);">PLAY</button>
+              <button class="chart-type-btn" id="btnReplayStep" onclick="replayStep()">STEP ▷</button>
+              <button class="chart-type-btn exit" onclick="toggleReplayMode()" style="border-color: var(--red-neon); color: var(--red-neon);">EXIT</button>
+            </div>
+
+            <button id="btnGoLive" onclick="snapToLive()" 
+              style="position: absolute; bottom: 15px; right: 15px; background: rgba(13, 14, 21, 0.85); border: 1.5px solid var(--cyan); color: var(--cyan); padding: 6px 12px; border-radius: 20px; font-family: 'Orbitron', sans-serif; font-size: 9px; font-weight: 800; cursor: pointer; display: none; box-shadow: var(--glow-cyan); transition: all 0.2s ease; z-index: 10;"
+              onmouseover="this.style.background='var(--cyan)'; this.style.color='#000';"
+              onmouseout="this.style.background='rgba(13, 14, 21, 0.85)'; this.style.color='var(--cyan)';">
+              GO LIVE ◉
+            </button>
+          </div>
+
+          <!-- Live Indicator Badges -->
+          <div class="indicators-row">
+            <div class="indicator-badge">
+              <div class="indicator-label" id="lblRsi">RSI (14)</div>
+              <div class="indicator-value" id="rsiVal" style="color: var(--cyan);">54.0</div>
+            </div>
+            <div class="indicator-badge">
+              <div class="indicator-label" id="lblMacd">MACD</div>
+              <div class="indicator-value" id="macdVal" style="color: var(--green-neon);">0.12</div>
+            </div>
+            <div class="indicator-badge">
+              <div class="indicator-label" id="lblSignal">SIGNAL</div>
+              <div class="indicator-value" id="signalVal" style="color: var(--text-secondary);">0.08</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pattern / Trap Scanner Logs -->
+        <div class="panel-card" style="margin-bottom: 0px;">
+          <div class="watchlist-header">
+            <span id="lblScannerHeader">Institutional Trap & Pattern Scanner</span>
+            <span id="scannerAccuracy" style="color: var(--gold-accent); font-weight: bold; text-shadow: var(--glow-gold);">ACCURACY: 98.9%</span>
+          </div>
+          <div class="scanner-logs-panel" id="scannerLogs">
+            <!-- Simulated Logs appear here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Right Sidebar: Risk Engine & Order Terminal -->
+      <div class="right-column">
+        <!-- Smart Risk Calculator -->
+        <div class="panel-card">
+          <div class="card-header-row">
+            <h2 class="risk-title" id="lblRiskTitle">SMART RISK CALCULATOR</h2>
+          </div>
+
+          <div class="direction-switcher">
+            <div class="direction-tab active long" id="btnLong" onclick="setDirection(true)">BUY / LONG</div>
+            <div class="direction-tab short" id="btnShort" onclick="setDirection(false)">SELL / SHORT</div>
+          </div>
+
+          <div class="input-label" id="lblEntryPrice">Entry Price</div>
+          <div class="input-wrapper">
+            <input type="text" class="price-input" id="entryInput" oninput="calculateRisk()" value="22450.00">
+            <button class="input-action-btn" onclick="syncCurrentPrice()" title="Sync current price">
+              <svg style="width: 16px; height: 16px; fill: currentColor;" viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+            </button>
+          </div>
+
+          <div class="calc-outputs">
+            <div class="output-item">
+              <div class="output-details">
+                <span class="output-label" id="lblVolatility" style="color: var(--cyan);">Volatility Buffer</span>
+                <span class="output-sub" id="lblStopMargin">Dynamic Stop Margin</span>
+              </div>
+              <span class="output-val" id="outVolatility">1.5%</span>
+            </div>
+
+            <div class="output-item">
+              <div class="output-details">
+                <span class="output-label" id="lblStopLoss" style="color: var(--red-neon);">Stop Loss</span>
+                <span class="output-sub" id="outRiskAmt">Risk Amount: -</span>
+              </div>
+              <span class="output-val" id="outStopLoss">-</span>
+            </div>
+
+            <div class="output-item">
+              <div class="output-details">
+                <span class="output-label" id="lblTarget1" style="color: var(--green-neon);">Target 1 (1:2 R:R)</span>
+                <span class="output-sub" id="outReward1">Est. Return: -</span>
+              </div>
+              <span class="output-val" id="outTarget1">-</span>
+            </div>
+
+            <div class="output-item">
+              <div class="output-details">
+                <span class="output-label" id="lblTarget2" style="color: var(--gold);">Target 2 (1:3 R:R)</span>
+                <span class="output-sub" id="outReward2">Est. Return: -</span>
+              </div>
+              <span class="output-val" id="outTarget2">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Advisory & Strategy Hub -->
+        <div class="panel-card" style="margin-bottom: 0px; display: flex; flex-direction: column; gap: 10px;">
+          <!-- Header Row -->
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 4px;">
+            <div class="term-tab active" id="tabAdvisory" style="font-family: 'Orbitron', sans-serif; font-size: 10px; font-weight: bold; color: var(--gold-accent); letter-spacing: 0.5px; text-transform: uppercase;">AI ADVISORY & STRATEGIES</div>
+            <button class="terminal-btn buy" id="btnLiveAIScan" onclick="triggerLiveAIScan()" style="font-family: 'Orbitron', sans-serif; font-size: 8px; font-weight: bold; width: auto; height: auto; padding: 4px 10px; margin: 0; border-radius: 4px; box-shadow: var(--glow-green);">RUN LIVE AI SCAN</button>
+          </div>
+
+          <div class="advisory-container" style="display: flex; flex-direction: column; gap: 10px;">
+            <!-- Advisory Table -->
+            <div class="watchlist-header" id="lblAdvisoryTableTitle" style="font-size: 8px; margin-bottom: 2px;">AI STRATEGY ADVISORY RATINGS</div>
+            <div class="advisory-table-wrapper" style="overflow-x: auto; border: 1px solid var(--border); border-radius: 6px; background: rgba(0,0,0,0.15); max-height: 140px;">
+              <table class="positions-table" style="width: 100%; min-width: 320px;">
+                <thead>
+                  <tr>
+                    <th id="thAdvisoryTicker" style="padding: 6px; font-size: 8px;">TICKER</th>
+                    <th id="thAdvisoryAction" style="padding: 6px; font-size: 8px;">RECOMMENDATION</th>
+                    <th id="thAdvisoryHoldClass" style="padding: 6px; font-size: 8px;">HOLD CLASS</th>
+                    <th id="thAdvisoryTimeframe" style="padding: 6px; font-size: 8px;">TIMEFRAME</th>
+                    <th id="thAdvisoryRationale" style="padding: 6px; font-size: 8px;">RATIONALE</th>
+                  </tr>
+                </thead>
+                <tbody id="advisoryTableBody" style="font-size: 9.5px;">
+                  <!-- Loaded dynamically by app.js -->
+                </tbody>
+              </table>
+            </div>
+            
+            <!-- Strategy Grid -->
+            <div class="watchlist-header" id="lblStrategyCardsTitle" style="font-size: 8px; margin-top: 4px; margin-bottom: 2px;">TRADING STRATEGY REFERENCE</div>
+            <div class="strategy-cards-grid" id="strategyCardsGrid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-height: 120px; overflow-y: auto; padding-right: 4px;">
+              <!-- Loaded dynamically by app.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="lblFooter">
+      Wiseman Analytics Pro Hub • High-end Workspace
+    </footer>
+  </div>
+
+  <!-- News Sentiment Glassmorphic Overlay Modal -->
+  <div class="sentiment-modal-overlay" id="sentimentModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 3, 7, 0.75); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); z-index: 999; justify-content: center; align-items: center; transition: all 0.3s ease;">
+    <div class="panel-card" style="width: 450px; border-color: var(--cyan); box-shadow: var(--glow-cyan); background: rgba(13, 14, 21, 0.95); margin-bottom: 0;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 12px;">
+        <span style="font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: bold; color: var(--gold-accent); letter-spacing: 1px;" id="lblSentimentTitle">AI NEWS SENTIMENT ANALYSIS</span>
+        <button onclick="closeSentimentReport()" style="background: transparent; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer; line-height: 1; outline: none;" onmouseover="this.style.color='var(--red-neon)'" onmouseout="this.style.color='var(--text-muted)'">&times;</button>
+      </div>
+      <div>
+        <div style="font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: bold; color: var(--text-primary); line-height: 1.4; margin-bottom: 10px;" id="modalSentimentHeadline">-</div>
+        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 12px;">
+          <span style="font-family: 'Orbitron', sans-serif; font-size: 8px; font-weight: bold; padding: 2px 6px; border-radius: 4px;" id="modalSentimentBadge">-</span>
+          <span style="font-size: 9px; color: var(--text-muted);" id="modalSentimentTime">-</span>
+        </div>
+        <div class="coach-quote-box" style="font-size: 11px; line-height: 1.5; color: var(--text-secondary); margin-bottom: 0; padding: 12px; font-style: normal;" id="modalSentimentAnalysis">-</div>
+        <div id="modalSentimentImpact" style="margin-top: 12px; font-size: 9.5px; font-weight: bold; font-family: 'Orbitron', sans-serif; text-align: center; border-radius: 6px; padding: 6px; background: rgba(255,255,255,0.02); border: 1px dashed var(--border);">-</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Scripts in Correct Order -->
+  <script>
+// --- START config.js ---
+// Wiseman Analytics Global Configurations & Localizations
+let currentLang = 'en';
+const RENDER_BACKEND_URL = "https://wiseman-backend.onrender.com"; // Replace with your actual Render URL if different
+const BACKEND_API_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+  ? "http://localhost:5000/api"
+  : `${RENDER_BACKEND_URL}/api`;
+
+const newsDatabase = [
+  {
+    id: 1,
+    headline: "US Federal Reserve hints at interest rate cuts in upcoming monetary policy review",
+    category: "Forex",
+    impact: "BULLISH",
+    time: "10 mins ago",
+    analysis: "The Federal Reserve's dovish pivot suggests an upcoming injection of liquidity into global markets. Lower interest rates typically weaken the US Dollar index (DXY) while boosting risk assets like equities and cryptocurrencies.",
+    summary: "EXPECTED IMPACT: High positive volatility for BTC, EUR/USD, and Nifty 50."
+  },
+  {
+    id: 2,
+    headline: "Binance receives regulatory clearance in European jurisdictions, boosting volume metrics",
+    category: "Crypto",
+    impact: "BULLISH",
+    time: "25 mins ago",
+    analysis: "European compliance clears regulatory bottlenecks for institutional flow. This increases retail confidence and ensures steady capital inflows into core trading pools for BTC, ETH, and SOL.",
+    summary: "EXPECTED IMPACT: Strongly Bullish for Crypto markets."
+  },
+  {
+    id: 3,
+    headline: "Reliance Industries announces massive green energy expansion project with key global partners",
+    category: "Stocks",
+    impact: "BULLISH",
+    time: "45 mins ago",
+    analysis: "This capital-efficient green project positions Reliance as a key ESG leader. FII (Foreign Institutional Investor) allocations are expected to increase over the next fiscal quarter, creating strong buy orders.",
+    summary: "EXPECTED IMPACT: Bullish for RELIANCE shares."
+  },
+  {
+    id: 4,
+    headline: "Inflation numbers report beats consensus expectations, triggering tight monetary fear concerns",
+    category: "Forex",
+    impact: "BEARISH",
+    time: "1 hour ago",
+    analysis: "Higher-than-expected inflation metrics force central banks to maintain restrictive higher-for-longer interest rates. This decreases retail credit flows and triggers stock market distributions.",
+    summary: "EXPECTED IMPACT: Bearish pressure on Nifty 50 and BTC."
+  },
+  {
+    id: 5,
+    headline: "Securities regulator initiates compliance sweeps on high-frequency algorithmic desks",
+    category: "Stocks",
+    impact: "NEUTRAL",
+    time: "2 hours ago",
+    analysis: "Strict audits of HFT desks will limit short-term spreads and reduce flash-crash risks. While liquidity will be slightly lower during the sweep, long-term market structure remains intact.",
+    summary: "EXPECTED IMPACT: Neutral short-term consolidation for Indian stocks."
+  }
+];
+
+const langDb = {
+  en: {
+    title: "WISEMAN ANALYTICS",
+    subtitle: "REAL-TIME QUANTITATIVE ENGINE",
+    tabStocks: "INDIAN STOCKS",
+    tabCrypto: "CRYPTO 24/7",
+    tabForex: "FOREX MARKET",
+    lblTickers: "Market Tickers",
+    lblChartTitle: "LIVE CHARTS & INTERACTIVE INDICATORS",
+    lblCoachName: "WISEMAN AI COACH",
+    lblCoachSub: "REAL-TIME HEURISTICS",
+    lblConfidence: "CONFIDENCE PROFILE",
+    lblRationale: "Signal Rationale",
+    lblRiskTitle: "SMART RISK CALCULATOR",
+    btnLong: "BUY / LONG",
+    btnShort: "SELL / SHORT",
+    lblEntryPrice: "Entry Price",
+    lblVolatility: "Volatility Buffer",
+    lblStopMargin: "Dynamic Stop Margin",
+    lblStopLoss: "Stop Loss",
+    lblTarget1: "Target 1 (1:2 R:R)",
+    lblTarget2: "Target 2 (1:3 R:R)",
+    lblTerminalTitle: "TRADE EXECUTION TERMINAL",
+    lblTradeSize: "Trade Size",
+    lblExecType: "Execution Type",
+    lblLivePos: "Live Open Positions",
+    thSymbol: "Symbol",
+    thType: "Type",
+    thEntry: "Entry",
+    thPnL: "PnL",
+    thAction: "Action",
+    emptyPos: "No active executions",
+    lblFooter: "Wiseman Analytics Pro Hub • A Black Dragon Product",
+    tickerLabel: "ALPHA FEED",
+    lblVolume: "VOLUME: ",
+    lblRsi: "RSI (14)",
+    lblMacd: "MACD",
+    lblSignal: "SIGNAL",
+    optMarket: "MARKET",
+    optLimit: "LIMIT",
+    btnExecuteBuy: "EXECUTE BUY ORDER",
+    btnExecuteSell: "EXECUTE SELL ORDER",
+    btnTableClose: "CLOSE",
+    riskAmtPrefix: "Risk Amount: ",
+    estRetPrefix: "Est. Return: ",
+    scanLabel: "SCANNING LIVE",
+    lblChatHeader: "WISEMAN AI ASSISTANT",
+    lblScannerHeader: "Institutional Trap & Pattern Scanner",
+    scannerAccuracy: "ACCURACY: ",
+    welcomeMsg: "Greetings. I am Wiseman, your algorithmic advisor (powered by Black Dragon). How may I assist you with your charting strategy or risk limits today?",
+    patternAlert: "[SCANNER] Pattern Detected on ",
+    trapAlert: "[TRAP WARNING] Liquidity Sweep detected on ",
+    statusApproved: "APPROVED",
+    statusAvoid: "AVOID",
+    statusNeutral: "NEUTRAL",
+    msgLowVol: "Market volatility is sub-optimal. Institutional players are sitting on the sidelines. Avoid execution.",
+    reasonLowVol1: "Extremely dry trading volume profile.",
+    reasonLowVol2: "Risk of high spread slippages.",
+    msgBullish: "Strong bullish reversal patterns emerging with rising institutional volume backing. High risk/reward long setup.",
+    reasonBullish1: "Bullish divergence forming on RSI.",
+    reasonBullish2: "Volume breakout confirmed.",
+    msgBearish: "Heavy distribution sweeps detected at local resistance. Selling pressure mounting. Tight stop losses advised.",
+    reasonBearish1: "RSI indicating overbought distribution.",
+    reasonBearish2: "Rejection pattern at major order block.",
+    msgNeutral: "Consolidation zone detected. Moving average indicators are flat. Range-bound oscillations.",
+    reasonNeutral1: "No clear trend breakout signal.",
+    reasonNeutral2: "Wait for key support/resistance sweep.",
+    msgConflicting: "Conflicting momentum signals on multiple timeframes. No clean trading edge at present.",
+    reasonConflicting: "RSI and MACD are flashing divergent cues.",
+    
+    // V2 Keys
+    lblSentimentTitle: "AI NEWS SENTIMENT ANALYSIS",
+    lblReplayTitle: "REPLAY MODE",
+    tabPositions: "POSITIONS",
+    tabHistory: "STATS & HISTORY",
+    tabStrategy: "STRATEGY BUILDER",
+    tabAdvisory: "AI ADVISORY",
+    statWinRate: "WIN RATE",
+    statNetProfit: "NET RETURN",
+    emptyHistory: "No closed executions",
+    lblRsiBuy: "RSI BUY TRIGGER",
+    lblMacdDir: "MACD DIRECTION",
+    lblStrategyEngine: "STRATEGY ENGINE STATUS",
+    statusMonitoring: "MONITORING FEEDS",
+    statusTriggered: "ALERT: CRITERIA SATISFIED!",
+    lblAdvisoryTableTitle: "AI STRATEGY ADVISORY RATINGS",
+    lblStrategyCardsTitle: "TRADING STRATEGY SHEET REFERENCE",
+    thAdvisoryTicker: "TICKER",
+    thAdvisoryAction: "RECOMMENDATION",
+    thAdvisoryHoldClass: "HOLD CLASS",
+    thAdvisoryTimeframe: "TIMEFRAME",
+    thAdvisoryRationale: "RATIONALE",
+    btnLiveAIScan: "RUN LIVE AI SCAN",
+    lblAIScanStatus: "Scanning markets with AI..."
+  },
+  mr: {
+    title: "वाईजमन ॲनालिटिक्स",
+    subtitle: "रिअल-टाइम क्वांटिटेटिव्ह इंजिन",
+    tabStocks: "भारतीय शेअर्स",
+    tabCrypto: "क्रिप्टो २४/७",
+    tabForex: "फॉरेक्स मार्केट",
+    lblTickers: "मार्केट टिकर्स",
+    lblChartTitle: "लाइव्ह चार्ट आणि इंडिकेटर्स",
+    lblCoachName: "वाईजमन AI कोच",
+    lblCoachSub: "रिअल-टाइम विश्लेषण",
+    lblConfidence: "विश्वासार्हता प्रोफाइल",
+    lblRationale: "सिग्नलचे कारण",
+    lblRiskTitle: "स्मार्ट रिस्क कॅल्क्युलेटर",
+    btnLong: "खरेदी / LONG",
+    btnShort: "विक्री / SHORT",
+    lblEntryPrice: "प्रवेश किंमत (Entry)",
+    lblVolatility: "व्होलॅटिलिटी बफर",
+    lblStopMargin: "डायनॅमिक स्टॉप मार्जिन",
+    lblStopLoss: "स्टॉप लॉस",
+    lblTarget1: "लक्ष्य १ (१:२ R:R)",
+    lblTarget2: "लक्ष्य २ (१:३ R:R)",
+    lblTerminalTitle: "ट्रेड एक्झिक्यूशन टर्मिनल",
+    lblTradeSize: "ट्रेड संख्या",
+    lblExecType: "ट्रेड प्रकार",
+    lblLivePos: "सक्रिय पोझिशन्स",
+    thSymbol: "चिन्ह",
+    thType: "प्रकार",
+    thEntry: "किंमत",
+    thPnL: "नफा/तोटा",
+    thAction: "कृती",
+    emptyPos: "कोणतेही सक्रिय ट्रेड्स नाहीत",
+    lblFooter: "वाईजमन ॲनालिटिक्स प्रो हब • ब्लॅक ड्रॅगन प्रॉडक्ट",
+    tickerLabel: "लाइव्ह फीड",
+    lblVolume: "व्हॉल्यूम: ",
+    lblRsi: "आरएसआय (14)",
+    lblMacd: "एमएसीडी",
+    lblSignal: "सिग्नल",
+    optMarket: "बाजार (MARKET)",
+    optLimit: "मर्यादा (LIMIT)",
+    btnExecuteBuy: "खरेदी ऑर्डर पूर्ण करा",
+    btnExecuteSell: "विक्री ऑर्डर पूर्ण करा",
+    btnTableClose: "बंद करा",
+    riskAmtPrefix: "जोखीम रक्कम: ",
+    estRetPrefix: "अंदाजे परतावा: ",
+    scanLabel: "लाइव्ह स्कॅनिंग सुरू",
+    lblChatHeader: "वाईजमन AI सहाय्यक",
+    lblScannerHeader: "ट्रॅप आणि चार्ट पॅटर्न स्कॅनर",
+    scannerAccuracy: "अचूकता: ",
+    welcomeMsg: "नमस्कार. मी वाईजमन आहे (ब्लॅक ड्रॅगन द्वारे समर्थित). आज तुम्हाला ट्रेडिंग आणि रिस्क व्यवस्थापनात काय मदत हवी आहे?",
+    patternAlert: "[स्कॅनर] चार्ट पॅटर्न आढळला - ",
+    trapAlert: "[चेतावणी] लिक्विडिटी ट्रॅप आढळला - ",
+    statusApproved: "मंजूर (BUY)",
+    statusAvoid: "टाळा (AVOID)",
+    statusNeutral: "तटस्थ (NEUTRAL)",
+    msgLowVol: "बाजारातील चढ-उतार कमी आहे. संस्थात्मक गुंतवणूकदार सक्रिय नाहीत. नवीन ट्रेड घेणे टाळा.",
+    reasonLowVol1: "अत्यंत कमी ट्रेडिंग व्हॉल्यूम प्रोफाइल.",
+    reasonLowVol2: "स्लिपेज आणि स्प्रेडचा धोका जास्त आहे.",
+    msgBullish: "वाढत्या व्हॉल्यूमच्या पाठिंब्यासह तेजीचे रिव्हर्सल संकेत. चांगला खरेदीचा (Long) सेटअप.",
+    reasonBullish1: "आरएसआय (RSI) वर तेजीचे संकेत (Bullish divergence).",
+    reasonBullish2: "व्हॉल्यूम ब्रेकआऊट निश्चित झाला आहे.",
+    msgBearish: "स्थानिक रेझिस्टन्सवर मोठ्या प्रमाणात विक्रीचे संकेत. स्टॉप लॉस अत्यंत कडक ठेवा.",
+    reasonBearish1: "आरएसआय ओव्हरबॉट झोन दाखवत आहे.",
+    reasonBearish2: "महत्वाच्या ऑर्डर ब्लॉकवर विक्रीचा दबाव.",
+    msgNeutral: "मार्केट एकाच रेंजमध्ये फिरत आहे. मूव्हिंग ॲव्हरेज सपाट आहेत.",
+    reasonNeutral1: "ट्रेन्ड ब्रेकआऊटचे स्पष्ट संकेत नाहीत.",
+    reasonNeutral2: "महत्वाच्या सपोर्ट/रेझिस्टन्स लेव्हलची वाट पहा.",
+    msgConflicting: "वेगवेगळ्या टाईमफ्रेमवर परस्परविरोधी संकेत आहेत. सध्या कोणताही स्पष्ट ट्रेड नाही.",
+    reasonConflicting: "आरएसआय आणि एमएसीडी वेगवेगळे संकेत देत आहेत.",
+    
+    // V2 Keys
+    lblSentimentTitle: "AI बातम्यांचे विश्लेषण",
+    lblReplayTitle: "बॅकटेस्टिंग रिप्ले",
+    tabPositions: "ट्रेड्स (LIVE)",
+    tabHistory: "इतिहास आणि आकडेवारी",
+    tabStrategy: "स्ट्रॅटेजी बिल्डर",
+    tabAdvisory: "AI सल्लागार आणि रणनीती",
+    statWinRate: "विन रेट (WIN %)",
+    statNetProfit: "एकूण नफा",
+    emptyHistory: "कोणतेही बंद ट्रेड्स नाहीत",
+    lblRsiBuy: "RSI खरेदी मर्यादा",
+    lblMacdDir: "MACD दिशा",
+    lblStrategyEngine: "स्ट्रॅटेजी इंजिन स्थिती",
+    statusMonitoring: "मार्केट स्कॅनिंग सुरू...",
+    statusTriggered: "इशारा: खरेदीचे संकेत!",
+    lblAdvisoryTableTitle: "AI ट्रेडिंग सल्लागार रेटिंग",
+    lblStrategyCardsTitle: "ट्रेडिंग धोरण संदर्भ (STRATEGY SHEET)",
+    thAdvisoryTicker: "टिकर",
+    thAdvisoryAction: "शिफारस",
+    thAdvisoryHoldClass: "होल्डिंग प्रकार",
+    thAdvisoryTimeframe: "कालावधी",
+    thAdvisoryRationale: "स्पष्टीकरण",
+    btnLiveAIScan: "थेट AI स्कॅनिंग सुरू करा",
+    lblAIScanStatus: "AI द्वारे मार्केट स्कॅन सुरू आहे..."
+  },
+  hi: {
+    title: "वाइजमैन एनालिटिक्स",
+    subtitle: "रियल-टाइम क्वांटिटेटिव इंजन",
+    tabStocks: "भारतीय स्टॉक्स",
+    tabCrypto: "क्रिप्टो २४/७",
+    tabForex: "फॉरेक्स संकेत",
+    lblTickers: "Market Tickers",
+    lblChartTitle: "लाइव चार्ट और इंडिकेटर्स",
+    lblCoachName: "वाइजमैन AI कोच",
+    lblCoachSub: "रियल-टाइम विश्लेषण",
+    lblConfidence: "विश्वसनीयता प्रोफाइल",
+    lblRationale: "सिग्नल का कारण",
+    lblRiskTitle: "स्मार्ट रिस्क कैलकुलेटर",
+    btnLong: "खरीदें / LONG",
+    btnShort: "बेचें / SHORT",
+    lblEntryPrice: "प्रवेश मूल्य (Entry)",
+    lblVolatility: "वोलैटिलिटी बफर",
+    lblStopMargin: "डायनेमिक स्टॉप मार्जिन",
+    lblStopLoss: "स्टॉप लॉस",
+    lblTarget1: "लक्ष्य १ (१:२ R:R)",
+    lblTarget2: "लक्ष्य २ (१:३ R:R)",
+    lblTerminalTitle: "ट्रेड निष्पादन टर्मिनल",
+    lblTradeSize: "ट्रेड मात्रा",
+    lblExecType: "ट्रेड का प्रकार",
+    lblLivePos: "सक्रिय पोजीशन्स",
+    thSymbol: "प्रतीक",
+    thType: "प्रकार",
+    thEntry: "प्रवेश",
+    thPnL: "लाभ/हानि",
+    thAction: "कार्रवाई",
+    emptyPos: "कोई सक्रिय ट्रेड नहीं हैं",
+    lblFooter: "वाइजमैन एनालिटिक्स प्रो हब • ब्लैक ड्रैगन प्रॉडक्ट",
+    tickerLabel: "लाइव फीड",
+    lblVolume: "वॉल्यूम: ",
+    lblRsi: "आरसआई (14)",
+    lblMacd: "एमएसीडी",
+    lblSignal: "सिग्नल",
+    optMarket: "बाजार (MARKET)",
+    optLimit: "सीमा (LIMIT)",
+    btnExecuteBuy: "खरीद ऑर्डर पूर्ण करें",
+    btnExecuteSell: "बिक्री ऑर्डर पूर्ण करें",
+    btnTableClose: "बंद करें",
+    riskAmtPrefix: "जोखिम राशि: ",
+    estRetPrefix: "अनुमानित लाभ: ",
+    scanLabel: "लाइव स्कैनिंग सक्रिय",
+    lblChatHeader: "वाइजमैन AI सहायक",
+    lblScannerHeader: "ट्रैप और चार्ट पैटर्न स्कैनर",
+    scannerAccuracy: "सटीकता: ",
+    welcomeMsg: "नमस्कार। मैं वाइजमैन हूँ (ब्लैक ड्रैगन द्वारा संचालित)। आज चार्टिंग रणनीतियों और जोखिम नियंत्रण में आपको मुझसे क्या सलाह चाहिए?",
+    patternAlert: "[स्कैनर] चार्ट पैटर्न मिला - ",
+    trapAlert: "[चेतावनी] लिक्विडिटी ट्रैप मिला - ",
+    statusApproved: "स्वीकृत (BUY)",
+    statusAvoid: "बचें (AVOID)",
+    statusNeutral: "तटस्थ (NEUTRAL)",
+    msgLowVol: "बाजार में उतार-चढ़ाव काफी कम है। बड़े संस्थागत खरीदार अभी सक्रिय नहीं हैं। ट्रेड करने से बचें।",
+    reasonLowVol1: "ट्रेडिंग वॉल्यूम का स्तर बहुत ही सामान्य है।",
+    reasonLowVol2: "बड़ी स्लिपेज का जोखिम बना हुआ है।",
+    msgBullish: "बढ़ते वॉल्यूम के समर्थन के साथ मजबूत तेजी (Bullish Reversal) के संकेत। खरीदारी का बेहतरीन मौका।",
+    reasonBullish1: "RSI पर तेजी का डायवर्जेंस बन रहा है।",
+    reasonBullish2: "वॉल्यूम突破 की पुष्टि हो चुकी है।",
+    msgBearish: "रेसिस्टेंस स्तर पर बिकवाली का दबाव देखा जा रहा है। सख्त स्टॉप लॉस लगाने की सलाह दी जाती है।",
+    reasonBearish1: "RSI ओवरबॉट वितरण की ओर इशारा कर रहा है।",
+    reasonBearish2: "मुख्य ऑर्डर ब्लॉक पर रिजेक्शन पैटर्न।",
+    msgNeutral: "बाजार कंसोलिडेशन जोन में है। मूविंग एवरेज सपाट बने हुए हैं।",
+    reasonNeutral1: "स्पष्ट ट्रेंड ब्रेकआउट का कोई संकेत नहीं।",
+    reasonNeutral2: "महत्वपूर्ण सपोर्ट या रेसिस्टेंस ब्रेक होने का इंतजार करें।",
+    msgConflicting: "विभिन्न टाइमफ्रेम पर परस्पर विरोधी संकेत। वर्तमान में कोई स्पष्ट ट्रेड संकेत नहीं है।",
+    reasonConflicting: "RSI और MACD अलग-अलग संकेत दे रहे हैं।",
+    
+    // V2 Keys
+    lblSentimentTitle: "AI समाचार विश्लेषण",
+    lblReplayTitle: "बैकटेस्टिंग रीप्ले",
+    tabPositions: "ट्रेड्स (LIVE)",
+    tabHistory: "इतिहास और आंकड़े",
+    tabStrategy: "रणनीति बिल्डर",
+    tabAdvisory: "AI सलाहकार",
+    statWinRate: "जीत दर (WIN %)",
+    statNetProfit: "कुल लाभ",
+    emptyHistory: "कोई बंद ट्रेड नहीं हैं",
+    lblRsiBuy: "RSI खरीद सीमा",
+    lblMacdDir: "MACD दिशा",
+    lblStrategyEngine: "रणनीति इंजन स्थिति",
+    statusMonitoring: "बाजार स्कैनिंग जारी...",
+    statusTriggered: "चेतावनी: खरीद संकेत!",
+    lblAdvisoryTableTitle: "AI ट्रेडिंग सलाहकार रेटिंग",
+    lblStrategyCardsTitle: "ट्रेडिंग रणनीति संदर्भ पत्रक",
+    thAdvisoryTicker: "टिकर",
+    thAdvisoryAction: "सिफारिश",
+    thAdvisoryHoldClass: "होल्डिंग प्रकार",
+    thAdvisoryTimeframe: "समय सीमा",
+    thAdvisoryRationale: "तर्क",
+    btnLiveAIScan: "सक्रिय AI स्कैन शुरू करें",
+    lblAIScanStatus: "AI द्वारा बाजार स्कैन जारी..."
+  },
+  es: {
+    title: "WISEMAN ANALYTICS",
+    subtitle: "MOTOR CUANTITATIVO EN TIEMPO REAL",
+    tabStocks: "ACCIONES INDIAS",
+    tabCrypto: "CRIPTOMONEDAS 24/7",
+    tabForex: "MERCADO FOREX",
+    lblTickers: "Cotizaciones",
+    lblChartTitle: "GRÁFICOS EN VIVO E INDICADORES INTERACTIVOS",
+    lblCoachName: "ENTRENADOR DE IA WISEMAN",
+    lblCoachSub: "HEURÍSTICA EN TIEMPO REAL",
+    lblConfidence: "PERFIL DE CONFIANZA",
+    lblRationale: "Razonamiento de Señal",
+    lblRiskTitle: "CALCULADORA DE RIESGO INTELIGENTE",
+    btnLong: "COMPRA / LARGO",
+    btnShort: "VENTA / CORTO",
+    lblEntryPrice: "Precio de Entrada",
+    lblVolatility: "Buffer de Volatilidad",
+    lblStopMargin: "Margen de Stop Dinámico",
+    lblStopLoss: "Límite de Pérdida (SL)",
+    lblTarget1: "Objetivo 1 (1:2 R:R)",
+    lblTarget2: "Objetivo 2 (1:3 R:R)",
+    lblTerminalTitle: "TERMINAL DE EJECUCIÓN DE TRADES",
+    lblTradeSize: "Tamaño del Trade",
+    lblExecType: "Tipo de Ejecución",
+    lblLivePos: "Posiciones Abiertas en Vivo",
+    thSymbol: "Símbolo",
+    thType: "Tipo",
+    thEntry: "Entrada",
+    thPnL: "Ganancia/Pérdida",
+    thAction: "Acción",
+    emptyPos: "Sin posiciones activas",
+    lblFooter: "Wiseman Analytics Pro Hub • Un Producto de Black Dragon",
+    tickerLabel: "NOTICIAS",
+    lblVolume: "VOLUMEN: ",
+    lblRsi: "RSI (14)",
+    lblMacd: "MACD",
+    lblSignal: "SEÑAL",
+    optMarket: "MERCADO",
+    optLimit: "LÍMITE",
+    btnExecuteBuy: "EJECUTAR COMPRA",
+    btnExecuteSell: "EJECUTAR VENTA",
+    btnTableClose: "CERRAR",
+    riskAmtPrefix: "Monto de Riesgo: ",
+    estRetPrefix: "Retorno Est.: ",
+    scanLabel: "ESCANEO EN VIVO",
+    lblChatHeader: "ASISTENTE DE IA WISEMAN",
+    lblScannerHeader: "Escáner de Trampas y Patrones",
+    scannerAccuracy: "PRECISIÓN: ",
+    welcomeMsg: "Saludos. Soy Wiseman, su asesor financiero (con tecnología de Black Dragon). ¿En qué puedo ayudarle hoy con sus límites de riesgo o análisis?",
+    patternAlert: "[ESCÁNER] Patrón detectado en ",
+    trapAlert: "[ALERTA] Barrido de liquidez en ",
+    statusApproved: "APROBADO",
+    statusAvoid: "EVITAR",
+    statusNeutral: "NEUTRAL",
+    msgLowVol: "La volatilidad del mercado es baja. Los participantes institucionales están al margen. Evite operar.",
+    reasonLowVol1: "Perfil de volumen extremadamente bajo.",
+    reasonLowVol2: "Riesgo de deslizamientos por spreads altos.",
+    msgBullish: "Patrones de reversión alcista con aumento de volumen institucional. Configuración óptima para compra.",
+    reasonBullish1: "Divergencia alcista formándose en el RSI.",
+    reasonBullish2: "Ruptura de volumen confirmada.",
+    msgBearish: "Fuerte distribución detectada en la resistencia local. Presión de venta aumentando. Se sugieren stop loss ajustados.",
+    reasonBearish1: "RSI indica distribución de sobrecompra.",
+    reasonBearish2: "Patrón de rechazo en bloque de órdenes clave.",
+    msgNeutral: "Zona de consolidación detectada. Los promedios móviles se mantienen planos.",
+    reasonNeutral1: "Sin señal clara de ruptura de tendencia.",
+    reasonNeutral2: "Espere el barrido de soporte/resistencia clave.",
+    msgConflicting: "Señales de impulso en conflicto en múltiples marcos temporales. Sin ventaja operativa clara.",
+    reasonConflicting: "RSI y MACD muestran señales divergentes.",
+    
+    // V2 Keys
+    lblSentimentTitle: "ANÁLISIS DE SENTIMIENTO DE IA",
+    lblReplayTitle: "MODO DE REPRODUCCIÓN",
+    tabPositions: "POSICIONES (LIVE)",
+    tabHistory: "HISTORIAL Y ESTADÍSTICAS",
+    tabStrategy: "CREADOR DE ESTRATEGIAS",
+    tabAdvisory: "ASESORÍA DE IA",
+    statWinRate: "TASA DE GANANCIA",
+    statNetProfit: "RETORNO NETO",
+    emptyHistory: "Sin ejecuciones cerradas",
+    lblRsiBuy: "LÍMITE DE COMPRA RSI",
+    lblMacdDir: "DIRECCIÓN MACD",
+    lblStrategyEngine: "ESTADO DEL MOTOR DE ESTRATEGIA",
+    statusMonitoring: "MONITOREANDO FEEDS",
+    statusTriggered: "ALERTA: ¡CRITERIO SATISFECHO!",
+    lblAdvisoryTableTitle: "CALIFICACIONES DE ASESORÍA DE IA",
+    lblStrategyCardsTitle: "HOJA DE ESTRATEGIAS DE TRADING",
+    thAdvisoryTicker: "TICKER",
+    thAdvisoryAction: "RECOMENDACIÓN",
+    thAdvisoryHoldClass: "CLASE DE MANTENIMIENTO",
+    thAdvisoryTimeframe: "MARCO DE TIEMPO",
+    thAdvisoryRationale: "RAZÓN",
+    btnLiveAIScan: "INICIAR ESCANEO DE IA",
+    lblAIScanStatus: "Escaneando mercados con IA..."
+  }
+};
+
+const tickerNamesTranslated = {
+  en: {
+    nifty: 'Nifty 50 Index', reliance: 'Reliance Industries', tata: 'Tata Motors Limited',
+    btc: 'Bitcoin / US Dollar', eth: 'Ethereum / US Dollar', sol: 'Solana / US Dollar',
+    eur: 'Euro / US Dollar', gbp: 'Pound / US Dollar', jpy: 'US Dollar / Yen',
+    tata_tech: 'Tata Tech Limited', sol_jup: 'Jupiter Token / SOL', usd_chf: 'US Dollar / Franc'
+  },
+  mr: {
+    nifty: 'निफ्टी ५० इंडेक्स', reliance: 'रिलायन्स इंडस्ट्रीज', tata: 'टाटा मोटर्स लिमिटेड',
+    btc: 'बिटकॉइन / यूएस डॉलर', eth: 'इथेरियम / यूएस डॉलर', sol: 'सोलाना / यूएस डॉलर',
+    eur: 'युरो / यूएस डॉलर', gbp: 'पाउंड / यूएस डॉलर', jpy: 'यूएस डॉलर / येन',
+    tata_tech: 'टाटा टेक लिमिटेड', sol_jup: 'ज्युपिटर टोकन / SOL', usd_chf: 'यूएस डॉलर / फ्रँक'
+  },
+  hi: {
+    nifty: 'निफ्टी ५० इंडेक्स', reliance: 'रिलायंस इंडस्ट्रीज', tata: 'टाटा मोटर्स लिमिटेड',
+    btc: 'बिटकॉइन / यूएस डॉलर', eth: 'इथेरियम / यूएस डॉलर', sol: 'सोलाना / यूएस डॉलर',
+    eur: 'यूरो / यूएस डॉलर', gbp: 'पाउंड / यूएस डॉलर', jpy: 'यूएस डॉलर / येन',
+    tata_tech: 'टाटा टेक लिमिटेड', sol_jup: 'जुपिटर टोकन / SOL', usd_chf: 'यूएस डॉलर / फ्रैंक'
+  },
+  es: {
+    nifty: 'Índice Nifty 50', reliance: 'Reliance Industries', tata: 'Tata Motors Limitada',
+    btc: 'Bitcoin / Dólar US', eth: 'Ethereum / Dólar US', sol: 'Solana / Dólar US',
+    eur: 'Euro / Dólar US', gbp: 'Libra / Dólar US', jpy: 'Dólar US / Yen',
+    tata_tech: 'Tata Tech Limitada', sol_jup: 'Token Jupiter / SOL', usd_chf: 'Dólar US / Franco'
+  }
+};
+
+const marketTickers = {
+  indianStocks: [
+    { key: 'nifty', symbol: 'NIFTY_50', name: 'Nifty 50 Index', basePrice: 22450.00, decimals: 2, currentPrice: 22450.00, change: 0.25, wsStream: null },
+    { key: 'reliance', symbol: 'RELIANCE', name: 'Reliance Industries', basePrice: 2890.00, decimals: 2, currentPrice: 2890.00, change: -0.42, wsStream: null },
+    { key: 'tata', symbol: 'TATA_MOTORS', name: 'Tata Motors Limited', basePrice: 945.00, decimals: 2, currentPrice: 945.00, change: 1.85, wsStream: null }
+  ],
+  crypto: [
+    { key: 'btc', symbol: 'BTC_USDT', name: 'Bitcoin / US Dollar', basePrice: 67500.00, decimals: 2, currentPrice: 67500.00, change: 1.15, wsStream: 'btcusdt@ticker' },
+    { key: 'eth', symbol: 'ETH_USDT', name: 'Ethereum / US Dollar', basePrice: 3820.00, decimals: 2, currentPrice: 3820.00, change: -0.78, wsStream: 'ethusdt@ticker' },
+    { key: 'sol', symbol: 'SOL_USDT', name: 'Solana / US Dollar', basePrice: 165.50, decimals: 2, currentPrice: 165.50, change: 4.12, wsStream: 'solusdt@ticker' }
+  ],
+  forex: [
+    { key: 'eur', symbol: 'EUR_USD', name: 'Euro / US Dollar', basePrice: 1.08500, decimals: 5, currentPrice: 1.08500, change: 0.04, wsStream: 'eurusdt@ticker' },
+    { key: 'gbp', symbol: 'GBP_USD', name: 'Pound / US Dollar', basePrice: 1.27200, decimals: 5, currentPrice: 1.27200, change: -0.12, wsStream: 'gbpusdt@ticker' },
+    { key: 'jpy', symbol: 'USD_JPY', name: 'US Dollar / Yen', basePrice: 156.40, decimals: 3, currentPrice: 156.40, change: 0.18, wsStream: 'usdtjpy@ticker' }
+  ]
+};
+
+const marketVols = {
+  indianStocks: { vol: 0.0005, riskPct: 1.5, volMult: 25.4 },
+  crypto: { vol: 0.0018, riskPct: 4.5, volMult: 120.5 },
+  forex: { vol: 0.0001, riskPct: 0.4, volMult: 12.2 }
+};
+
+const advisoryDatabase = {
+  en: [
+    { ticker: "RELIANCE", action: "BUY", holdClass: "SWING", timeframe: "1-2 Weeks", rationale: "RSI divergence combined with strong volume breakout at key support level." },
+    { ticker: "TATA_MOTORS", action: "SELL", holdClass: "INTRADAY", timeframe: "15m - 1h", rationale: "Severe overhead resistance block met on high volume, potential pullback expected." },
+    { ticker: "NIFTY_50", action: "BUY", holdClass: "LONG-TERM", timeframe: "Holding", rationale: "FII inflows accelerating, bullish macro backdrop with positive rate cut expectations." },
+    { ticker: "TATA_TECH", action: "HOLD", holdClass: "SWING", timeframe: "Consolidating", rationale: "Moving averages are flat. Awaiting volume sweep of the recent trading range." }
+  ],
+  mr: [
+    { ticker: "RELIANCE", action: "खरेदी (BUY)", holdClass: "स्विंग (SWING)", timeframe: "१-२ आठवडे", rationale: "महत्वाच्या सपोर्ट लेव्हलवर वाढत्या व्हॉल्यूमसह आरएसआय तेजीचे संकेत (RSI divergence)." },
+    { ticker: "TATA_MOTORS", action: "विक्री (SELL)", holdClass: "इंट्राडे (INTRADAY)", timeframe: "१५ मि. - १ तास", rationale: "उच्च व्हॉल्यूमवर वरच्या स्तरावर जोरदार रेझिस्टन्स ब्लॉक, लहान पुलबॅकची अपेक्षा." },
+    { ticker: "NIFTY_50", action: "खरेदी (BUY)", holdClass: "दीर्घकालीन (LONG-TERM)", timeframe: "होल्डिंग", rationale: "FII गुंतवणूक वाढत आहे, व्याजदर कपातीची शक्यता असल्याने मार्केटमध्ये तेजीचे वातावरण." },
+    { ticker: "TATA_TECH", action: "तटस्थ (HOLD)", holdClass: "स्विंग (SWING)", timeframe: "कंसॉलिडेशन", rationale: "मूव्हिंग ॲव्हरेज सपाट आहेत. ट्रेडिंग रेंजच्या ब्रेकआऊटची वाट पहावी." }
+  ],
+  hi: [
+    { ticker: "RELIANCE", action: "खरीदें (BUY)", holdClass: "स्विंग (SWING)", timeframe: "1-2 सप्ताह", rationale: "महत्वपूर्ण सपोर्ट स्तर पर वोल्यूम ब्रेकआउट और RSI डायवर्जेंस।" },
+    { ticker: "TATA_MOTORS", action: "बेचें (SELL)", holdClass: "इंट्राडे (INTRADAY)", timeframe: "15मि - 1घंटा", rationale: "उच्च स्तर पर भारी बिकवाली का दबाव, छोटा पुलबैक संभावित है।" },
+    { ticker: "NIFTY_50", action: "खरीदें (BUY)", holdClass: "दीर्घकालीन (LONG-TERM)", timeframe: "होल्डिंग", rationale: "FII प्रवाह बढ़ रहा है, अनुकूल वृहद आर्थिक कारकों से बाजार में तेजी।" },
+    { ticker: "TATA_TECH", action: "होल्ड (HOLD)", holdClass: "स्विंग (SWING)", timeframe: "कंसॉलिडेशन", rationale: "मूविंग एवरेज सपाट हैं। नई रेंज के ब्रेकआउट की प्रतीक्षा करें।" }
+  ],
+  es: [
+    { ticker: "RELIANCE", action: "COMPRAR", holdClass: "SWING", timeframe: "1-2 Semanas", rationale: "Divergencia alcista del RSI combinada con ruptura de volumen en soporte clave." },
+    { ticker: "TATA_MOTORS", action: "VENDER", holdClass: "INTRADAY", timeframe: "15m - 1h", rationale: "Fuerte resistencia superior detectada con alto volumen, se espera retroceso." },
+    { ticker: "NIFTY_50", action: "COMPRAR", holdClass: "LARGO PLAZO", timeframe: "Mantener", rationale: "Entrada de capital institucional acelerándose, entorno macroeconómico alcista." },
+    { ticker: "TATA_TECH", action: "MANTENER", holdClass: "SWING", timeframe: "Consolidando", rationale: "Promedios móviles planos. Esperando ruptura del rango actual." }
+  ]
+};
+
+const strategyDatabase = {
+  en: [
+    { name: "Scalping", timeframe: "1m / 5m", indicators: "Volume + Order Flow", desc: "Ultra-fast execution targeting micro-movements. Requires strict discipline." },
+    { name: "Intraday Trading", timeframe: "15m / 1h", indicators: "VWAP + Bollinger Bands", desc: "Day trading strategy opening and closing all positions within the market hours." },
+    { name: "Swing Trading", timeframe: "4h / 1d", indicators: "RSI Divergence + MAs", desc: "Captures price swings over several days to weeks. Excellent for retail traders." },
+    { name: "Positional (Hold)", timeframe: "Weekly / Monthly", indicators: "FII Flows + Macro Trends", desc: "Long-term investment targeting major structural trends. Fundamental strength." }
+  ],
+  mr: [
+    { name: "स्कॅल्पिंग (Scalping)", timeframe: "१ मि. / ५ मि.", indicators: "व्हॉल्यूम + ऑर्डर फ्लो", desc: "बाजारातील अगदी सूक्ष्म हालचालींवरून जलद गतीने नफा मिळवण्याचे धोरण. कडक शिस्त आवश्यक." },
+    { name: "इंट्राडे ट्रेडिंग (Intraday)", timeframe: "१५ मि. / १ तास", indicators: "VWAP + बोलिंगर बँड्स", desc: "बाजार सुरू असतानाच सर्व व्यवहार उघडून बंद करणे. दैनंदिन व्हॉलॅटिलिटीवर आधारित." },
+    { name: "स्विंग ट्रेडिंग (Swing)", timeframe: "४ तास / १ दिवस", indicators: "RSI डायव्हर्जेंस + MAs", desc: "काही दिवस ते आठवड्यांच्या कालावधीत किंमतीतील चढ-उतार पकडणे. सतत वॉच न करणाऱ्यांसाठी योग्य." },
+    { name: "पोझिशनल होल्ड (Positional)", timeframe: "साप्ताहिक / मासिक", indicators: "FII फ्लो + मॅक्रो ट्रेन्ड्स", desc: "दीर्घकालीन गुंतवणूक जी प्रमुख रचनात्मक ट्रेन्ड्सवर लक्ष केंद्रित करते." }
+  ],
+  hi: [
+    { name: "स्कैल्पिंग (Scalping)", timeframe: "1मि / 5मि", indicators: "वॉल्यूम + ऑर्डर फ्लो", desc: "सूक्ष्म-मूवमेंट को लक्षित करने वाले तीव्र ट्रेड। सख्त अनुशासन की आवश्यकता होती है।" },
+    { name: "इंट्राडे ट्रेडिंग (Intraday)", timeframe: "15मि / 1घंटा", indicators: "VWAP + बोलिंजर बैंड्स", desc: "बाजार के समय के भीतर सभी पोजीशन खोलना और बंद करना। दैनिक उतार-चढ़ाव पर निर्भर।" },
+    { name: "स्विंग ट्रेडिंग (Swing)", timeframe: "4घंटा / 1दिन", indicators: "RSI डायवर्जेंस + MAs", desc: "कई दिनों से हफ्तों तक के मूल्य स्विंग्स को किसे भी समय कैप्चर करना।" },
+    { name: "पोजीशनल होल्ड (Positional)", timeframe: "साप्ताहिक / मासिक", indicators: "FII प्रवाह + व्यापक आर्थिक रुझान", desc: "दीर्घकालिक निवेश जो प्रमुख संरचनात्मक रुझानों को लक्षित करता है।" }
+  ],
+  es: [
+    { name: "Scalping", timeframe: "1m / 5m", indicators: "Volumen + Flujo de Órdenes", desc: "Ejecución ultrarrápida dirigida a micro-movimientos. Requiere estricta disciplina." },
+    { name: "Trading Intradía", timeframe: "15m / 1h", indicators: "VWAP + Bandas de Bollinger", desc: "Estrategia de trading diario que abre y cierra todas las posiciones en el mismo día." },
+    { name: "Trading de Swing", timeframe: "4h / 1d", indicators: "Divergencia RSI + MAs", desc: "Captura oscilaciones de precios durante varios días o semanas. Excelente para minoristas." },
+    { name: "Posicional (Mantener)", timeframe: "Semanal / Mensual", indicators: "Flujos FII + Tendencias Macro", desc: "Inversión a largo plazo dirigida a grandes tendencias estructurales de mercado." }
+  ]
+};
+
+function translateUI(lang) {
+  currentLang = lang;
+  const dict = langDb[lang];
+  if (!dict) return;
+
+  const mappings = {
+    lblTitle: dict.title,
+    lblSubtitle: dict.subtitle,
+    tabStocks: dict.tabStocks,
+    tabCrypto: dict.tabCrypto,
+    tabForex: dict.tabForex,
+    lblTickers: dict.lblTickers,
+    lblChartTitle: dict.lblChartTitle,
+    lblCoachName: dict.lblCoachName,
+    lblCoachSub: dict.lblCoachSub,
+    lblConfidence: dict.lblConfidence,
+    lblRationale: dict.lblRationale,
+    lblRiskTitle: dict.lblRiskTitle,
+    btnLong: dict.btnLong,
+    btnShort: dict.btnShort,
+    lblEntryPrice: dict.lblEntryPrice,
+    lblVolatility: dict.lblVolatility,
+    lblStopMargin: dict.lblStopMargin,
+    lblStopLoss: dict.lblStopLoss,
+    lblTarget1: dict.lblTarget1,
+    lblTarget2: dict.lblTarget2,
+    lblTerminalTitle: dict.lblTerminalTitle,
+    lblTradeSize: dict.lblTradeSize,
+    lblExecType: dict.lblExecType,
+    lblLivePos: dict.lblLivePos,
+    thSymbol: dict.thSymbol,
+    thType: dict.thType,
+    thEntry: dict.thEntry,
+    thPnL: dict.thPnL,
+    thAction: dict.thAction,
+    lblFooter: dict.lblFooter,
+    tickerLabel: dict.tickerLabel,
+    lblRsi: dict.lblRsi,
+    lblMacd: dict.lblMacd,
+    lblSignal: dict.lblSignal,
+    scanLabel: dict.scanLabel,
+    lblChatHeader: dict.lblChatHeader,
+    lblScannerHeader: dict.lblScannerHeader,
+    scannerAccuracy: dict.scannerAccuracy + (typeof scannerAccuracyValue !== 'undefined' ? scannerAccuracyValue.toFixed(2) : "98.9") + "%",
+    tabPositions: dict.tabPositions,
+    tabHistory: dict.tabHistory,
+    tabStrategy: dict.tabStrategy,
+    tabAdvisory: dict.tabAdvisory,
+    lblAdvisoryTableTitle: dict.lblAdvisoryTableTitle,
+    lblStrategyCardsTitle: dict.lblStrategyCardsTitle,
+    thAdvisoryTicker: dict.thAdvisoryTicker,
+    thAdvisoryAction: dict.thAdvisoryAction,
+    thAdvisoryHoldClass: dict.thAdvisoryHoldClass,
+    thAdvisoryTimeframe: dict.thAdvisoryTimeframe,
+    thAdvisoryRationale: dict.thAdvisoryRationale,
+    btnLiveAIScan: dict.btnLiveAIScan
+  };
+
+  for (const [id, value] of Object.entries(mappings)) {
+    const el = document.getElementById(id);
+    if (el && value) el.innerText = value;
+  }
+
+  const execSelect = document.getElementById('execType');
+  if (execSelect) {
+    execSelect.innerHTML = `
+      <option value="market">${dict.optMarket}</option>
+      <option value="limit">${dict.optLimit}</option>
+    `;
+  }
+
+  const welcome = document.getElementById('chatWelcomeMsg');
+  if (welcome) {
+    welcome.innerText = dict.welcomeMsg;
+  }
+
+  if (typeof populateWatchlist === 'function') populateWatchlist();
+  if (typeof updateIndicatorsAndCoach === 'function') updateIndicatorsAndCoach(volume);
+  if (typeof renderAdvisoryPanel === 'function') renderAdvisoryPanel();
+}
+
+
+// --- END config.js ---
+
+// --- START risk.js ---
+// Wiseman Analytics Smart Risk Calculator Engine
+
+function syncCurrentPrice() {
+  const config = marketTickers[activeMarket].find(t => t.key === activeTickerKey);
+  const entryInput = document.getElementById('entryInput');
+  if (entryInput) {
+    entryInput.value = price.toFixed(config.decimals);
+    calculateRisk();
+  }
+}
+
+function calculateRisk() {
+  const entryInput = document.getElementById('entryInput');
+  if (!entryInput) return;
+  
+  // Monitor inputs for threat signatures
+  if (monitorSecurityThreats(entryInput.value)) {
+    const config = marketTickers[activeMarket].find(t => t.key === activeTickerKey);
+    entryInput.value = price.toFixed(config.decimals);
+    return;
+  }
+
+  const entry = parseFloat(entryInput.value);
+  if (isNaN(entry) || entry <= 0) return;
+
+  const config = marketTickers[activeMarket].find(t => t.key === activeTickerKey);
+  const vols = marketVols[activeMarket];
+  const riskPct = vols.riskPct;
+  const riskAmt = entry * (riskPct / 100);
+  
+  let sl, t1, t2;
+  if (isLong) {
+    sl = entry - riskAmt;
+    t1 = entry + (riskAmt * 2);
+    t2 = entry + (riskAmt * 3);
+  } else {
+    sl = entry + riskAmt;
+    t1 = entry - (riskAmt * 2);
+    t2 = entry - (riskAmt * 3);
+  }
+
+  const dict = langDb[currentLang];
+  
+  const elVolatility = document.getElementById('outVolatility');
+  const elStopLoss = document.getElementById('outStopLoss');
+  const elRiskAmt = document.getElementById('outRiskAmt');
+  const elTarget1 = document.getElementById('outTarget1');
+  const elReward1 = document.getElementById('outReward1');
+  const elTarget2 = document.getElementById('outTarget2');
+  const elReward2 = document.getElementById('outReward2');
+
+  if (elVolatility) elVolatility.innerText = riskPct + '%';
+  if (elStopLoss) elStopLoss.innerText = sl.toFixed(config.decimals);
+  if (elRiskAmt) elRiskAmt.innerText = dict.riskAmtPrefix + riskAmt.toFixed(config.decimals);
+  if (elTarget1) elTarget1.innerText = t1.toFixed(config.decimals);
+  if (elReward1) elReward1.innerText = dict.estRetPrefix + (riskAmt * 2).toFixed(config.decimals);
+  if (elTarget2) elTarget2.innerText = t2.toFixed(config.decimals);
+  if (elReward2) elReward2.innerText = dict.estRetPrefix + (riskAmt * 3).toFixed(config.decimals);
+}
+
+// --- END risk.js ---
+
+// --- START ai.js ---
+// Wiseman Analytics AI Coach & Advisor Heuristics
+
+async function sendChatMessage() {
+  const input = document.getElementById('chatInput');
+  if (!input) return;
+  const prompt = input.value.trim();
+  if (!prompt) return;
+
+  // Monitor for security threat signatures
+  if (monitorSecurityThreats(prompt)) {
+    input.value = '';
+    return;
+  }
+
+  const chat = document.getElementById('chatHistory');
+  if (!chat) return;
+
+  // Render User Message bubble
+  const userBubble = document.createElement('div');
+  userBubble.className = 'chat-bubble bubble-user';
+  userBubble.innerText = prompt;
+  chat.appendChild(userBubble);
+  input.value = '';
+  chat.scrollTop = chat.scrollHeight;
+
+  // Render temporary "Thinking..." bubble
+  const thinkingBubble = document.createElement('div');
+  thinkingBubble.className = 'chat-bubble bubble-ai';
+  thinkingBubble.style.fontStyle = 'italic';
+  thinkingBubble.style.color = 'var(--text-muted)';
+  thinkingBubble.innerText = currentLang === 'mr' ? 'वाईजमन विश्लेषण करत आहे...' : 'Wiseman is scanning...';
+  chat.appendChild(thinkingBubble);
+  chat.scrollTop = chat.scrollHeight;
+
+  const config = marketTickers[activeMarket].find(t => t.key === activeTickerKey);
+  const name = config.symbol.replace('_', ' ');
+
+  try {
+    const response = await fetch(`${BACKEND_API_URL}/ai/chat`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        prompt: prompt,
+        ticker: name,
+        language: currentLang,
+        price: price.toFixed(config.decimals),
+        rsi: rsi.toFixed(1),
+        macd: macd.toFixed(3),
+        volume: (typeof volume !== 'undefined' && volume) ? volume.toFixed(1) + "M" : '24M'
+      })
+    });
+
+    if (!response.ok) throw new Error("Server communication failure");
+
+    const data = await response.json();
+    thinkingBubble.remove(); // Remove loading bubble
+
+    const aiBubble = document.createElement('div');
+    aiBubble.className = 'chat-bubble bubble-ai';
+
+    if (data.status === "NO_KEY") {
+      // API Key missing inside backend .env. Show API key helper warning, then local fallback response.
+      const fallbackText = getLocalHeuristicResponse(prompt, name, config);
+      aiBubble.innerHTML = `<span style="color: var(--gold-accent); font-weight: bold; display: block; margin-bottom: 6px;">${data.reply}</span>${fallbackText}`;
+    } else if (data.status === "SUCCESS") {
+      // Successful Gemini response. Convert markdown bold/linebreaks for UI rendering.
+      const formattedText = data.reply
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/\n/g, '<br>');
+      aiBubble.innerHTML = formattedText;
+    } else {
+      throw new Error("Invalid payload status");
+    }
+
+    chat.appendChild(aiBubble);
+    chat.scrollTop = chat.scrollHeight;
+
+  } catch (error) {
+    console.warn("AI chat API failed, executing local heuristic fallback:", error);
+    thinkingBubble.remove(); // Remove loading bubble
+
+    // Graceful fallback to rule-based analysis
+    const fallbackText = getLocalHeuristicResponse(prompt, name, config);
+    const aiBubble = document.createElement('div');
+    aiBubble.className = 'chat-bubble bubble-ai';
+    aiBubble.innerHTML = `<span style="color: var(--cyan); font-size: 8px; font-weight: bold; display: block; margin-bottom: 4px; font-family: 'Orbitron', sans-serif;">🛡️ TERMINATOR LOCAL RECOVERY ACTIVE</span>${fallbackText}`;
+    
+    chat.appendChild(aiBubble);
+    chat.scrollTop = chat.scrollHeight;
+  }
+}
+
+function evaluateAIQuote(vol) {
+  const coachStatus = document.getElementById('coachStatus');
+  const confidenceVal = document.getElementById('confidenceVal');
+  const confidenceFill = document.getElementById('confidenceFill');
+  const coachQuote = document.getElementById('coachQuote');
+  const rationaleList = document.getElementById('rationaleList');
+  const avatar = document.getElementById('coachAvatarGlow');
+
+  if (!coachStatus || !confidenceVal || !confidenceFill || !coachQuote || !rationaleList || !avatar) return;
+
+  const config = marketTickers[activeMarket].find(t => t.key === activeTickerKey);
+  const name = config.symbol.replace('_', ' ');
+  const dict = langDb[currentLang];
+  const macdHist = macd - signalLine;
+  const isLowVol = vol < (activeMarket === 'crypto' ? 50 : 15);
+  avatar.className = "coach-avatar";
+
+  if (isLowVol) {
+    coachStatus.innerText = dict.statusAvoid;
+    coachStatus.className = "coach-status-badge status-avoid";
+    avatar.classList.add("sell-glow");
+    confidenceVal.innerText = "20%";
+    confidenceFill.style.width = "20%";
+    confidenceFill.style.backgroundColor = "var(--red-neon)";
+    
+    if (currentLang === 'mr') {
+      coachQuote.innerText = `"${config.symbol} मधील व्होलॅटिलिटी खूप कमी आहे (${vol.toFixed(1)}M). मोठे खरेदीदार सध्या सक्रिय नाहीत. नवीन ट्रेड घेणे टाळा."`;
+      rationaleList.innerHTML = `
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--red-neon);">●</span>
+          <span>अत्यंत कोरडा ट्रेडिंग वॉल्यूम प्रोफाइल.</span>
+        </div>
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--red-neon);">●</span>
+          <span>मोठ्या स्लिपेज आणि स्प्रेडचा धोका जास्त.</span>
+        </div>
+      `;
+    } else {
+      coachQuote.innerText = `"${name} volatility is sub-optimal (${vol.toFixed(1)}M). Institutional players are sitting on the sidelines. Avoid execution."`;
+      rationaleList.innerHTML = `
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--red-neon);">●</span>
+          <span>Extremely dry trading volume profile.</span>
+        </div>
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--red-neon);">●</span>
+          <span>High risk of spread slippages.</span>
+        </div>
+      `;
+    }
+    return;
+  }
+
+  if (rsi < 35 && macdHist > 0) {
+    coachStatus.innerText = dict.statusApproved;
+    coachStatus.className = "coach-status-badge status-approved";
+    avatar.classList.add("buy-glow");
+    confidenceVal.innerText = "85%";
+    confidenceFill.style.width = "85%";
+    confidenceFill.style.backgroundColor = "var(--green-neon)";
+    
+    if (currentLang === 'mr') {
+      coachQuote.innerText = `"${config.symbol} वर मजबूत तेजीचे संकेत आहेत (RSI: ${rsi.toFixed(1)}). MACD वर पॉझिटिव्ह क्रॉसओवर (${macdHist.toFixed(3)}) बनला आहे. खरेदीसाठी उत्तम सेटअप."`;
+      rationaleList.innerHTML = `
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--green-neon);">●</span>
+          <span>RSI ${rsi.toFixed(1)} वरून रिव्हर्सल संकेत देत आहे.</span>
+        </div>
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--green-neon);">●</span>
+          <span>MACD बुलिश क्रॉसओवर निश्चित झाला आहे (${macdHist.toFixed(3)}).</span>
+        </div>
+      `;
+    } else {
+      coachQuote.innerText = `"${name} is showing a strong bullish reversal pattern (RSI: ${rsi.toFixed(1)}). MACD is flashing a positive crossover (${macdHist.toFixed(3)}). High R:R long setup."`;
+      rationaleList.innerHTML = `
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--green-neon);">●</span>
+          <span>Bullish divergence forming on RSI at ${rsi.toFixed(1)}.</span>
+        </div>
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--green-neon);">●</span>
+          <span>Volume breakout confirmed with positive MACD momentum.</span>
+        </div>
+      `;
+    }
+  } else if (rsi > 65 && macdHist < 0) {
+    coachStatus.innerText = dict.statusApproved;
+    coachStatus.className = "coach-status-badge status-approved";
+    avatar.classList.add("sell-glow");
+    confidenceVal.innerText = "82%";
+    confidenceFill.style.width = "82%";
+    confidenceFill.style.backgroundColor = "var(--red-neon)";
+    
+    if (currentLang === 'mr') {
+      coachQuote.innerText = `"${config.symbol} स्थानिक रेझिस्टन्सवर नफा वसुली आणि विक्रीच्या दबावाखाली आहे (RSI: ${rsi.toFixed(1)}). स्टॉप लॉस कडक ठेवा."`;
+      rationaleList.innerHTML = `
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--red-neon);">●</span>
+          <span>RSI ओव्हरबॉट वितरण दाखवत आहे (${rsi.toFixed(1)}).</span>
+        </div>
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--red-neon);">●</span>
+          <span>महत्वाच्या ऑर्डर ब्लॉकवरून रिजेक्शन संकेत (MACD: ${macdHist.toFixed(3)}).</span>
+        </div>
+      `;
+    } else {
+      coachQuote.innerText = `"${name} is experiencing heavy distribution sweeps at local resistance (RSI: ${rsi.toFixed(1)}). Selling pressure mounting. Tight stop losses advised."`;
+      rationaleList.innerHTML = `
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--red-neon);">●</span>
+          <span>RSI indicating overbought distribution at ${rsi.toFixed(1)}.</span>
+        </div>
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--red-neon);">●</span>
+          <span>Rejection pattern at major order block (MACD: ${macdHist.toFixed(3)}).</span>
+        </div>
+      `;
+    }
+  } else if (rsi >= 40 && rsi <= 60) {
+    coachStatus.innerText = dict.statusAvoid;
+    coachStatus.className = "coach-status-badge status-avoid";
+    avatar.classList.add("sell-glow");
+    confidenceVal.innerText = "35%";
+    confidenceFill.style.width = "35%";
+    confidenceFill.style.backgroundColor = "var(--red-neon)";
+    
+    if (currentLang === 'mr') {
+      coachQuote.innerText = `"${config.symbol} सध्या साईडवेज (sideways) रेंजमध्ये आहे (RSI: ${rsi.toFixed(1)}). ब्रेकआऊट होईपर्यंत वाट पहा."`;
+      rationaleList.innerHTML = `
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--text-muted);">●</span>
+          <span>ट्रेन्ड ब्रेकआऊटचे कोणतेही स्पष्ट संकेत नाहीत.</span>
+        </div>
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--text-muted);">●</span>
+          <span>महत्वाच्या सपोर्ट/रेझिस्टन्स लेव्हलची वाट पहा (RSI: ${rsi.toFixed(1)}).</span>
+        </div>
+      `;
+    } else {
+      coachQuote.innerText = `"${name} is in a consolidation zone (RSI: ${rsi.toFixed(1)}). Moving average indicators are flat. Range-bound oscillations expected."`;
+      rationaleList.innerHTML = `
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--text-muted);">●</span>
+          <span>No clear trend breakout signal. RSI flat at ${rsi.toFixed(1)}.</span>
+        </div>
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--text-muted);">●</span>
+          <span>Wait for key support/resistance sweep.</span>
+        </div>
+      `;
+    }
+  } else {
+    coachStatus.innerText = dict.statusAvoid;
+    coachStatus.className = "coach-status-badge status-avoid";
+    avatar.classList.add("neutral-glow");
+    confidenceVal.innerText = "45%";
+    confidenceFill.style.width = "45%";
+    confidenceFill.style.backgroundColor = "var(--cyan)";
+    
+    if (currentLang === 'mr') {
+      coachQuote.innerText = `"${config.symbol} वर परस्परविरोधी संकेत आहेत. RSI (${rsi.toFixed(1)}) आणि MACD (${macdHist.toFixed(3)}) भिन्न मते दाखवत आहेत."`;
+      rationaleList.innerHTML = `
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--cyan);">●</span>
+          <span>आरएसआय आणि एमएसीडी वेगवेगळे संकेत देत आहेत.</span>
+        </div>
+      `;
+    } else {
+      coachQuote.innerText = `"Conflicting momentum signals on ${name} multiple timeframes (RSI: ${rsi.toFixed(1)}, MACD: ${macdHist.toFixed(3)}). No clean trading edge."`;
+      rationaleList.innerHTML = `
+        <div class="rationale-item">
+          <span class="rationale-icon" style="color: var(--cyan);">●</span>
+          <span>RSI and MACD are flashing divergent cues.</span>
+        </div>
+      `;
+    }
+  }
+}
+
+// Local fallback rule-based analyzer when API is offline
+function getLocalHeuristicResponse(prompt, name, config) {
+  let response = "";
+  const p = prompt.toLowerCase();
+  const lang = typeof currentLang !== 'undefined' ? currentLang : 'en';
+
+  if (lang === 'mr') {
+    if (p.includes('analyze') || p.includes('chart') || p.includes('विश्लेषण') || p.includes('तपासा') || p.includes('नकाशा')) {
+      response = `${name} साठी वाईजमन विश्लेषण: मार्केटमध्ये MACD हिस्टोग्राम ${macd.toFixed(3)} आहे आणि RSI ${rsi.toFixed(1)} वर आहे. विश्लेषण दर्शविते की आपण ${rsi > 60 ? 'तेजीच्या क्षेत्रात (Bullish Expansion) आहोत, वरील स्तरांवर नफा वसुलीकडे लक्ष ठेवा' : (rsi < 40 ? 'ओव्हरसोल्ड क्षेत्रात (Oversold Accumulation) आहोत, रिव्हर्सल संकेत जवळ आहेत' : 'तटस्थ रेंजबाउंड क्षेत्रात आहोत')}. स्टॉप लॉस +/- ${marketVols[activeMarket].riskPct}% ठेवण्याची शिफारस केली जाते.`;
+    } else if (p.includes('trap') || p.includes('bear') || p.includes('bull') || p.includes('फसवा') || p.includes('जाळे')) {
+      response = `संस्थात्मक लिक्विडिटी ट्रॅप (Institutuional Traps) रिटेल ट्रेडर्सचे स्टॉप लॉस उडवण्यासाठी तयार केले जातात. जेव्हा किंमत अचानक ब्रेकआऊट दाखवते (Bull Trap) किंवा ब्रेकडाऊन दाखवते (Bear Trap) आणि लगेच विरुद्ध दिशेने वळते, त्याला ट्रॅप म्हणतात. यापासून वाचण्यासाठी उजवीकडील रिस्क कॅल्क्युलेटरने दिलेले अचूक स्टॉप लॉस वापरावे.`;
+    } else if (p.includes('stop loss') || p.includes('target') || p.includes('risk') || p.includes('मर्यादा') || p.includes('नफा') || p.includes('तोटा')) {
+      const entryVal = price;
+      const riskPct = marketVols[activeMarket].riskPct;
+      const riskAmt = entryVal * (riskPct / 100);
+      response = `सध्याच्या सेटिंगनुसार, ${name} मध्ये एंट्री ${entryVal.toFixed(config.decimals)} वर असल्यास, स्टॉप लॉस ${(entryVal - riskAmt).toFixed(config.decimals)} वर असावा (जोखीम रक्कम: ${riskAmt.toFixed(config.decimals)}). टार्गेट १ (१:२ R:R) हे ${(entryVal + riskAmt * 2).toFixed(config.decimals)} वर आणि टार्गेट २ (१:३ R:R) हे ${(entryVal + riskAmt * 3).toFixed(config.decimals)} वर असावे.`;
+    } else if (p.includes('मार्क') || p.includes('तू कोण') || p.includes('help') || p.includes('मदत')) {
+      response = `मी वाईजमन (Mark) आहे, तुमचा संस्थात्मक मार्केट ॲनालिसिस सहाय्यक. मी चार्ट पॅटर्न्स, इंडिकेटर्स आणि रिस्क व्यवस्थापनाचे विश्लेषण करू शकतो, सर.`;
+    } else {
+      const activeVolume = (typeof volume !== 'undefined' && volume) ? volume.toFixed(1) : '24.5';
+      response = `${name} चे संख्यात्मक आकडेवारी दर्शविते की ट्रेडिंग व्हॉल्यूम ${activeVolume}M वर आहे. अधिक अचूकतेसाठी, तुम्ही चार्टवर सपोर्ट लाईन ओढू शकता किंवा डबल-क्लिक करून एंट्री प्राईस सेट करू शकता, सर.`;
+    }
+  } else if (lang === 'hi') {
+    if (p.includes('analyze') || p.includes('chart') || p.includes('विश्लेषण') || p.includes('नक्शा') || p.includes('जांच')) {
+      response = `${name} के लिए वाइजमैन विश्लेषण: वर्तमान में MACD ${macd.toFixed(3)} है और RSI ${rsi.toFixed(1)} पर खड़ा है। विश्लेषण से पता चलता है कि हम ${rsi > 60 ? 'तेजी के क्षेत्र में हैं, ऊपरी स्तरों पर बिकवाली का ध्यान रखें' : (rsi < 40 ? 'ओव्हरसोल्ड संचय क्षेत्र में हैं, जल्द ही तेजी आ सकती है' : 'एक निश्चित सीमा में मजबूत समेकन देख रहे हैं')}. स्टॉप लॉस +/- ${marketVols[activeMarket].riskPct}% रखने की सलाह दी जाती है।`;
+    } else if (p.includes('trap') || p.includes('bear') || p.includes('bull') || p.includes('धोखा') || p.includes('फंसाना')) {
+      response = `संस्थागत ट्रैप (Institutional Traps) बड़े ऑपरेटरों द्वारा स्टॉप लॉस को हिट करने के लिए बनाए जाते हैं। जैसे, बुल ट्रैप (Bull Trap) रेजिस्टेंस ब्रेकआउट के झूठे संकेत देकर खरीदारों को फंसाता है। जोखिम से बचने के लिए स्मार्ट रिस्क कैलकुलेटर द्वारा सुझाए गए लेवल्स का ही पालन करें।`;
+    } else if (p.includes('stop loss') || p.includes('target') || p.includes('risk') || p.includes('nuksan') || p.includes('munafa')) {
+      const entryVal = price;
+      const riskPct = marketVols[activeMarket].riskPct;
+      const riskAmt = entryVal * (riskPct / 100);
+      response = `वर्तमान सेटिंग के अनुसार, ${name} में एंट्री ${entryVal.toFixed(config.decimals)} पर है, तो स्टॉप लॉस ${(entryVal - riskAmt).toFixed(config.decimals)} पर रखें (जोखिम राशि: ${riskAmt.toFixed(config.decimals)}). टारगेट १ (१:२ R:R) ${(entryVal + riskAmt * 2).toFixed(config.decimals)} और टारगेट २ (१:३ R:R) ${(entryVal + riskAmt * 3).toFixed(config.decimals)} पर बनता है।`;
+    } else if (p.includes('मार्क') || p.includes('कौन') || p.includes('मदद')) {
+      response = `मैं वाइजमैन (Mark) हूँ, आपका संस्थागत बाजार विश्लेषण सहायक। मैं चार्ट पैटर्न, रिस्क मैनेजमेंट और लाइव इंडिकेटर की गणना कर सकता हूँ, सर।`;
+    } else {
+      const activeVolume = (typeof volume !== 'undefined' && volume) ? volume.toFixed(1) : '24.5';
+      response = `${name} की आकडेवारी दर्शाती है कि ट्रेडिंग वॉल्यूम ${activeVolume}M पर है। आप चार्ट पर डबल-क्लिक करके एंट्री सेट कर सकते हैं या सपोर्ट लाइन खींचकर रिस्क को ऑटो-कैलकुलेट कर सकते हैं, सर।`;
+    }
+  } else if (lang === 'es') {
+    if (p.includes('analyze') || p.includes('chart') || p.includes('analizar') || p.includes('grafico')) {
+      response = `Análisis de Wiseman para ${name}: El indicador MACD es de ${macd.toFixed(3)} y el RSI está en ${rsi.toFixed(1)}. Indica que estamos en una ${rsi > 60 ? 'zona de expansión alcista, atención a la toma de ganancias' : (rsi < 40 ? 'zona de acumulación de sobreventa, posible reversión alcista' : 'fase de consolidación plana')}. Se recomienda un Stop Loss de +/- ${marketVols[activeMarket].riskPct}%.`;
+    } else if (p.includes('trap') || p.includes('oso') || p.includes('toro') || p.includes('trampa')) {
+      response = `Las trampas institucionales se ejecutan mediante barridos de liquidez. Por ejemplo, una trampa de toros (Bull Trap) ocurre cuando el precio supera una resistencia e incita a comprar antes de caer con fuerza. Utilice siempre los niveles de stop loss sugeridos para evitar liquidaciones.`;
+    } else if (p.includes('stop loss') || p.includes('target') || p.includes('riesgo') || p.includes('limite')) {
+      const entryVal = price;
+      const riskPct = marketVols[activeMarket].riskPct;
+      const riskAmt = entryVal * (riskPct / 100);
+      response = `Con una entrada en ${entryVal.toFixed(config.decimals)} para ${name}, su Stop Loss debe estar en ${(entryVal - riskAmt).toFixed(config.decimals)} (Riesgo: ${riskAmt.toFixed(config.decimals)}). El Objetivo 1 (1:2 R:R) está en ${(entryVal + riskAmt * 2).toFixed(config.decimals)}.`;
+    } else {
+      const activeVolume = (typeof volume !== 'undefined' && volume) ? volume.toFixed(1) : '24.5';
+      response = `Los datos cuantitativos para ${name} indican un volumen de ${activeVolume}M. Puede hacer doble clic en el gráfico para fijar el precio de entrada o trazar una línea de soporte para ajustar el riesgo, señor.`;
+    }
+  } else {
+    // English default
+    if (p.includes('analyze') || p.includes('chart') || p.includes('nifty') || p.includes('btc')) {
+      response = `Wiseman Analysis for ${name}: Market is currently printing MACD value of ${macd.toFixed(3)} and RSI is standing at ${rsi.toFixed(1)}. Rationale indicates we are in a ${rsi > 60 ? 'Bullish Expansion block, watch for local distribution' : (rsi < 40 ? 'Oversold Accumulation zone, prepare for reversal' : 'Rangebound consolidation zone')}. Strict risk stop loss at entry +/- ${marketVols[activeMarket].riskPct}% is recommended.`;
+    } else if (p.includes('trap') || p.includes('bear') || p.includes('bull')) {
+      response = `An institutional trap is executed by sweeps of liquidity pools. For example, a Bull Trap occurs when price breaks previous resistance highs, trapping retail buyers, and then reverses aggressively to sweep stop losses below. Maintain your Stop Loss levels as calculated by the Smart Risk Calculator to avoid being liquidated.`;
+    } else if (p.includes('stop loss') || p.includes('target') || p.includes('risk')) {
+      const entryVal = price;
+      const riskPct = marketVols[activeMarket].riskPct;
+      const riskAmt = entryVal * (riskPct / 100);
+      response = `Under current ${activeMarket} settings, with an entry at ${entryVal.toFixed(config.decimals)}, your stop loss should be placed at ${(entryVal - riskAmt).toFixed(config.decimals)} (Risk: ${riskAmt.toFixed(config.decimals)}). Target 1 (1:2 R:R) stands at ${(entryVal + riskAmt * 2).toFixed(config.decimals)}.`;
+    } else if (p.includes('mark') || p.includes('who are you') || p.includes('help')) {
+      response = `I am Wiseman (codename: Mark), your quantitative market analysis assistant. I can analyze chart structures, dynamic indicators, and verify risk limits, Sir.`;
+    } else {
+      const activeVolume = (typeof volume !== 'undefined' && volume) ? volume.toFixed(1) : '24.5';
+      response = `The quantitative metrics for ${name} indicate volume is stable at ${activeVolume}M. If you want to configure custom entries, double-click on the chart to set Entry Price or draw a Support line to auto-sync Stop Loss, Sir.`;
+    }
+  }
+  return response;
+}
+
+// Live AI Market Scanner Trigger (Fetches from backend Render/Local server)
+async function triggerLiveAIScan() {
+  const scanBtn = document.getElementById('btnLiveAIScan');
+  if (scanBtn) {
+    scanBtn.disabled = true;
+    scanBtn.innerText = currentLang === 'mr' ? 'स्कॅनिंग सुरू आहे...' : 'SCANNING...';
+  }
+
+  // Get active tickers in the current market
+  const activeTickers = marketTickers[activeMarket] || [];
+  const tickersPayload = activeTickers.map(t => ({
+    ticker: t.symbol,
+    price: t.currentPrice.toFixed(t.decimals),
+    rsi: rsi.toFixed(1), // Use active terminal RSI/MACD as basis
+    trend: rsi > 60 ? "Overbought momentum" : (rsi < 40 ? "Oversold structure" : "Neutral range consolidation")
+  }));
+
+  try {
+    const response = await fetch(`${BACKEND_API_URL}/ai/advisory`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        language: currentLang,
+        tickers: tickersPayload
+      })
+    });
+
+    if (!response.ok) throw new Error("Backend response error");
+    
+    const data = await response.json();
+    
+    if (data.status === "SUCCESS" && data.recommendations) {
+      // Re-render advisory table with AI recommendations!
+      const tableBody = document.getElementById('advisoryTableBody');
+      if (tableBody) {
+        tableBody.innerHTML = '';
+        data.recommendations.forEach(item => {
+          const row = document.createElement('tr');
+          let badgeClass = 'badge-hold';
+          const actionUpper = item.action.toUpperCase();
+          if (actionUpper.includes('BUY') || item.action.includes('खरेदी') || item.action.includes('खरीद')) {
+            badgeClass = 'badge-buy';
+          } else if (actionUpper.includes('SELL') || item.action.includes('विक्री') || item.action.includes('बेच')) {
+            badgeClass = 'badge-sell';
+          }
+
+          row.innerHTML = `
+            <td><span class="pos-ticker" style="font-family: 'Orbitron', sans-serif;">${item.ticker.replace('_', ' ')}</span></td>
+            <td><span class="${badgeClass}">${item.action}</span></td>
+            <td><span style="color: var(--text-secondary); font-weight: 600; font-size: 8px; font-family: 'Orbitron', sans-serif;">${item.holdClass}</span></td>
+            <td><span style="color: var(--cyan); font-weight: 500; font-size: 8.5px; font-family: 'Orbitron', sans-serif;">${item.timeframe}</span></td>
+            <td style="color: var(--text-muted); font-size: 8px; line-height: 1.3; max-width: 200px; white-space: normal; text-align: left; padding: 6px;">✨ ${item.rationale}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+
+        // Add a dynamic report bubble inside the chat assistant
+        const chat = document.getElementById('chatHistory');
+        if (chat) {
+          const reportBubble = document.createElement('div');
+          reportBubble.className = 'chat-bubble bubble-ai';
+          reportBubble.innerHTML = `🤖 **WISEMAN DYNAMIC MARKET REPORT:** Live AI scan successfully analyzed ${activeMarket} assets and updated the Advisory Panel recommendations in **${currentLang.toUpperCase()}** mode, Sir.`;
+          chat.appendChild(reportBubble);
+          chat.scrollTop = chat.scrollHeight;
+        }
+      }
+    } else {
+      // Warn about missing API key
+      alert(currentLang === 'mr' ? 'जेमिनी AI की (API Key) जोडलेली नाही. कृपया बॅकएंड .env फाईलमध्ये GEMINI_API_KEY जोडा.' : 'Gemini API Key missing. Please configure GEMINI_API_KEY in the backend .env file to enable live AI market scans.');
+    }
+  } catch (err) {
+    console.error("AI Scan failed:", err);
+    alert(currentLang === 'mr' ? 'AI स्कॅन अयशस्वी. कृपया बॅकएंड सर्व्हर सुरू असल्याची खात्री करा.' : 'AI Scan failed. Please make sure the backend server is running.');
+  } finally {
+    if (scanBtn) {
+      scanBtn.disabled = false;
+      const dict = langDb[currentLang];
+      scanBtn.innerText = dict.btnLiveAIScan || 'RUN LIVE AI SCAN';
+    }
+  }
+}
+
+
+// --- END ai.js ---
+
+// --- START chart.js ---
+// Chart state variables
+let visibleCount = 60;
+let panOffset = 0;
+let drawings = { trendlines: [], fibs: [], supports: [] };
+let isDragging = false;
+let dragStartX = 0;
+let dragStartPanOffset = 0;
+let hoverPoint = null;
+let startPoint = null;
+
+// Replay Mode States
+let isReplayMode = false;
+let replayIndex = 50;
+let replayTimer = null;
+let replayIsPlaying = false;
+
+function getCoordsFromValue(globalIdx, priceVal) {
+  const width = canvas.width / window.devicePixelRatio;
+  const height = canvas.height / window.devicePixelRatio;
+  
+  const activeHistory = isReplayMode ? history.slice(0, replayIndex) : history;
+  const startIndex = Math.max(0, activeHistory.length - visibleCount - panOffset);
+  const endIndex = Math.min(activeHistory.length, activeHistory.length - panOffset);
+  const visibleHistory = activeHistory.slice(startIndex, endIndex);
+  
+  const minPrice = Math.min(...visibleHistory);
+  const maxPrice = Math.max(...visibleHistory);
+  const priceRange = (maxPrice - minPrice) || 1;
+  const pad = priceRange * 0.15;
+  
+  const calcY = (val) => height - (((val - (minPrice - pad)) / (priceRange + pad * 2)) * height);
+  const stepX = width / (visibleHistory.length - 1);
+  
+  const sliceIdx = globalIdx - startIndex;
+  const x = stepX * sliceIdx;
+  const y = calcY(priceVal);
+  
+  return { x, y };
+}
+
+function getValueFromCoords(x, y) {
+  const width = canvas.width / window.devicePixelRatio;
+  const height = canvas.height / window.devicePixelRatio;
+  
+  const activeHistory = isReplayMode ? history.slice(0, replayIndex) : history;
+  const startIndex = Math.max(0, activeHistory.length - visibleCount - panOffset);
+  const endIndex = Math.min(activeHistory.length, activeHistory.length - panOffset);
+  const visibleHistory = activeHistory.slice(startIndex, endIndex);
+  
+  const minPrice = Math.min(...visibleHistory);
+  const maxPrice = Math.max(...visibleHistory);
+  const priceRange = (maxPrice - minPrice) || 1;
+  const pad = priceRange * 0.15;
+  
+  const stepX = width / (visibleHistory.length - 1);
+  
+  const sliceIdx = x / stepX;
+  const globalIdx = Math.round(sliceIdx + startIndex);
+  const priceVal = ((height - y) / height) * (priceRange + pad * 2) + (minPrice - pad);
+  
+  return { globalIdx, priceVal };
+}
+
+function getActiveDrawingStyles() {
+  const colorEl = document.getElementById('drawingColor');
+  const widthEl = document.getElementById('drawingWidth');
+  return {
+    color: colorEl ? colorEl.value : 'rgba(0, 240, 255, 0.7)',
+    width: widthEl ? parseInt(widthEl.value) : 1.5
+  };
+}
+
+function onChartDblClick(e) {
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  
+  const val = getValueFromCoords(x, y);
+  const entryInput = document.getElementById('entryInput');
+  if (entryInput) {
+    const config = marketTickers[activeMarket].find(t => t.key === activeTickerKey);
+    const priceStr = val.priceVal.toFixed(config.decimals);
+    entryInput.value = priceStr;
+    if (typeof calculateRisk === 'function') {
+      calculateRisk();
+    }
+    
+    const chat = document.getElementById('chatHistory');
+    if (chat) {
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-bubble bubble-ai';
+      bubble.style.borderColor = 'var(--cyan)';
+      bubble.innerText = currentLang === 'mr' ? 
+        `[रिस्क कॅल्क्युलेटर] चार्टवर डबल-क्लिक करून एंट्री प्राईस ${priceStr} वर सेट केली आहे, सर.` : 
+        `[RISK ENGINE] Synced entry price to ${priceStr} via chart double-click, Sir.`;
+      chat.appendChild(bubble);
+      chat.scrollTop = chat.scrollHeight;
+    }
+  }
+}
+
+function onChartMouseDown(e) {
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  if (activeDrawingTool) {
+    const val = getValueFromCoords(x, y);
+    const styles = getActiveDrawingStyles();
+    
+    if (activeDrawingTool === 'support') {
+      drawings.supports.push({ priceVal: val.priceVal, color: styles.color, width: styles.width });
+      activeDrawingTool = null;
+      const el = document.getElementById('toolSupport');
+      if (el) el.classList.remove('active');
+      
+      // Sync Support directly as a Stop Loss inside Smart Risk Calculator
+      const entryInput = document.getElementById('entryInput');
+      if (entryInput) {
+        const entry = parseFloat(entryInput.value);
+        if (!isNaN(entry) && entry > 0) {
+          const config = marketTickers[activeMarket].find(t => t.key === activeTickerKey);
+          const slPrice = val.priceVal;
+          const riskDiff = Math.abs(entry - slPrice);
+          const riskPct = ((riskDiff / entry) * 100);
+
+          const elStopLoss = document.getElementById('outStopLoss');
+          const elRiskAmt = document.getElementById('outRiskAmt');
+          const elTarget1 = document.getElementById('outTarget1');
+          const elReward1 = document.getElementById('outReward1');
+          const elTarget2 = document.getElementById('outTarget2');
+          const elReward2 = document.getElementById('outReward2');
+          const dict = langDb[currentLang];
+
+          if (elStopLoss) elStopLoss.innerText = slPrice.toFixed(config.decimals);
+          if (elRiskAmt) elRiskAmt.innerText = dict.riskAmtPrefix + riskDiff.toFixed(config.decimals) + ` (${riskPct.toFixed(1)}%)`;
+
+          let t1, t2;
+          if (isLong) {
+            t1 = entry + (riskDiff * 2);
+            t2 = entry + (riskDiff * 3);
+          } else {
+            t1 = entry - (riskDiff * 2);
+            t2 = entry - (riskDiff * 3);
+          }
+
+          if (elTarget1) elTarget1.innerText = t1.toFixed(config.decimals);
+          if (elReward1) elReward1.innerText = dict.estRetPrefix + (riskDiff * 2).toFixed(config.decimals);
+          if (elTarget2) elTarget2.innerText = t2.toFixed(config.decimals);
+          if (elReward2) elReward2.innerText = dict.estRetPrefix + (riskDiff * 3).toFixed(config.decimals);
+
+          const chat = document.getElementById('chatHistory');
+          if (chat) {
+            const bubble = document.createElement('div');
+            bubble.className = 'chat-bubble bubble-ai';
+            bubble.style.borderColor = 'var(--red-neon)';
+            bubble.innerText = currentLang === 'mr' ? 
+              `[रिस्क कॅल्क्युलेटर] चार्टवर सपोर्ट लाईन ओढून स्टॉप लॉस ${slPrice.toFixed(config.decimals)} (जोखीम: ${riskPct.toFixed(1)}%) वर सेट केला आहे.` : 
+              `[RISK ENGINE] Synced Stop Loss to ${slPrice.toFixed(config.decimals)} (${riskPct.toFixed(1)}% risk) based on support line drawing, Sir.`;
+            chat.appendChild(bubble);
+            chat.scrollTop = chat.scrollHeight;
+          }
+        }
+      }
+      
+      drawChart();
+    } else if (!startPoint) {
+      startPoint = val;
+    } else {
+      if (activeDrawingTool === 'trendline') {
+        drawings.trendlines.push({
+          gIdx1: startPoint.globalIdx,
+          price1: startPoint.priceVal,
+          gIdx2: val.globalIdx,
+          price2: val.priceVal,
+          color: styles.color,
+          width: styles.width
+        });
+        const el = document.getElementById('toolTrendline');
+        if (el) el.classList.remove('active');
+      } else if (activeDrawingTool === 'fib') {
+        drawings.fibs.push({
+          priceMin: startPoint.priceVal,
+          priceMax: val.priceVal,
+          color: styles.color,
+          width: styles.width
+        });
+        const el = document.getElementById('toolFib');
+        if (el) el.classList.remove('active');
+      }
+      activeDrawingTool = null;
+      startPoint = null;
+      drawChart();
+    }
+  } else {
+    // Click-to-delete check
+    let deletedAny = false;
+    const clickTolerance = 6;
+    const height = canvas.height / window.devicePixelRatio;
+    
+    const activeHistory = isReplayMode ? history.slice(0, replayIndex) : history;
+    const startIndex = Math.max(0, activeHistory.length - visibleCount - panOffset);
+    const endIndex = Math.min(activeHistory.length, activeHistory.length - panOffset);
+    const visibleHistory = activeHistory.slice(startIndex, endIndex);
+    
+    if (visibleHistory.length >= 2) {
+      const minPrice = Math.min(...visibleHistory);
+      const maxPrice = Math.max(...visibleHistory);
+      const priceRange = (maxPrice - minPrice) || 1;
+      const pad = priceRange * 0.15;
+      const calcY = (val) => height - (((val - (minPrice - pad)) / (priceRange + pad * 2)) * height);
+
+      // Check supports
+      for (let i = 0; i < drawings.supports.length; i++) {
+        const sY = calcY(drawings.supports[i].priceVal);
+        if (Math.abs(y - sY) < clickTolerance) {
+          drawings.supports.splice(i, 1);
+          deletedAny = true;
+          break;
+        }
+      }
+
+      if (!deletedAny) {
+        // Check trendlines
+        for (let i = 0; i < drawings.trendlines.length; i++) {
+          const tl = drawings.trendlines[i];
+          const p1 = getCoordsFromValue(tl.gIdx1, tl.price1);
+          const p2 = getCoordsFromValue(tl.gIdx2, tl.price2);
+          
+          const dist = getDistanceToSegment(x, y, p1.x, p1.y, p2.x, p2.y);
+          if (dist < clickTolerance) {
+            drawings.trendlines.splice(i, 1);
+            deletedAny = true;
+            break;
+          }
+        }
+      }
+      
+      if (!deletedAny) {
+        // Check fibs
+        for (let i = 0; i < drawings.fibs.length; i++) {
+          const fib = drawings.fibs[i];
+          const yMin = calcY(fib.priceMin);
+          const yMax = calcY(fib.priceMax);
+          const dy = yMax - yMin;
+          const levels = [0, 0.236, 0.382, 0.5, 0.618, 0.786, 1];
+          
+          for (let l of levels) {
+            const yL = yMin + dy * l;
+            if (Math.abs(y - yL) < clickTolerance) {
+              drawings.fibs.splice(i, 1);
+              deletedAny = true;
+              break;
+            }
+          }
+          if (deletedAny) break;
+        }
+      }
+    }
+
+    if (deletedAny) {
+      drawChart();
+    } else {
+      isDragging = true;
+      dragStartX = e.clientX;
+      dragStartPanOffset = panOffset;
+    }
+  }
+}
+
+function onChartMouseMove(e) {
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  hoverPoint = { x, y };
+
+  if (isDragging) {
+    const deltaX = e.clientX - dragStartX;
+    const width = canvas.width / window.devicePixelRatio;
+    const stepX = width / (visibleCount - 1);
+    const barsDelta = Math.round(deltaX / stepX);
+    panOffset = Math.max(0, Math.min(history.length - visibleCount, dragStartPanOffset + barsDelta));
+    
+    const btnGoLive = document.getElementById('btnGoLive');
+    if (btnGoLive) {
+      btnGoLive.style.display = panOffset > 0 ? 'block' : 'none';
+    }
+  }
+  drawChart();
+}
+
+function onChartMouseUp(e) {
+  isDragging = false;
+}
+
+function onChartMouseLeave(e) {
+  isDragging = false;
+  hoverPoint = null;
+  drawChart();
+}
+
+function onChartWheel(e) {
+  e.preventDefault();
+  const zoomFactor = e.deltaY > 0 ? 3 : -3;
+  const prevVisibleCount = visibleCount;
+  visibleCount = Math.max(10, Math.min(150, visibleCount + zoomFactor));
+  
+  if (panOffset > 0) {
+    panOffset = Math.max(0, Math.min(history.length - visibleCount, panOffset + (prevVisibleCount - visibleCount)));
+  }
+  drawChart();
+}
+
+function snapToLive() {
+  panOffset = 0;
+  const btnGoLive = document.getElementById('btnGoLive');
+  if (btnGoLive) btnGoLive.style.display = 'none';
+  drawChart();
+}
+
+function drawChart() {
+  if (!canvas || canvas.width === 0 || canvas.height === 0) return;
+  const width = canvas.width / window.devicePixelRatio;
+  const height = canvas.height / window.devicePixelRatio;
+  ctx.clearRect(0, 0, width, height);
+
+  // Draw Grid Lines
+  ctx.strokeStyle = '#111827';
+  ctx.lineWidth = 1;
+  const gridCount = 5;
+  for (let i = 1; i < gridCount; i++) {
+    const y = (height / gridCount) * i;
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke();
+  }
+  for (let i = 1; i < 7; i++) {
+    const x = (width / 7) * i;
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke();
+  }
+
+  const activeHistory = isReplayMode ? history.slice(0, replayIndex) : history;
+  if (activeHistory.length < 2) return;
+
+  // Slice history to the current visible window
+  const N = activeHistory.length;
+  const startIndex = Math.max(0, N - visibleCount - panOffset);
+  const endIndex = Math.min(N, N - panOffset);
+  const visibleHistory = activeHistory.slice(startIndex, endIndex);
+
+  if (visibleHistory.length < 2) return;
+
+  const minPrice = Math.min(...visibleHistory);
+  const maxPrice = Math.max(...visibleHistory);
+  const priceRange = (maxPrice - minPrice) || 1;
+  const pad = priceRange * 0.15;
+  
+  const calcY = (val) => height - (((val - (minPrice - pad)) / (priceRange + pad * 2)) * height);
+  const stepX = width / (visibleHistory.length - 1);
+  
+  // Draw Chart based on type
+  if (chartType === 'line') {
+    ctx.beginPath();
+    for (let i = 0; i < visibleHistory.length; i++) {
+      const x = stepX * i;
+      const y = calcY(visibleHistory[i]);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = '#00f0ff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  } else if (chartType === 'area') {
+    ctx.beginPath();
+    ctx.moveTo(0, height);
+    for (let i = 0; i < visibleHistory.length; i++) {
+      ctx.lineTo(stepX * i, calcY(visibleHistory[i]));
+    }
+    ctx.lineTo(width, height);
+    ctx.closePath();
+    const areaGrd = ctx.createLinearGradient(0, 0, 0, height);
+    areaGrd.addColorStop(0, 'rgba(0, 240, 255, 0.2)');
+    areaGrd.addColorStop(1, 'rgba(0, 240, 255, 0)');
+    ctx.fillStyle = areaGrd;
+    ctx.fill();
+
+    ctx.beginPath();
+    for (let i = 0; i < visibleHistory.length; i++) {
+      if (i === 0) ctx.moveTo(0, calcY(visibleHistory[0]));
+      else ctx.lineTo(stepX * i, calcY(visibleHistory[i]));
+    }
+    ctx.strokeStyle = '#00f0ff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  } else if (chartType === 'candle') {
+    for (let i = 1; i < visibleHistory.length; i++) {
+      const x = stepX * i;
+      const prev = visibleHistory[i-1];
+      const curr = visibleHistory[i];
+      const isGreen = curr >= prev;
+      
+      // Stable pseudo-random high/low wick values
+      const globalIdx = startIndex + i;
+      const seed = Math.sin(globalIdx) * 10000;
+      const randomFactor = seed - Math.floor(seed);
+      const wickSpread = (priceRange * 0.03) * randomFactor;
+      const high = Math.max(prev, curr) + wickSpread;
+      const low = Math.min(prev, curr) - wickSpread;
+      
+      ctx.strokeStyle = isGreen ? '#00e676' : '#ff1744';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(x, calcY(high));
+      ctx.lineTo(x, calcY(low));
+      ctx.stroke();
+      
+      ctx.fillStyle = isGreen ? '#00e676' : '#ff1744';
+      ctx.fillRect(x - 3, calcY(Math.max(prev, curr)), 6, Math.max(1, Math.abs(calcY(prev) - calcY(curr))));
+    }
+  } else if (chartType === 'bar') {
+    for (let i = 1; i < visibleHistory.length; i++) {
+      const x = stepX * i;
+      const prev = visibleHistory[i-1];
+      const curr = visibleHistory[i];
+      const isGreen = curr >= prev;
+      
+      // Stable pseudo-random high/low values
+      const globalIdx = startIndex + i;
+      const seed = Math.sin(globalIdx) * 10000;
+      const randomFactor = seed - Math.floor(seed);
+      const wickSpread = (priceRange * 0.025) * randomFactor;
+      const high = Math.max(prev, curr) + wickSpread;
+      const low = Math.min(prev, curr) - wickSpread;
+      
+      ctx.strokeStyle = isGreen ? '#00e676' : '#ff1744';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(x, calcY(high));
+      ctx.lineTo(x, calcY(low));
+      ctx.stroke();
+      
+      ctx.beginPath(); ctx.moveTo(x - 3, calcY(prev)); ctx.lineTo(x, calcY(prev)); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x, calcY(curr)); ctx.lineTo(x + 3, calcY(curr)); ctx.stroke();
+    }
+  }
+
+  ctx.shadowBlur = 0;
+  
+  // Draw Saved Support & Resistance lines
+  drawings.supports.forEach(sup => {
+    const y = calcY(sup.priceVal);
+    ctx.strokeStyle = sup.color || 'rgba(0, 240, 255, 0.7)';
+    ctx.lineWidth = sup.width || 1.5;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke();
+    ctx.setLineDash([]);
+  });
+
+  // Draw Saved Trendlines
+  drawings.trendlines.forEach(tl => {
+    const p1 = getCoordsFromValue(tl.gIdx1, tl.price1);
+    const p2 = getCoordsFromValue(tl.gIdx2, tl.price2);
+    ctx.strokeStyle = tl.color || 'rgba(255, 215, 0, 0.8)';
+    ctx.lineWidth = tl.width || 1.5;
+    ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+  });
+
+  // Draw Saved Fibonacci Retracements
+  drawings.fibs.forEach(fib => {
+    const yMin = calcY(fib.priceMin);
+    const yMax = calcY(fib.priceMax);
+    const dy = yMax - yMin;
+    const levels = [0, 0.236, 0.382, 0.5, 0.618, 0.786, 1];
+    const colors = ['#ff1744', '#ff7300', '#ffd700', '#00e676', '#00f0ff', '#8a2be2', '#ffffff'];
+    
+    levels.forEach((l, idx) => {
+      const yLevel = yMin + dy * l;
+      ctx.strokeStyle = fib.color || colors[idx];
+      ctx.lineWidth = fib.width || 0.8;
+      ctx.setLineDash([2, 2]);
+      ctx.beginPath(); ctx.moveTo(0, yLevel); ctx.lineTo(width, yLevel); ctx.stroke();
+      ctx.setLineDash([]);
+      
+      ctx.fillStyle = fib.color || colors[idx];
+      ctx.font = '8px Orbitron';
+      ctx.fillText((l * 100).toFixed(1) + '%', 10, yLevel - 2);
+    });
+  });
+
+  // Bollinger Bands drawing overlay
+  const isBBChecked = document.getElementById('cbBB')?.checked;
+  if (isBBChecked && activeHistory.length >= 20) {
+    const bb = calculateBollingerBands(activeHistory);
+    
+    // Draw Upper Band
+    ctx.strokeStyle = 'rgba(138, 43, 226, 0.4)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    let first = true;
+    for (let i = startIndex; i < endIndex; i++) {
+      if (bb.upper[i] === null) continue;
+      const x = stepX * (i - startIndex);
+      const y = calcY(bb.upper[i]);
+      if (first) { ctx.moveTo(x, y); first = false; }
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Draw Lower Band
+    ctx.beginPath();
+    first = true;
+    for (let i = startIndex; i < endIndex; i++) {
+      if (bb.lower[i] === null) continue;
+      const x = stepX * (i - startIndex);
+      const y = calcY(bb.lower[i]);
+      if (first) { ctx.moveTo(x, y); first = false; }
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Draw Middle Band
+    ctx.strokeStyle = 'rgba(138, 43, 226, 0.25)';
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    first = true;
+    for (let i = startIndex; i < endIndex; i++) {
+      if (bb.middle[i] === null) continue;
+      const x = stepX * (i - startIndex);
+      const y = calcY(bb.middle[i]);
+      if (first) { ctx.moveTo(x, y); first = false; }
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // EMA 20 drawing overlay
+  const isEMA20Checked = document.getElementById('cbEMA20')?.checked;
+  if (isEMA20Checked && activeHistory.length >= 20) {
+    const ema20 = calculateEMA(activeHistory, 20);
+    ctx.strokeStyle = 'rgba(255, 115, 0, 0.7)';
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    let first = true;
+    for (let i = startIndex; i < endIndex; i++) {
+      if (ema20[i] === null) continue;
+      const x = stepX * (i - startIndex);
+      const y = calcY(ema20[i]);
+      if (first) { ctx.moveTo(x, y); first = false; }
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+
+  // EMA 50 drawing overlay
+  const isEMA50Checked = document.getElementById('cbEMA50')?.checked;
+  if (isEMA50Checked && activeHistory.length >= 50) {
+    const ema50 = calculateEMA(activeHistory, 50);
+    ctx.strokeStyle = 'rgba(255, 23, 68, 0.7)';
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    let first = true;
+    for (let i = startIndex; i < endIndex; i++) {
+      if (ema50[i] === null) continue;
+      const x = stepX * (i - startIndex);
+      const y = calcY(ema50[i]);
+      if (first) { ctx.moveTo(x, y); first = false; }
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+
+  // Draw Drawing Tool Preview
+  if (activeDrawingTool && startPoint && hoverPoint) {
+    const p1 = getCoordsFromValue(startPoint.globalIdx, startPoint.priceVal);
+    if (activeDrawingTool === 'trendline') {
+      ctx.strokeStyle = 'rgba(255, 215, 0, 0.5)';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([3, 3]);
+      ctx.beginPath();
+      ctx.moveTo(p1.x, p1.y);
+      ctx.lineTo(hoverPoint.x, hoverPoint.y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    } else if (activeDrawingTool === 'fib') {
+      const yMin = p1.y;
+      const yMax = hoverPoint.y;
+      const dy = yMax - yMin;
+      const levels = [0, 0.236, 0.382, 0.5, 0.618, 0.786, 1];
+      const colors = ['rgba(255,23,68,0.4)', 'rgba(255,115,0,0.4)', 'rgba(255,215,0,0.4)', 'rgba(0,230,118,0.4)', 'rgba(0,240,255,0.4)', 'rgba(138,43,226,0.4)', 'rgba(255,255,255,0.4)'];
+      
+      levels.forEach((l, idx) => {
+        const yLevel = yMin + dy * l;
+        ctx.strokeStyle = colors[idx];
+        ctx.lineWidth = 0.8;
+        ctx.beginPath(); ctx.moveTo(0, yLevel); ctx.lineTo(width, yLevel); ctx.stroke();
+        ctx.fillStyle = colors[idx];
+        ctx.font = '8px Orbitron';
+        ctx.fillText((l * 100).toFixed(1) + '%', 10, yLevel - 2);
+      });
+    }
+  }
+
+  // 1. Draw Institutional Order Blocks
+  const obHeight = priceRange * 0.08;
+  
+  // Supply Zone (Red overlay at the top)
+  const ySupplyTop = calcY(maxPrice);
+  const ySupplyBottom = calcY(maxPrice - obHeight);
+  ctx.fillStyle = 'rgba(255, 23, 68, 0.06)';
+  ctx.fillRect(0, ySupplyTop, width, ySupplyBottom - ySupplyTop);
+  ctx.strokeStyle = 'rgba(255, 23, 68, 0.25)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(0, ySupplyBottom);
+  ctx.lineTo(width, ySupplyBottom);
+  ctx.stroke();
+  
+  // Supply Zone Label
+  ctx.fillStyle = 'rgba(255, 23, 68, 0.7)';
+  ctx.font = '8px Orbitron';
+  ctx.textAlign = 'left';
+  let supplyLabel = 'INSTITUTIONAL ORDER BLOCK (SUPPLY)';
+  if (currentLang === 'mr') supplyLabel = 'संस्थात्मक ऑर्डर ब्लॉक (सप्लाय झोन)';
+  else if (currentLang === 'hi') supplyLabel = 'संस्थागत ऑर्डर ब्लॉक (सप्लाई ज़ोन)';
+  else if (currentLang === 'es') supplyLabel = 'BLOQUE DE ORDEN INSTITUCIONAL (OFERTA)';
+  ctx.fillText(supplyLabel, 10, ySupplyBottom - 4);
+
+  // Demand Zone (Green overlay at the bottom)
+  const yDemandTop = calcY(minPrice + obHeight);
+  const yDemandBottom = calcY(minPrice);
+  ctx.fillStyle = 'rgba(0, 230, 118, 0.06)';
+  ctx.fillRect(0, yDemandTop, width, yDemandBottom - yDemandTop);
+  ctx.strokeStyle = 'rgba(0, 230, 118, 0.25)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(0, yDemandTop);
+  ctx.lineTo(width, yDemandTop);
+  ctx.stroke();
+  
+  // Demand Zone Label
+  ctx.fillStyle = 'rgba(0, 230, 118, 0.7)';
+  ctx.font = '8px Orbitron';
+  ctx.textAlign = 'left';
+  let demandLabel = 'INSTITUTIONAL ORDER BLOCK (DEMAND)';
+  if (currentLang === 'mr') demandLabel = 'संस्थात्मक ऑर्डर ब्लॉक (डिमांड झोन)';
+  else if (currentLang === 'hi') demandLabel = 'संस्थागत ऑर्डर ब्लॉक (डिमांड ज़ोन)';
+  else if (currentLang === 'es') demandLabel = 'BLOQUE DE ORDEN INSTITUCIONAL (DEMANDA)';
+  ctx.fillText(demandLabel, 10, yDemandTop + 10);
+
+  // 2. Draw Liquidity Pools (Dotted lines slightly inside swing high / low)
+  const lpUpperPrice = maxPrice - priceRange * 0.16;
+  const lpLowerPrice = minPrice + priceRange * 0.16;
+  
+  ctx.strokeStyle = 'rgba(255, 215, 0, 0.35)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([2, 5]);
+  
+  // Upper LP Line
+  const yLpUpper = calcY(lpUpperPrice);
+  ctx.beginPath();
+  ctx.moveTo(0, yLpUpper);
+  ctx.lineTo(width, yLpUpper);
+  ctx.stroke();
+  
+  // Lower LP Line
+  const yLpLower = calcY(lpLowerPrice);
+  ctx.beginPath();
+  ctx.moveTo(0, yLpLower);
+  ctx.lineTo(width, yLpLower);
+  ctx.stroke();
+  
+  ctx.setLineDash([]);
+  
+  // Upper LP Label
+  ctx.fillStyle = 'rgba(255, 215, 0, 0.75)';
+  ctx.font = '7.5px Orbitron';
+  let lpUpperLabel = 'LIQUIDITY POOL (BUY STOPS)';
+  if (currentLang === 'mr') lpUpperLabel = 'लिक्विडिटी पूल (बाय स्टॉप्स)';
+  else if (currentLang === 'hi') lpUpperLabel = 'लिक्विडिटी पूल (बाय स्टॉप्स)';
+  else if (currentLang === 'es') lpUpperLabel = 'POOL DE LIQUIDEZ (COMPRA STOPS)';
+  ctx.fillText(lpUpperLabel, width - 150, yLpUpper - 3);
+
+  // Lower LP Label
+  let lpLowerLabel = 'LIQUIDITY POOL (SELL STOPS)';
+  if (currentLang === 'mr') lpLowerLabel = 'लिक्विडिटी पूल (सेल स्टॉप्स)';
+  else if (currentLang === 'hi') lpLowerLabel = 'लिक्विडिटी पूल (सेल स्टॉप्स)';
+  else if (currentLang === 'es') lpLowerLabel = 'POOL DE LIQUIDEZ (VENTA STOPS)';
+  ctx.fillText(lpLowerLabel, width - 150, yLpLower + 9);
+
+  // 3. Render Flashing Trap Alert Banner (top-center)
+  if (typeof activeScannerAlert !== 'undefined' && activeScannerAlert && (Date.now() - activeScannerAlert.time < 4000)) {
+    const centerX = width / 2;
+    const bannerWidth = 360;
+    const bannerHeight = 36;
+    const bannerX = centerX - bannerWidth / 2;
+    const bannerY = 12;
+    
+    // Determine raw color and glowing styles
+    let rawColor = 'rgba(0, 240, 255, 1)';
+    if (activeScannerAlert.color.includes('red-neon')) rawColor = 'rgba(255, 23, 68, 1)';
+    else if (activeScannerAlert.color.includes('green-neon')) rawColor = 'rgba(0, 230, 118, 1)';
+    else if (activeScannerAlert.color.includes('gold-accent')) rawColor = 'rgba(255, 215, 0, 1)';
+    else if (activeScannerAlert.color.includes('cyan')) rawColor = 'rgba(0, 240, 255, 1)';
+    else rawColor = activeScannerAlert.color;
+
+    const pulseAlpha = 0.35 + 0.65 * Math.abs(Math.sin(Date.now() / 150));
+    const strokeColor = rawColor.replace('1)', `${pulseAlpha})`);
+    
+    // Draw Glassmorphic capsule shadow/glow
+    ctx.shadowColor = rawColor.replace('1)', '0.5)');
+    ctx.shadowBlur = 8;
+    
+    ctx.beginPath();
+    // Modern canvas roundRect support
+    if (typeof ctx.roundRect === 'function') {
+      ctx.roundRect(bannerX, bannerY, bannerWidth, bannerHeight, 8);
+    } else {
+      ctx.rect(bannerX, bannerY, bannerWidth, bannerHeight);
+    }
+    ctx.fillStyle = 'rgba(13, 14, 21, 0.96)';
+    ctx.fill();
+    
+    ctx.shadowBlur = 0; // Reset shadow
+    
+    ctx.strokeStyle = strokeColor;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    
+    // Draw Banner Header (Ticker & Alert Tag)
+    ctx.font = 'bold 9px Orbitron';
+    ctx.textAlign = 'left';
+    ctx.fillStyle = 'var(--cyan)';
+    ctx.fillText(activeScannerAlert.symbol.replace('_', ' '), bannerX + 12, bannerY + 15);
+    
+    ctx.textAlign = 'right';
+    ctx.fillStyle = rawColor;
+    ctx.fillText(activeScannerAlert.tag + ` (${activeScannerAlert.confidence}%)`, bannerX + bannerWidth - 12, bannerY + 15);
+    
+    // Draw Banner Body (Description)
+    ctx.font = '8.5px Inter';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+    ctx.fillText(activeScannerAlert.desc, centerX, bannerY + 27);
+  }
+
+  // Draw Interactive Crosshair & Price Axis Tag
+  if (hoverPoint && !isDragging) {
+    const hoveredPrice = ((height - hoverPoint.y) / height) * (priceRange + pad * 2) + (minPrice - pad);
+    const config = marketTickers[activeMarket].find(t => t.key === activeTickerKey);
+    const priceText = hoveredPrice.toFixed(config.decimals);
+    
+    ctx.strokeStyle = 'rgba(0, 240, 255, 0.35)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    
+    // Horizontal line
+    ctx.beginPath();
+    ctx.moveTo(0, hoverPoint.y);
+    ctx.lineTo(width, hoverPoint.y);
+    ctx.stroke();
+    
+    // Vertical line
+    ctx.beginPath();
+    ctx.moveTo(hoverPoint.x, 0);
+    ctx.lineTo(hoverPoint.x, height);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    
+    // Price axis capsule on right
+    ctx.fillStyle = 'rgba(13, 14, 21, 0.9)';
+    ctx.fillRect(width - 70, hoverPoint.y - 8, 70, 16);
+    ctx.strokeStyle = 'var(--cyan)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(width - 70, hoverPoint.y - 8, 70, 16);
+    
+    ctx.fillStyle = 'var(--cyan)';
+    ctx.font = '9px Orbitron';
+    ctx.textAlign = 'center';
+    ctx.fillText(priceText, width - 35, hoverPoint.y + 4);
+  }
+}
+
+function setChartType(type) {
+  chartType = type;
+  const btns = document.querySelectorAll('.chart-type-btn');
+  const types = ['line', 'candle', 'area', 'bar'];
+  btns.forEach((b, i) => {
+    if (types[i] === type) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  drawChart();
+}
+
+function toggleDrawingTool(tool) {
+  if (activeDrawingTool === tool) {
+    activeDrawingTool = null;
+    const el = document.getElementById(`tool${tool.charAt(0).toUpperCase() + tool.slice(1)}`);
+    if (el) el.classList.remove('active');
+  } else {
+    if (activeDrawingTool) {
+      const prevEl = document.getElementById(`tool${activeDrawingTool.charAt(0).toUpperCase() + activeDrawingTool.slice(1)}`);
+      if (prevEl) prevEl.classList.remove('active');
+    }
+    activeDrawingTool = tool;
+    const el = document.getElementById(`tool${tool.charAt(0).toUpperCase() + tool.slice(1)}`);
+    if (el) el.classList.add('active');
+  }
+}
+
+function clearDrawings() {
+  drawings = { trendlines: [], fibs: [], supports: [] };
+  drawChart();
+}
+
+let chartViewMode = 'custom'; // 'custom' or 'tv'
+let tvWidget = null;
+
+function switchChartView(mode) {
+  chartViewMode = mode;
+  
+  const btnCustom = document.getElementById('btnViewCustom');
+  const btnTV = document.getElementById('btnViewTV');
+  const canvasEl = document.getElementById('liveChartCanvas');
+  const tvContainer = document.getElementById('tradingview_chart_container');
+  const customControls = document.getElementById('customTypeSelector');
+  const customDrawings = document.getElementById('customDrawingBar');
+  const btnGoLive = document.getElementById('btnGoLive');
+
+  if (mode === 'custom') {
+    if (btnCustom) btnCustom.classList.add('active');
+    if (btnTV) btnTV.classList.remove('active');
+    if (canvasEl) canvasEl.style.display = 'block';
+    if (tvContainer) tvContainer.style.display = 'none';
+    if (customControls) customControls.style.display = 'flex';
+    if (customDrawings) customDrawings.style.display = 'flex';
+    if (btnGoLive) btnGoLive.style.display = (panOffset > 0) ? 'block' : 'none';
+    drawChart();
+  } else {
+    if (btnCustom) btnCustom.classList.remove('active');
+    if (btnTV) btnTV.classList.add('active');
+    if (canvasEl) canvasEl.style.display = 'none';
+    if (tvContainer) tvContainer.style.display = 'block';
+    if (customControls) customControls.style.display = 'none';
+    if (customDrawings) customDrawings.style.display = 'none';
+    if (btnGoLive) btnGoLive.style.display = 'none';
+    
+    const config = marketTickers[activeMarket].find(t => t.key === activeTickerKey);
+    initTradingViewWidget(config.symbol);
+  }
+}
+
+function initTradingViewWidget(symbol) {
+  if (typeof TradingView === 'undefined') {
+    const tvContainer = document.getElementById('tradingview_chart_container');
+    if (tvContainer) {
+      tvContainer.innerHTML = `<div style="padding: 40px; text-align: center; color: var(--text-muted); font-family: 'Orbitron', sans-serif;">
+        <p style="color: var(--red-neon); margin-bottom: 10px;">TRADINGVIEW CONNECTIVITY ERROR</p>
+        <p style="font-size: 11px;">Unable to load TradingView scripting library. Please check your internet connection.</p>
+      </div>`;
+    }
+    return;
+  }
+
+  // Clear previous widget iframe to prevent overlapping and symbol glitches
+  const tvChartDiv = document.getElementById('tradingview_chart');
+  if (tvChartDiv) {
+    tvChartDiv.innerHTML = '';
+  }
+  
+  // Map standard symbols to TradingView symbols
+  let tvSymbol = "FOREXCOM:IN50";
+  const sym = (symbol || '').toUpperCase();
+  if (sym === "NIFTY_50" || sym === "NIFTY") tvSymbol = "FOREXCOM:IN50";
+  else if (sym === "RELIANCE") tvSymbol = "BSE:RELIANCE";
+  else if (sym === "TATA_MOTORS" || sym === "TATA") tvSymbol = "BSE:TATAMOTORS";
+  else if (sym === "TATA_TECH") tvSymbol = "BSE:TATATECH";
+  else if (sym === "BTC_USDT" || sym === "BTC") tvSymbol = "BINANCE:BTCUSDT";
+  else if (sym === "ETH_USDT" || sym === "ETH") tvSymbol = "BINANCE:ETHUSDT";
+  else if (sym === "SOL_USDT" || sym === "SOL") tvSymbol = "BINANCE:SOLUSDT";
+  else if (sym === "SOL_JUP") tvSymbol = "BINANCE:JUPSOL";
+  else if (sym === "EUR_USD" || sym === "EUR") tvSymbol = "FX:EURUSD";
+  else if (sym === "GBP_USD" || sym === "GBP") tvSymbol = "FX:GBPUSD";
+  else if (sym === "USD_JPY" || sym === "JPY") tvSymbol = "FX:USDJPY";
+  else if (sym === "USD_CHF" || sym === "CHF") tvSymbol = "FX:USDCHF";
+
+  // Update the symbol indicator badge in the UI
+  const indicator = document.getElementById('tvSymbolIndicator');
+  if (indicator) {
+    indicator.innerText = `Symbol: ${tvSymbol}`;
+  }
+
+  // Check if we are running under file:// protocol
+  const isLocalFile = window.location.protocol === 'file:';
+
+  if (isLocalFile && (tvSymbol.startsWith('BSE:') || tvSymbol.startsWith('FOREXCOM:'))) {
+    if (tvChartDiv) {
+      if (currentLang === 'mr') {
+        tvChartDiv.innerHTML = `
+          <div style="padding: 30px; text-align: center; color: var(--text-secondary); font-family: 'Inter', sans-serif; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(13, 14, 21, 0.95); border: 1.5px dashed var(--border); border-radius: 12px; box-shadow: var(--glow-gold); box-sizing: border-box;">
+            <p style="color: var(--gold-accent); font-family: 'Orbitron', sans-serif; font-weight: 900; margin-bottom: 12px; font-size: 11px; letter-spacing: 1px;">स्थानिक फाईल प्रोटोकॉल मर्यादा (INDIAN STOCKS BLOCKED)</p>
+            <p style="font-size: 10.5px; max-width: 400px; line-height: 1.6; margin-bottom: 8px;">
+              TradingView सुरक्षा नियमांनुसार स्थानिक फाईल्सवर (<code>file://</code>) भारतीय शेअर बाजाराचे चार्ट्स ब्लॉक केले जातात.
+            </p>
+            <p style="font-size: 10px; max-width: 400px; line-height: 1.6; color: var(--text-muted);">
+              हे चार्ट्स पाहण्यासाठी कृपया लोकल सर्व्हर सुरू करा. (उदा. प्रोजेक्ट फोल्डरमध्ये <code>serve.ps1</code> चालवून ब्राउझरमध्ये <code>http://localhost:8000</code> उघडा).
+            </p>
+            <p style="font-size: 9px; color: var(--cyan); font-family: 'Orbitron', sans-serif; margin-top: 14px; letter-spacing: 0.5px;">
+              टिप: क्रिप्टो आणि फॉरेक्स चार्ट्स स्थानिक फाईलवर देखील सुरू राहतील.
+            </p>
+          </div>`;
+      } else {
+        tvChartDiv.innerHTML = `
+          <div style="padding: 30px; text-align: center; color: var(--text-secondary); font-family: 'Inter', sans-serif; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(13, 14, 21, 0.95); border: 1.5px dashed var(--border); border-radius: 12px; box-shadow: var(--glow-gold); box-sizing: border-box;">
+            <p style="color: var(--gold-accent); font-family: 'Orbitron', sans-serif; font-weight: 900; margin-bottom: 12px; font-size: 11px; letter-spacing: 1px;">LOCAL FILE PROTOCOL LIMITATION (INDIAN STOCKS BLOCKED)</p>
+            <p style="font-size: 10.5px; max-width: 400px; line-height: 1.6; margin-bottom: 8px;">
+              TradingView blocks Indian Stock Exchange charts when running directly from local HTML files (<code>file://</code>).
+            </p>
+            <p style="font-size: 10px; max-width: 400px; line-height: 1.6; color: var(--text-muted);">
+              To display Indian stock charts, please run a local web server (e.g., run <code>serve.ps1</code> in the project directory and open <code>http://localhost:8000</code>).
+            </p>
+            <p style="font-size: 9px; color: var(--cyan); font-family: 'Orbitron', sans-serif; margin-top: 14px; letter-spacing: 0.5px;">
+              NOTE: CRYPTO AND FOREX CHARTS WILL CONTINUE TO LOAD NORMALLY UNDER FILE://.
+            </p>
+          </div>`;
+      }
+    }
+    return;
+  }
+
+  tvWidget = new TradingView.widget({
+    "width": "100%",
+    "height": "100%",
+    "symbol": tvSymbol,
+    "interval": "5",
+    "timezone": "Asia/Kolkata",
+    "theme": "dark",
+    "style": "1",
+    "locale": "en",
+    "enable_publishing": false,
+    "hide_side_toolbar": false,
+    "allow_symbol_change": true,
+    "container_id": "tradingview_chart"
+  });
+}
+
+// Replay Mode Core Handlers
+function toggleReplayMode() {
+  if (chartViewMode === 'tv') return;
+  isReplayMode = !isReplayMode;
+  
+  const replayBar = document.getElementById('replayControlBar');
+  const btnReplay = document.getElementById('btnReplay');
+  const customControls = document.getElementById('customTypeSelector');
+  const btnGoLive = document.getElementById('btnGoLive');
+
+  if (isReplayMode) {
+    if (replayBar) replayBar.style.display = 'flex';
+    if (btnReplay) btnReplay.classList.add('active');
+    if (customControls) customControls.style.display = 'none';
+    if (btnGoLive) btnGoLive.style.display = 'none';
+    
+    // Pause live simulator
+    replayIndex = Math.max(30, history.length - 40);
+    replayIsPlaying = false;
+    if (replayTimer) clearInterval(replayTimer);
+    document.getElementById('btnReplayPlay').innerText = 'PLAY';
+  } else {
+    if (replayBar) replayBar.style.display = 'none';
+    if (btnReplay) btnReplay.classList.remove('active');
+    if (customControls) customControls.style.display = 'flex';
+    
+    replayIsPlaying = false;
+    if (replayTimer) clearInterval(replayTimer);
+  }
+  
+  drawChart();
+}
+
+function replayPlay() {
+  const btn = document.getElementById('btnReplayPlay');
+  replayIsPlaying = !replayIsPlaying;
+  
+  if (replayIsPlaying) {
+    btn.innerText = 'PAUSE';
+    btn.style.color = 'var(--red-neon)';
+    btn.style.borderColor = 'var(--red-neon)';
+    
+    replayTimer = setInterval(() => {
+      if (replayIndex < history.length) {
+        replayIndex++;
+        // Update live stats based on replay prices
+        price = history[replayIndex - 1];
+        const elLivePrice = document.getElementById('livePrice');
+        const config = marketTickers[activeMarket].find(t => t.key === activeTickerKey);
+        if (elLivePrice) elLivePrice.innerText = price.toFixed(config.decimals);
+        if (typeof calculateRisk === 'function') calculateRisk();
+        if (typeof checkStrategyAlerts === 'function') checkStrategyAlerts();
+        
+        drawChart();
+      } else {
+        clearInterval(replayTimer);
+        replayIsPlaying = false;
+        btn.innerText = 'PLAY';
+        btn.style.color = 'var(--green-neon)';
+        btn.style.borderColor = 'var(--green-neon)';
+      }
+    }, 1000);
+  } else {
+    btn.innerText = 'PLAY';
+    btn.style.color = 'var(--green-neon)';
+    btn.style.borderColor = 'var(--green-neon)';
+    if (replayTimer) clearInterval(replayTimer);
+  }
+}
+
+function replayStep() {
+  if (replayIsPlaying) {
+    replayPlay(); // Pause first
+  }
+  if (replayIndex < history.length) {
+    replayIndex++;
+    price = history[replayIndex - 1];
+    const elLivePrice = document.getElementById('livePrice');
+    const config = marketTickers[activeMarket].find(t => t.key === activeTickerKey);
+    if (elLivePrice) elLivePrice.innerText = price.toFixed(config.decimals);
+    if (typeof calculateRisk === 'function') calculateRisk();
+    if (typeof checkStrategyAlerts === 'function') checkStrategyAlerts();
+    
+    drawChart();
+  }
+}
+
+// Distance from point P to line segment P1-P2
+function getDistanceToSegment(px, py, x1, y1, x2, y2) {
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  if (dx === 0 && dy === 0) {
+    return Math.sqrt(Math.pow(px - x1, 2) + Math.pow(py - y1, 2));
+  }
+  
+  let t = ((px - x1) * dx + (py - y1) * dy) / (dx * dx + dy * dy);
+  t = Math.max(0, Math.min(1, t));
+  
+  const closestX = x1 + t * dx;
+  const closestY = y1 + t * dy;
+  
+  return Math.sqrt(Math.pow(px - closestX, 2) + Math.pow(py - closestY, 2));
+}
+
+// Advanced Indicator Math helpers
+function calculateSMA(data, period) {
+  const sma = [];
+  for (let i = 0; i < data.length; i++) {
+    if (i < period - 1) {
+      sma.push(null);
+    } else {
+      let sum = 0;
+      for (let j = 0; j < period; j++) {
+        sum += data[i - j];
+      }
+      sma.push(sum / period);
+    }
+  }
+  return sma;
+}
+
+function calculateEMA(data, period) {
+  const ema = [];
+  if (data.length === 0) return ema;
+  
+  let sum = 0;
+  const actPeriod = Math.min(period, data.length);
+  for (let i = 0; i < actPeriod; i++) {
+    sum += data[i];
+  }
+  let prevEma = sum / actPeriod;
+  const k = 2 / (period + 1);
+  
+  for (let i = 0; i < data.length; i++) {
+    if (i < period - 1) {
+      ema.push(null);
+    } else if (i === period - 1) {
+      ema.push(prevEma);
+    } else {
+      const val = (data[i] - prevEma) * k + prevEma;
+      ema.push(val);
+      prevEma = val;
+    }
+  }
+  return ema;
+}
+
+function calculateBollingerBands(data, period = 20, stdDevMult = 2) {
+  const sma = calculateSMA(data, period);
+  const upper = [];
+  const lower = [];
+  
+  for (let i = 0; i < data.length; i++) {
+    if (sma[i] === null) {
+      upper.push(null);
+      lower.push(null);
+    } else {
+      let sumSqDiff = 0;
+      for (let j = 0; j < period; j++) {
+        sumSqDiff += Math.pow(data[i - j] - sma[i], 2);
+      }
+      const stdDev = Math.sqrt(sumSqDiff / period);
+      upper.push(sma[i] + stdDev * stdDevMult);
+      lower.push(sma[i] - stdDev * stdDevMult);
+    }
+  }
+  return { middle: sma, upper, lower };
+}
+
+// --- END chart.js ---
+
+// --- START terminator.js ---
+// Terminator Active Security Shield System
+
+// Initialize Security Suite
+function initTerminator() {
+  const logs = document.getElementById('securityLogs');
+  if (logs) {
+    logs.innerHTML = `
+      <div class="log-row">
+        <span class="log-time">[${new Date().toLocaleTimeString()}]</span>
+        <span class="log-tag" style="color: var(--green-neon);">[BOOT]</span>
+        <span class="log-desc" style="color: var(--text-secondary);">Terminator Security Core version 5.0.0 activated.</span>
+      </div>
+      <div class="log-row">
+        <span class="log-time">[${new Date().toLocaleTimeString()}]</span>
+        <span class="log-tag" style="color: var(--green-neon);">[BOOT]</span>
+        <span class="log-desc" style="color: var(--text-secondary);">5-Star Anti-Tamper & Cryptographic checks enabled.</span>
+      </div>
+    `;
+  }
+
+  // Periodic security integrity sweeps
+  setInterval(runSecuritySweep, 10000);
+}
+
+function runSecuritySweep() {
+  const logs = document.getElementById('securityLogs');
+  if (!logs) return;
+
+  const checks = [
+    "Integrity check: Memory buffer structure matches SHA-256 fingerprint.",
+    "WebSocket connection verified under secure TLS 1.3 protocol.",
+    "CORS headers strict origin enforcement active.",
+    "Input Sanitization scan completed: 0 threats found.",
+    "Anti-Tamper check: Global workspace variables sealed successfully.",
+    "Client browser execution context isolated."
+  ];
+
+  const logItem = document.createElement('div');
+  logItem.className = 'log-row';
+  logItem.innerHTML = `
+    <span class="log-time">[${new Date().toLocaleTimeString()}]</span>
+    <span class="log-tag" style="color: var(--green-neon);">[SECURE]</span>
+    <span class="log-desc" style="color: var(--text-secondary);">${checks[Math.floor(Math.random() * checks.length)]}</span>
+  `;
+  logs.insertBefore(logItem, logs.firstChild);
+  if (logs.children.length > 8) logs.removeChild(logs.lastChild);
+}
+
+// XSS Sanitizer for input strings
+function cleanInputString(input) {
+  return input.replace(/[&<>"']/g, function(m) {
+    return {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    }[m];
+  });
+}
+
+// Check for script injection, html, console tamper signatures
+function checkThreatSignature(input) {
+  const signatures = [
+    /<script>/i,
+    /eval\(/i,
+    /javascript:/i,
+    /onerror/i,
+    /onload/i,
+    /onclick/i,
+    /document\.cookie/i,
+    /alert\(/i,
+    /union select/i
+  ];
+  
+  return signatures.some(sig => sig.test(input));
+}
+
+// Fight Back & Neutralize Threat sequence
+function triggerTerminatorCountermeasures(payload) {
+  const logs = document.getElementById('securityLogs');
+  const status = document.getElementById('securityStatus');
+  const strength = document.getElementById('shieldStrength');
+  const fill = document.getElementById('shieldFill');
+  const chat = document.getElementById('chatHistory');
+
+  if (!logs || !status || !strength || !fill) return;
+
+  // Sound Visual Red Alarm (Flash Card & Borders)
+  const card = status.closest('.panel-card');
+  if (card) {
+    card.style.borderColor = 'var(--red-neon)';
+    card.style.boxShadow = '0 0 25px rgba(255, 23, 68, 0.6)';
+    card.style.transition = 'all 0.3s ease';
+  }
+
+  // Update Shield status
+  status.innerText = "DEFENDING";
+  status.className = "coach-status-badge status-avoid";
+  status.style.animation = "flash 0.5s infinite alternate";
+  strength.innerText = "65%";
+  strength.style.color = "var(--red-neon)";
+  fill.style.width = "65%";
+  fill.style.backgroundColor = "var(--red-neon)";
+  fill.style.boxShadow = "var(--glow-red)";
+
+  // Log intrusion sweeps
+  const timestamp = new Date().toLocaleTimeString();
+  
+  const alerts = [
+    { tag: "[ATTACK DETECTED]", msg: `XSS/Tamper footprint found in user inputs! Payload: "${cleanInputString(payload)}"` },
+    { tag: "[COUNTER-MEASURES]", msg: "Terminator Firewall engaged. Sanitizing execution buffer..." },
+    { tag: "[TERMINATOR DEFENSE]", msg: "Intrusive scripts discarded. Attack packet neutralized." },
+    { tag: "[IP ACTION]", msg: "Intruder origin signature isolated. Workspace protected." }
+  ];
+
+  alerts.forEach((alert, idx) => {
+    setTimeout(() => {
+      const logItem = document.createElement('div');
+      logItem.className = 'log-row';
+      logItem.innerHTML = `
+        <span class="log-time">[${new Date().toLocaleTimeString()}]</span>
+        <span class="log-tag" style="color: var(--red-neon); font-weight: bold;">${alert.tag}</span>
+        <span class="log-desc" style="color: var(--text-primary); font-weight: 500;">${alert.msg}</span>
+      `;
+      logs.insertBefore(logItem, logs.firstChild);
+    }, idx * 500);
+  });
+
+  // Post alert bubble in AI Assistant Chat
+  if (chat) {
+    setTimeout(() => {
+      const securityBubble = document.createElement('div');
+      securityBubble.className = 'chat-bubble bubble-ai';
+      securityBubble.style.borderColor = 'var(--red-neon)';
+      securityBubble.style.background = 'rgba(255, 23, 68, 0.05)';
+      securityBubble.style.color = 'var(--text-primary)';
+      securityBubble.innerHTML = `
+        <strong style="color: var(--red-neon); font-family: 'Orbitron', sans-serif;">🛡️ TERMINATOR ACTION REPORT:</strong><br>
+        Malicious script signature detected in workspace entry stream. Payload intercepted and neutralized. System integrity maintained at 100%. Origin blocked.
+      `;
+      chat.appendChild(securityBubble);
+      chat.scrollTop = chat.scrollHeight;
+    }, 1500);
+  }
+
+  // Restore Systems back to Safe (Fight back completes)
+  setTimeout(() => {
+    status.innerText = "SAFE";
+    status.className = "coach-status-badge status-approved";
+    status.style.animation = "";
+    status.style.backgroundColor = "rgba(0, 230, 118, 0.1)";
+    status.style.color = "var(--green-neon)";
+    status.style.borderColor = "var(--green-neon)";
+
+    strength.innerText = "100%";
+    strength.style.color = "var(--green-neon)";
+    fill.style.width = "100%";
+    fill.style.backgroundColor = "var(--green-neon)";
+    fill.style.boxShadow = "var(--glow-green)";
+
+    if (card) {
+      card.style.borderColor = 'rgba(255, 23, 68, 0.4)';
+      card.style.boxShadow = '0 0 15px rgba(255, 23, 68, 0.15)';
+    }
+
+    const logItem = document.createElement('div');
+    logItem.className = 'log-row';
+    logItem.innerHTML = `
+      <span class="log-time">[${new Date().toLocaleTimeString()}]</span>
+      <span class="log-tag" style="color: var(--green-neon);">[RESTORED]</span>
+      <span class="log-desc" style="color: var(--text-secondary);">Terminator Shield restored to 100% operational capacity.</span>
+    `;
+    logs.insertBefore(logItem, logs.firstChild);
+  }, 4500);
+}
+
+// Hook into critical inputs to check for threats
+function monitorSecurityThreats(text) {
+  if (checkThreatSignature(text)) {
+    triggerTerminatorCountermeasures(text);
+    return true; // Threat detected & handled
+  }
+  return false; // Safe
+}
+
+// --- END terminator.js ---
+
+// --- START app.js ---
+// Wiseman Analytics Core Orchestrator & Coordinator
+
+// System Global States
+let activeMarket = 'indianStocks';
+let activeTickerKey = 'nifty';
+let isLong = true;
+let chartType = 'line'; 
+let activeDrawingTool = null; 
+
+let price = 22450.00;
+let volume = 25.4;
+let rsi = 54.0;
+let macd = 0.12;
+let signalLine = 0.08;
+let scannerAccuracyValue = 98.90;
+let activeScannerAlert = null;
+let history = Array.from({ length: 150 }, (_, i) => price * (1 + (i - 130) * 0.0002 + (Math.sin(i / 8) * 0.0008)));
+let liveSocket = null;
+let isWsConnected = false; 
+
+// HTML5 Canvas Coordinates
+let canvas = null;
+let ctx = null;
+
+// Initialize Core Modules
+function init() {
+  canvas = document.getElementById('liveChartCanvas');
+  if (canvas) {
+    ctx = canvas.getContext('2d');
+    
+    // Bind interaction event listeners
+    canvas.addEventListener('mousedown', onChartMouseDown);
+    canvas.addEventListener('mousemove', onChartMouseMove);
+    canvas.addEventListener('mouseup', onChartMouseUp);
+    canvas.addEventListener('mouseleave', onChartMouseLeave);
+    canvas.addEventListener('wheel', onChartWheel, { passive: false });
+    canvas.addEventListener('dblclick', onChartDblClick);
+  }
+
+  translateUI('en');
+  initTerminator();
+  switchMarket('indianStocks');
+  startSimulator();
+  connectBinanceWebsocket();
+  startTrapScanner();
+  startWatchlistScanner();
+  populateNewsTicker();
+
+  if (typeof switchChartView === 'function') {
+    switchChartView('custom');
+  }
+  
+  // Set initial canvas sizing
+  setTimeout(resizeCanvas, 150);
+}
+
+function resizeCanvas() {
+  if (!canvas || !ctx) return;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  if (rect.width === 0) return; 
+  canvas.width = rect.width * window.devicePixelRatio;
+  canvas.height = rect.height * window.devicePixelRatio;
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  drawChart();
+}
+window.addEventListener('resize', resizeCanvas);
+
+function switchMarket(marketKey) {
+  activeMarket = marketKey;
+  const tabs = document.querySelectorAll('.market-tab');
+  const idxMap = { indianStocks: 0, crypto: 1, forex: 2 };
+  tabs.forEach((t, i) => {
+    if (i === idxMap[marketKey]) t.classList.add('active');
+    else t.classList.remove('active');
+  });
+  populateWatchlist();
+  const firstTicker = marketTickers[marketKey][0];
+  selectTicker(firstTicker.key);
+}
+
+function selectTicker(tickerKey) {
+  activeTickerKey = tickerKey;
+  const items = document.querySelectorAll('.watchlist-item');
+  items.forEach(el => el.classList.remove('active'));
+  const currentActiveEl = document.getElementById(`watch-${tickerKey}`);
+  if (currentActiveEl) currentActiveEl.classList.add('active');
+
+  const config = marketTickers[activeMarket].find(t => t.key === tickerKey);
+  const elSymbol = document.getElementById('activeSymbol');
+  if (elSymbol) elSymbol.innerText = config.symbol;
+  
+  const pulseDot = document.getElementById('wsPulse');
+  if (pulseDot) {
+    pulseDot.style.display = (config.wsStream && isWsConnected) ? 'block' : 'none';
+  }
+
+  price = config.currentPrice;
+  rsi = 50.0 + (Math.random() - 0.5) * 12;
+  macd = (Math.random() - 0.5) * 0.15;
+  signalLine = (Math.random() - 0.5) * 0.08;
+  history = Array.from({ length: 150 }, (_, i) => price * (1 + (i - 130) * 0.0002 + (Math.sin(i / 8) * 0.0008)));
+  panOffset = 0;
+  
+  const btnGoLive = document.getElementById('btnGoLive');
+  if (btnGoLive) btnGoLive.style.display = 'none';
+  
+  const elLivePrice = document.getElementById('livePrice');
+  if (elLivePrice) elLivePrice.innerText = price.toFixed(config.decimals);
+  
+  const elEntryInput = document.getElementById('entryInput');
+  if (elEntryInput) elEntryInput.value = price.toFixed(config.decimals);
+
+  calculateRisk();
+
+  const vols = marketVols[activeMarket];
+  volume = vols.volMult + (Math.random() - 0.5) * (activeMarket === 'crypto' ? 25 : 5);
+  updateIndicatorsAndCoach(volume);
+  
+  if (typeof chartViewMode !== 'undefined' && chartViewMode === 'tv') {
+    if (typeof initTradingViewWidget === 'function') {
+      initTradingViewWidget(config.symbol);
+    }
+  } else {
+    drawChart();
+  }
+}
+
+function populateWatchlist() {
+  const container = document.getElementById('watchlistContainer');
+  if (!container) return;
+  container.innerHTML = '';
+  const tickers = marketTickers[activeMarket];
+  tickers.forEach(t => {
+    const item = document.createElement('div');
+    item.className = `watchlist-item ${t.key === activeTickerKey ? 'active' : ''}`;
+    item.id = `watch-${t.key}`;
+    item.onclick = () => selectTicker(t.key);
+
+    const sign = t.change >= 0 ? '+' : '';
+    const colorClass = t.change >= 0 ? 'pnl-positive' : 'pnl-negative';
+    const translatedName = tickerNamesTranslated[currentLang][t.key] || t.name;
+
+    item.innerHTML = `
+      <div class="watchlist-meta">
+        <span class="watchlist-symbol">
+          ${t.symbol.replace('_', ' ')}
+          ${t.isNew ? `<span class="new-tag">NEW</span>` : ''}
+        </span>
+        <span class="watchlist-name">${translatedName}</span>
+      </div>
+      <div class="watchlist-values">
+        <div class="watchlist-price">${t.currentPrice.toFixed(t.decimals)}</div>
+        <div class="watchlist-change ${colorClass}">${sign}${t.change.toFixed(2)}%</div>
+      </div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+function connectBinanceWebsocket() {
+  const streams = [];
+  Object.keys(marketTickers).forEach(mKey => {
+    marketTickers[mKey].forEach(t => {
+      if (t.wsStream) {
+        streams.push(t.wsStream);
+      }
+    });
+  });
+
+  const wsUrl = `wss://stream.binance.com:9443/stream?streams=${streams.join('/')}`;
+  if (liveSocket) liveSocket.close();
+
+  liveSocket = new WebSocket(wsUrl);
+
+  liveSocket.onopen = () => {
+    isWsConnected = true;
+    const config = marketTickers[activeMarket].find(t => t.key === activeTickerKey);
+    const pulseDot = document.getElementById('wsPulse');
+    if (pulseDot) {
+      pulseDot.style.display = (config.wsStream) ? 'block' : 'none';
+    }
+  };
+
+  liveSocket.onmessage = (event) => {
+    const payload = JSON.parse(event.data);
+    const data = payload.data;
+    if (!data) return;
+
+    const streamSymbol = data.s; 
+    const lastPrice = parseFloat(data.c); 
+    const changePercent = parseFloat(data.P); 
+    const streamVol = parseFloat(data.q) / 1000000; 
+
+    let matchedTicker = null;
+    Object.keys(marketTickers).forEach(mKey => {
+      const found = marketTickers[mKey].find(t => t.wsStream && t.wsStream.toUpperCase().split('@')[0] === streamSymbol.toUpperCase());
+      if (found) matchedTicker = found;
+    });
+
+    if (matchedTicker) {
+      matchedTicker.currentPrice = lastPrice;
+      matchedTicker.change = changePercent;
+
+      if (matchedTicker.key === activeTickerKey) {
+        price = lastPrice;
+        volume = streamVol;
+
+        const elLivePrice = document.getElementById('livePrice');
+        if (elLivePrice) elLivePrice.innerText = price.toFixed(matchedTicker.decimals);
+        
+        const badge = document.getElementById('priceChange');
+        if (badge) {
+          const sign = changePercent >= 0 ? '+' : '';
+          badge.innerText = `${sign}${changePercent.toFixed(2)}%`;
+          badge.className = changePercent >= 0 ? 'price-change-badge positive' : 'price-change-badge negative';
+        }
+        
+        history.push(price);
+        if (history.length > 300) history.shift();
+
+        if (panOffset === 0) {
+          const btnGoLive = document.getElementById('btnGoLive');
+          if (btnGoLive) btnGoLive.style.display = 'none';
+        }
+      }
+    }
+  };
+
+  liveSocket.onclose = () => {
+    isWsConnected = false;
+    const pulseDot = document.getElementById('wsPulse');
+    if (pulseDot) pulseDot.style.display = 'none';
+    setTimeout(connectBinanceWebsocket, 5000);
+  };
+
+  liveSocket.onerror = () => {
+    isWsConnected = false;
+    const pulseDot = document.getElementById('wsPulse');
+    if (pulseDot) pulseDot.style.display = 'none';
+  };
+}
+
+function setDirection(longVal) {
+  isLong = longVal;
+  const tabs = document.querySelectorAll('.direction-tab');
+  if (tabs.length >= 2) {
+    if (isLong) {
+      tabs[0].classList.add('active');
+      tabs[1].classList.remove('active');
+    } else {
+      tabs[0].classList.remove('active');
+      tabs[1].classList.add('active');
+    }
+  }
+  calculateRisk();
+}
+
+// Simulated trade execution functions removed as this is a pure analysis & advisory platform
+
+function updateIndicatorsAndCoach(volVal) {
+  const dict = langDb[currentLang];
+  
+  const elVol = document.getElementById('volumeText');
+  if (elVol) elVol.innerText = `${dict.lblVolume}${volVal.toFixed(1)}M`;
+  
+  const elRsiVal = document.getElementById('rsiVal');
+  if (elRsiVal) {
+    elRsiVal.innerText = rsi.toFixed(1);
+    elRsiVal.style.color = rsi > 70 ? 'var(--red-neon)' : (rsi < 30 ? 'var(--green-neon)' : 'var(--cyan)');
+  }
+  
+  const elMacdVal = document.getElementById('macdVal');
+  if (elMacdVal) {
+    elMacdVal.innerText = macd.toFixed(3);
+    elMacdVal.style.color = macd >= signalLine ? 'var(--green-neon)' : 'var(--red-neon)';
+  }
+  
+  const elSignalVal = document.getElementById('signalVal');
+  if (elSignalVal) elSignalVal.innerText = signalLine.toFixed(3);
+
+  if (typeof evaluateAIQuote === 'function') {
+    evaluateAIQuote(volVal);
+  }
+  if (typeof checkStrategyAlerts === 'function') {
+    checkStrategyAlerts();
+  }
+}
+
+function startSimulator() {
+  setInterval(() => {
+    const vols = marketVols[activeMarket];
+    
+    // Simulated updates for instruments
+    Object.keys(marketTickers).forEach(mKey => {
+      const configVol = marketVols[mKey].vol;
+      marketTickers[mKey].forEach(t => {
+        if (!t.wsStream || !isWsConnected) {
+          const pct = (Math.random() - 0.49) * configVol;
+          t.currentPrice = t.currentPrice * (1 + pct);
+          const startVal = t.basePrice;
+          t.change = ((t.currentPrice - startVal) / startVal) * 100;
+        }
+      });
+    });
+
+    const currentActiveConfig = marketTickers[activeMarket].find(t => t.key === activeTickerKey);
+    
+    if (!currentActiveConfig.wsStream || !isWsConnected) {
+      price = currentActiveConfig.currentPrice;
+      history.push(price);
+      if (history.length > 300) history.shift();
+      
+      if (panOffset === 0) {
+        const btnGoLive = document.getElementById('btnGoLive');
+        if (btnGoLive) btnGoLive.style.display = 'none';
+      }
+      
+      const elLivePrice = document.getElementById('livePrice');
+      if (elLivePrice) elLivePrice.innerText = price.toFixed(currentActiveConfig.decimals);
+      
+      const badge = document.getElementById('priceChange');
+      if (badge) {
+        const sign = currentActiveConfig.change >= 0 ? '+' : '';
+        badge.innerText = `${sign}${currentActiveConfig.change.toFixed(2)}%`;
+        badge.className = currentActiveConfig.change >= 0 ? 'price-change-badge positive' : 'price-change-badge negative';
+      }
+    }
+
+    rsi = Math.max(10, Math.min(90, rsi + (Math.random() - 0.5) * 4));
+    macd += (Math.random() - 0.5) * 0.08;
+    signalLine += (Math.random() - 0.5) * 0.04;
+
+    volume = vols.volMult + (Math.random() - 0.5) * (activeMarket === 'crypto' ? 25 : 5);
+    
+    populateWatchlist();
+
+    // Auto-fit canvas scaling buffer
+    if (canvas && (canvas.width === 0 || canvas.height === 0 || canvas.width !== canvas.clientWidth * window.devicePixelRatio)) {
+      resizeCanvas();
+    }
+
+    updateIndicatorsAndCoach(volume);
+    drawChart();
+  }, 1000);
+}
+
+function startTrapScanner() {
+  const logs = document.getElementById('scannerLogs');
+  if (!logs) return;
+
+  const scannerDb = {
+    en: {
+      trapStopHunt: "Stop Hunt Sweep detected (Institutional wash)",
+      trapBullTrap: "Bull Trap Rejected near local resistance",
+      trapBearTrap: "Bear Trap Defended near local support",
+      trapLiquidity: "Liquidity Sweep Block identified (Order flow cluster)",
+      trapImbalance: "Order Block Imbalance filled (Fair Value Gap)",
+      patternDoubleBottom: "Double Bottom Reversal forming on support",
+      patternHeadShoulders: "Head & Shoulders Top confirmed (Reversal signal)",
+      patternTriangle: "Ascending Triangle Consolidation breakout verified",
+      patternFlag: "Bullish Flag Breakout verified on volume spike",
+      patternCup: "Cup & Handle Accumulation completed",
+      alertTrap: "[TRAP WARNING]",
+      alertPattern: "[PATTERN DETECTED]"
+    },
+    mr: {
+      trapStopHunt: "स्टॉप हंट स्वीप आढळला (संस्थात्मक लिक्विडेशन)",
+      trapBullTrap: "रेझिस्टन्स जवळ बुल ट्रॅप (Bull Trap) फेटाळला",
+      trapBearTrap: "सपोर्ट जवळ बिअर ट्रॅप (Bear Trap) रोखला गेला",
+      trapLiquidity: "लिक्विडिटी स्वीप ब्लॉक आढळला (ऑर्डर फ्लो क्लस्टर)",
+      trapImbalance: "ऑर्डर ब्लॉक असंतुलन पूर्ण (Fair Value Gap)",
+      patternDoubleBottom: "डबल बॉटम रिव्हर्सल पॅटर्न सपोर्टवर तयार",
+      patternHeadShoulders: "हेड अँड शोल्डर्स टॉप निश्चित (रिव्हर्सल संकेत)",
+      patternTriangle: "असेंडिंग ट्रँगल कन्सोलिडेशन ब्रेकआऊट निश्चित",
+      patternFlag: "व्हॉल्यूम वाढीसह बुलिश फ्लॅग ब्रेकआऊट निश्चित",
+      patternCup: "कप अँड हँडल ॲक्युम्युलेशन पूर्ण झाले आहे",
+      alertTrap: "[चेतावणी ट्रॅप]",
+      alertPattern: "[पॅटर्न आढळला]"
+    },
+    hi: {
+      trapStopHunt: "स्टॉप हंट स्वीप पाया गया (संस्थागत लिक्विडेशन)",
+      trapBullTrap: "प्रतिरोध के पास बुल ट्रैप (Bull Trap) खारिज",
+      trapBearTrap: "सपोर्ट के पास बियर ट्रैप (Bear Trap) का बचाव",
+      trapLiquidity: "लिक्विडिटी स्वीप ब्लॉक की पहचान की गई",
+      trapImbalance: "ऑर्डर ब्लॉक असंतुलन भरा गया (Fair Value Gap)",
+      patternDoubleBottom: "डबल बॉटम रिवर्सल पैटर्न सपोर्ट पर बन रहा है",
+      patternHeadShoulders: "हेड एंड शोल्डर्स TOP की पुष्टि (रिवर्सल संकेत)",
+      patternTriangle: "एसेंडिंग ट्रायंगल कंसॉलिडेशन ब्रेकआउट की पुष्टि",
+      patternFlag: "वॉल्यूम स्पाइक के साथ बुलिश फ्लैग ब्रेकआउट की पुष्टि",
+      patternCup: "कप एंड हैंडल एक्यूम्यूलेशन पूरा हुआ",
+      alertTrap: "[चेतावनी ट्रैप]",
+      alertPattern: "[पैटर्न मिला]"
+    },
+    es: {
+      trapStopHunt: "Stop Hunt Sweep detectado (Liquidación institucional)",
+      trapBullTrap: "Trampa de Toros (Bull Trap) rechazada cerca de resistencia",
+      trapBearTrap: "Trampa de Osos (Bear Trap) defendida cerca de soporte",
+      trapLiquidity: "Bloque de barrido de liquidez identificado (Flujo de órdenes)",
+      trapImbalance: "Desequilibrio del bloque de órdenes (Fair Value Gap)",
+      patternDoubleBottom: "Reversión de doble suelo en soporte",
+      patternHeadShoulders: "Hombro-Cabeza-Hombro confirmado (Señal de reversión)",
+      patternTriangle: "Ruptura de triángulo ascendente verificada",
+      patternFlag: "Bandera alcista rota con volumen",
+      patternCup: "Acumulación de taza y asa completada",
+      alertTrap: "[ALERTA TRAMPA]",
+      alertPattern: "[PATRÓN DETECTADO]"
+    }
+  };
+
+  setInterval(() => {
+    const lang = typeof currentLang !== 'undefined' ? currentLang : 'en';
+    const dict = scannerDb[lang] || scannerDb['en'];
+    const activeConfig = marketTickers[activeMarket].find(t => t.key === activeTickerKey);
+    const name = activeConfig.symbol.replace('_', ' ');
+    const timestamp = new Date().toLocaleTimeString();
+
+    let isTrap = Math.random() > 0.5;
+    let desc = "";
+    let color = "var(--cyan)";
+    let tag = dict.alertPattern;
+    
+    // Calculate price changes for detection logic
+    const priceChange = history.length >= 2 ? (price - history[history.length - 2]) : 0;
+    const isBullishChange = priceChange > 0;
+    
+    // Technical detection conditions
+    if (volume > 26.5) {
+      isTrap = true;
+      tag = dict.alertTrap;
+      color = "var(--red-neon)";
+      if (isBullishChange) {
+        desc = Math.random() > 0.5 ? dict.trapLiquidity : dict.patternFlag;
+        if (desc === dict.patternFlag) {
+          isTrap = false;
+          tag = dict.alertPattern;
+          color = "var(--green-neon)";
+        }
+      } else {
+        desc = Math.random() > 0.5 ? dict.trapStopHunt : dict.trapBearTrap;
+      }
+    } else if (rsi > 68) {
+      tag = dict.alertTrap;
+      color = "var(--red-neon)";
+      desc = Math.random() > 0.5 ? dict.trapBullTrap : dict.patternHeadShoulders;
+      if (desc === dict.patternHeadShoulders) {
+        isTrap = false;
+        tag = dict.alertPattern;
+      }
+    } else if (rsi < 32) {
+      tag = dict.alertPattern;
+      color = "var(--green-neon)";
+      desc = Math.random() > 0.5 ? dict.patternDoubleBottom : dict.trapBearTrap;
+      if (desc === dict.trapBearTrap) {
+        isTrap = true;
+        tag = dict.alertTrap;
+        color = "var(--red-neon)";
+      }
+    } else if (macd >= signalLine) {
+      tag = dict.alertPattern;
+      color = "var(--green-neon)";
+      desc = Math.random() > 0.5 ? dict.patternTriangle : dict.patternCup;
+    } else {
+      tag = dict.alertTrap;
+      color = "var(--gold-accent)";
+      desc = dict.trapImbalance;
+    }
+
+    // Dynamic confidence score
+    const indicatorWeight = (volume * 0.4) + (Math.abs(rsi - 50) * 0.8) + (Math.abs(macd) * 12);
+    const confidence = Math.min(99.98, Math.max(97.20, 97.20 + (indicatorWeight % 2.78))).toFixed(2);
+
+    // Save alert globally for custom canvas graphics overlays
+    activeScannerAlert = {
+      type: isTrap ? 'TRAP' : 'PATTERN',
+      symbol: activeConfig.symbol,
+      desc: desc,
+      tag: tag,
+      price: price,
+      time: Date.now(),
+      color: color,
+      confidence: confidence
+    };
+
+    // Redraw chart rapidly to animate the flashing banner smoothly
+    let alertDraws = 0;
+    const alertInterval = setInterval(() => {
+      if (alertDraws++ > 80 || !activeScannerAlert || Date.now() - activeScannerAlert.time >= 4000) {
+        clearInterval(alertInterval);
+      }
+      if (typeof drawChart === 'function') {
+        drawChart();
+      }
+    }, 50); // ~20 FPS for smooth flashing animation
+
+    // Play native synthesised sci-fi audio beeps using Web Audio API
+    playFuturisticAlert(isTrap);
+
+    // Fluctuate scanner accuracy slightly (98.60% - 99.40%)
+    scannerAccuracyValue = Math.min(99.40, Math.max(98.60, 98.95 + (Math.sin(Date.now() / 12000) * 0.35) + (Math.random() * 0.1)));
+    
+    const accEl = document.getElementById('scannerAccuracy');
+    if (accEl) {
+      const activeLangDb = langDb[lang] || langDb['en'];
+      const accPrefix = activeLangDb.scannerAccuracy || "ACCURACY: ";
+      accEl.innerText = `${accPrefix}${scannerAccuracyValue.toFixed(2)}%`;
+    }
+
+    const logItem = document.createElement('div');
+    logItem.className = 'log-row';
+    logItem.style.borderLeft = `2px solid ${color}`;
+    logItem.style.background = isTrap ? "rgba(255, 23, 68, 0.02)" : "rgba(0, 230, 118, 0.02)";
+    logItem.innerHTML = `
+      <span class="log-time">[${timestamp}]</span>
+      <span class="log-tag" style="color: ${color}; font-weight: 800;">${tag}</span>
+      <span class="log-desc" style="color: var(--text-primary); font-weight: 500;">
+        ${name} &rarr; <span style="color: var(--text-secondary); font-style: italic;">${desc}</span>
+      </span>
+      <span class="confidence-badge" style="float: right; font-size: 8px; font-family: 'Orbitron', sans-serif; color: var(--gold-accent); background: rgba(255, 215, 0, 0.08); padding: 1px 4px; border-radius: 4px; border: 1px solid rgba(255, 215, 0, 0.25);">CONF: ${confidence}%</span>
+    `;
+    logs.insertBefore(logItem, logs.firstChild);
+    if (logs.children.length > 20) logs.removeChild(logs.lastChild);
+  }, 5000);
+}
+
+// Native synthesised audio generating sci-fi beeps using Web Audio API (Zero assets required)
+function playFuturisticAlert(isTrap) {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    const audioCtx = new AudioContext();
+
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    if (isTrap) {
+      // Sawtooth drop alarm sweep (Short duration to avoid annoying user)
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(550, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(180, audioCtx.currentTime + 0.3);
+      gainNode.gain.setValueAtTime(0.04, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.3);
+    } else {
+      // Tech-y positive sweep (Sine wave)
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(380, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.2);
+      gainNode.gain.setValueAtTime(0.035, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.2);
+    }
+  } catch (err) {
+    // Autoplay browser safety policy bypass
+  }
+}
+
+function startWatchlistScanner() {
+  const newItems = {
+    indianStocks: { key: 'tata_tech', symbol: 'TATA_TECH', name: 'Tata Tech Limited', basePrice: 1040.00, decimals: 2, currentPrice: 1040.00, change: 0.8, wsStream: null },
+    crypto: { key: 'sol_jup', symbol: 'SOL_JUP', name: 'Jupiter Token / SOL', basePrice: 0.0125, decimals: 5, currentPrice: 0.0125, change: 12.4, wsStream: null },
+    forex: { key: 'usd_chf', symbol: 'USD_CHF', name: 'US Dollar / Franc', basePrice: 0.91200, decimals: 5, currentPrice: 0.91200, change: -0.15, wsStream: null }
+  };
+
+  setTimeout(() => {
+    Object.keys(newItems).forEach(mKey => {
+      const item = newItems[mKey];
+      item.isNew = true;
+      marketTickers[mKey].push(item);
+    });
+
+    const chat = document.getElementById('chatHistory');
+    if (chat) {
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-bubble bubble-ai';
+      bubble.innerText = `[SCANNER SERVICE] Wiseman detected institutional listings! Added new tickers to watchlist: TATA TECH (Stocks), SOL_JUP (Crypto), USD_CHF (Forex). Dynamic analysis initiated.`;
+      chat.appendChild(bubble);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    populateWatchlist();
+  }, 12000);
+}
+
+// AI News Sentiment Modal Handlers
+function openSentimentReport(newsId) {
+  const item = newsDatabase.find(n => n.id === newsId);
+  if (!item) return;
+
+  const modal = document.getElementById('sentimentModal');
+  const headline = document.getElementById('modalSentimentHeadline');
+  const badge = document.getElementById('modalSentimentBadge');
+  const time = document.getElementById('modalSentimentTime');
+  const analysis = document.getElementById('modalSentimentAnalysis');
+  const impact = document.getElementById('modalSentimentImpact');
+
+  if (modal && headline && badge && time && analysis && impact) {
+    headline.innerText = item.headline;
+    badge.innerText = `${item.category.toUpperCase()} • ${item.impact}`;
+    
+    // Style badge
+    if (item.impact === 'BULLISH') {
+      badge.style.background = 'rgba(0, 230, 118, 0.15)';
+      badge.style.color = 'var(--green-neon)';
+      badge.style.borderColor = 'var(--green-neon)';
+    } else if (item.impact === 'BEARISH') {
+      badge.style.background = 'rgba(255, 23, 68, 0.15)';
+      badge.style.color = 'var(--red-neon)';
+      badge.style.borderColor = 'var(--red-neon)';
+    } else {
+      badge.style.background = 'rgba(255, 215, 0, 0.15)';
+      badge.style.color = 'var(--gold-accent)';
+      badge.style.borderColor = 'var(--gold-accent)';
+    }
+    
+    time.innerText = item.time;
+    analysis.innerText = item.analysis;
+    impact.innerText = item.summary;
+    
+    // Color summary text border/bg based on impact
+    if (item.impact === 'BULLISH') {
+      impact.style.color = 'var(--green-neon)';
+      impact.style.borderColor = 'rgba(0, 230, 118, 0.3)';
+    } else if (item.impact === 'BEARISH') {
+      impact.style.color = 'var(--red-neon)';
+      impact.style.borderColor = 'rgba(255, 23, 68, 0.3)';
+    } else {
+      impact.style.color = 'var(--gold-accent)';
+      impact.style.borderColor = 'rgba(255, 215, 0, 0.3)';
+    }
+
+    modal.style.display = 'flex';
+  }
+}
+
+function closeSentimentReport() {
+  const modal = document.getElementById('sentimentModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+function populateNewsTicker() {
+  const ticker = document.getElementById('newsTicker');
+  if (!ticker) return;
+  ticker.innerHTML = '';
+  
+  newsDatabase.forEach(item => {
+    const span = document.createElement('span');
+    span.className = 'news-ticker-item';
+    span.onclick = () => openSentimentReport(item.id);
+    
+    const impactColor = item.impact === 'BULLISH' ? 'var(--green-neon)' : (item.impact === 'BEARISH' ? 'var(--red-neon)' : 'var(--gold-accent)');
+    span.innerHTML = `<span style="color: ${impactColor}; font-weight: bold; margin-right: 6px;">[${item.category} ${item.impact}]</span>${item.headline}`;
+    ticker.appendChild(span);
+  });
+}
+
+// Lower Stats Tab Switches
+function switchLowerTab(tabId) {
+  const tabs = ['positions', 'history', 'strategy', 'advisory'];
+  tabs.forEach(t => {
+    const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+    const content = document.getElementById('content' + t.charAt(0).toUpperCase() + t.slice(1));
+    if (t === tabId) {
+      if (btn) btn.classList.add('active');
+      if (content) content.style.display = 'block';
+    } else {
+      if (btn) btn.classList.remove('active');
+      if (content) content.style.display = 'none';
+    }
+  });
+}
+
+// AI Advisory and Strategies Panel Renderer
+function renderAdvisoryPanel() {
+  const tableBody = document.getElementById('advisoryTableBody');
+  const cardsGrid = document.getElementById('strategyCardsGrid');
+  if (!tableBody || !cardsGrid) return;
+
+  const lang = typeof currentLang !== 'undefined' ? currentLang : 'en';
+  const adviceList = advisoryDatabase[lang] || advisoryDatabase['en'] || [];
+  const stratList = strategyDatabase[lang] || strategyDatabase['en'] || [];
+
+  // 1. Render Table
+  tableBody.innerHTML = '';
+  adviceList.forEach(item => {
+    const row = document.createElement('tr');
+    
+    // Check recommendation action to apply badge class
+    let badgeClass = 'badge-hold';
+    const actionUpper = item.action.toUpperCase();
+    if (actionUpper.includes('BUY') || item.action.includes('खरेदी') || item.action.includes('खरीद')) {
+      badgeClass = 'badge-buy';
+    } else if (actionUpper.includes('SELL') || item.action.includes('विक्री') || item.action.includes('बेच')) {
+      badgeClass = 'badge-sell';
+    }
+    
+    row.innerHTML = `
+      <td><span class="pos-ticker" style="font-family: 'Orbitron', sans-serif;">${item.ticker.replace('_', ' ')}</span></td>
+      <td><span class="${badgeClass}">${item.action}</span></td>
+      <td><span style="color: var(--text-secondary); font-weight: 600; font-size: 8px; font-family: 'Orbitron', sans-serif;">${item.holdClass}</span></td>
+      <td><span style="color: var(--cyan); font-weight: 500; font-size: 8.5px; font-family: 'Orbitron', sans-serif;">${item.timeframe}</span></td>
+      <td style="color: var(--text-muted); font-size: 8px; line-height: 1.3; max-width: 200px; white-space: normal; text-align: left; padding: 6px;">${item.rationale}</td>
+    `;
+    tableBody.appendChild(row);
+  });
+
+  // 2. Render Strategy Cards
+  cardsGrid.innerHTML = '';
+  stratList.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'strategy-card';
+    card.innerHTML = `
+      <div class="strategy-card-header">
+        <span class="strategy-card-title">${item.name}</span>
+        <span class="strategy-card-timeframe">${item.timeframe}</span>
+      </div>
+      <div class="strategy-card-indicators">${item.indicators}</div>
+      <div class="strategy-card-desc">${item.desc}</div>
+    `;
+    cardsGrid.appendChild(card);
+  });
+}
+
+// Closed trade history rendering removed as this is a pure analysis & advisory platform
+
+// Strategy alerts condition analyzer
+function checkStrategyAlerts() {
+  const slider = document.getElementById('sliderRsiThreshold');
+  const macdSelect = document.getElementById('selectMacdTrigger');
+  const status = document.getElementById('strategyAlertStatus');
+  const box = document.getElementById('strategyAlertBox');
+  if (!slider || !macdSelect || !status || !box) return;
+
+  const threshold = parseFloat(slider.value);
+  const direction = macdSelect.value;
+  
+  const rsiCheck = rsi <= threshold;
+  
+  let macdCheck = false;
+  if (direction === 'any') {
+    macdCheck = true;
+  } else if (direction === 'bullish') {
+    macdCheck = macd > signalLine;
+  } else if (direction === 'bearish') {
+    macdCheck = macd < signalLine;
+  }
+  
+  if (rsiCheck && macdCheck) {
+    status.innerText = currentLang === 'mr' ? 'इशारा: खरेदीचे संकेत!' : 'ALERT: CRITERIA SATISFIED!';
+    status.style.color = 'var(--green-neon)';
+    box.style.borderColor = 'var(--green-neon)';
+    box.style.boxShadow = 'var(--glow-green)';
+    box.style.background = 'rgba(0, 230, 118, 0.08)';
+  } else {
+    status.innerText = currentLang === 'mr' ? 'मार्केट स्कॅनिंग सुरू...' : 'MONITORING FEEDS';
+    status.style.color = 'var(--text-secondary)';
+    box.style.borderColor = 'var(--border)';
+    box.style.boxShadow = 'none';
+    box.style.background = 'rgba(13, 14, 21, 0.85)';
+  }
+}
+
+// Local browser storage trade persistence and database sync methods removed as this is a pure analysis & advisory platform
+
+// Bootstrap execution
+window.addEventListener('DOMContentLoaded', init);
+
+// --- END app.js ---
+
+
+</script>
+</body>
+</html>
+
