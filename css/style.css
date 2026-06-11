@@ -284,14 +284,21 @@ header {
 /* Cards Styling (Glassmorphism) */
 .panel-card {
   background: var(--surface);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 16px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
   margin-bottom: 16px;
   position: relative;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.panel-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 240, 255, 0.35);
+  box-shadow: 0 12px 40px 0 rgba(0, 240, 255, 0.12);
 }
 
 .panel-card::before {
@@ -301,7 +308,97 @@ header {
   left: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  background: linear-gradient(90deg, transparent, var(--cyan-dim), transparent);
+}
+
+/* Custom Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(3, 3, 7, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyan-dim);
+}
+
+/* Real-Time Alpha Feed CSS */
+.news-feed-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 230px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.news-feed-row {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.news-feed-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(0, 240, 255, 0.25);
+  transform: translateX(3px);
+}
+
+.news-feed-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 8px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.news-feed-time {
+  color: var(--text-muted);
+}
+
+.news-feed-impact {
+  font-weight: 900;
+  padding: 1px 4px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  font-size: 7.5px;
+}
+
+.news-feed-impact.bullish {
+  background: rgba(0, 230, 118, 0.08);
+  color: var(--green-neon);
+  border-color: rgba(0, 230, 118, 0.2);
+}
+
+.news-feed-impact.bearish {
+  background: rgba(255, 23, 68, 0.08);
+  color: var(--red-neon);
+  border-color: rgba(255, 23, 68, 0.2);
+}
+
+.news-feed-impact.neutral {
+  background: rgba(255, 215, 0, 0.08);
+  color: var(--gold-accent);
+  border-color: rgba(255, 215, 0, 0.2);
+}
+
+.news-feed-headline {
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-primary);
 }
 
 /* Watchlist & Scanner Panel */
