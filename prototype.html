@@ -1366,6 +1366,78 @@ footer {
   background: var(--text-muted);
 }
 
+/* Premium Login Portal Overlay */
+.login-portal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  background-color: #030307;
+  overflow: hidden;
+}
+
+/* Animated Cyberpunk Grid Background */
+.login-grid-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center;
+  z-index: 1;
+  animation: gridScroll 20s linear infinite;
+}
+
+.login-grid-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 40%, rgba(3, 3, 7, 0.9) 85%);
+  z-index: 2;
+}
+
+@keyframes gridScroll {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 160px; }
+}
+
+.login-card {
+  width: 380px;
+  max-width: 90%;
+  background: rgba(13, 14, 21, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid var(--border);
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.15);
+  z-index: 3;
+  padding: 30px 25px;
+  border-radius: 20px;
+  animation: cardFadeIn 0.5s ease-out;
+}
+
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.login-card:hover {
+  border-color: rgba(0, 240, 255, 0.5);
+  box-shadow: 0 0 45px rgba(0, 240, 255, 0.22);
+  transform: none; /* Override standard panel hover */
+}
+
 
 
 </style>
@@ -1376,14 +1448,14 @@ footer {
 <body>
 
   <!-- News Ticker -->
-  <div class="news-ticker-container">
+  <div class="news-ticker-container" id="mainTickerContainer" style="display: none;">
     <div class="news-ticker-label" id="tickerLabel">ALPHA FEED</div>
     <div class="news-ticker-content" id="newsTicker">
       <!-- Populated Dynamically by app.js -->
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" id="mainDashboardContainer" style="display: none;">
     <!-- Header -->
     <header>
       <div class="brand">
@@ -1406,6 +1478,11 @@ footer {
             <option value="es">ES (Español)</option>
           </select>
         </div>
+
+        <!-- Logout Button -->
+        <button class="tool-btn" id="btnLogout" onclick="handleLogout()" style="border-color: rgba(255,23,68,0.4); color: var(--red-neon); padding: 6px 12px; font-family: 'Orbitron'; font-size: 9px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+          LOGOUT &times;
+        </button>
 
         <div class="live-ticker-info">
           <div class="active-symbol-title-row">
@@ -1775,6 +1852,44 @@ footer {
         </div>
         <div class="coach-quote-box" style="font-size: 11px; line-height: 1.5; color: var(--text-secondary); margin-bottom: 0; padding: 12px; font-style: normal;" id="modalSentimentAnalysis">-</div>
         <div id="modalSentimentImpact" style="margin-top: 12px; font-size: 9.5px; font-weight: bold; font-family: 'Orbitron', sans-serif; text-align: center; border-radius: 6px; padding: 6px; background: rgba(255,255,255,0.02); border: 1px dashed var(--border);">-</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Cyberpunk Login/Registration Portal -->
+  <div id="loginPortalContainer" class="login-portal-overlay">
+    <div class="login-grid-bg"></div>
+    <div class="panel-card login-card">
+      <div class="brand" style="justify-content: center; margin-bottom: 12px;">
+        <div class="brand-accent-bar" style="height: 24px;"></div>
+        <div>
+          <div style="font-family: 'Orbitron', sans-serif; font-size: 8px; font-weight: 900; color: var(--gold-accent); letter-spacing: 1.5px; margin-bottom: 1px; text-transform: uppercase;">BLACK DRAGON</div>
+          <div style="font-family: 'Orbitron', sans-serif; font-size: 15px; font-weight: 900; color: var(--text-primary); letter-spacing: 1.5px;">WISEMAN SECURITIES</div>
+        </div>
+      </div>
+      
+      <h2 id="lblAuthPortalTitle" style="font-family: 'Orbitron', sans-serif; font-size: 11px; text-align: center; color: var(--cyan); letter-spacing: 1px; margin-bottom: 20px; text-transform: uppercase;">SECURED PORTAL ACCESS</h2>
+      
+      <!-- Feedback notification -->
+      <div id="authAlert" style="display: none; font-size: 9.5px; padding: 8px 12px; border-radius: 6px; margin-bottom: 16px; border: 1px solid transparent; text-align: center;"></div>
+      
+      <form id="authForm" onsubmit="handleAuthSubmit(event)">
+        <div class="input-label" id="lblUsername">Username</div>
+        <div class="input-wrapper" style="margin-bottom: 16px;">
+          <input type="text" id="authUsername" class="price-input" style="padding-left: 12px;" required placeholder="Enter username...">
+        </div>
+        
+        <div class="input-label" id="lblPassword">Password</div>
+        <div class="input-wrapper" style="margin-bottom: 24px;">
+          <input type="password" id="authPassword" class="price-input" style="padding-left: 12px;" required placeholder="Enter password...">
+        </div>
+        
+        <button type="submit" id="btnAuthSubmit" class="chat-send-btn" style="width: 100%; height: 36px; font-size: 10.5px; letter-spacing: 1px; margin-bottom: 16px;">AUTHENTICATE SESSION</button>
+      </form>
+      
+      <div style="text-align: center; font-size: 10px;">
+        <span id="lblAuthToggleText" style="color: var(--text-muted);">New Operator? </span>
+        <a href="#" id="btnAuthToggle" onclick="toggleAuthMode(event)" style="color: var(--gold-accent); text-decoration: none; font-weight: bold; font-family: 'Orbitron'; letter-spacing: 0.5px;">Register Credentials</a>
       </div>
     </div>
   </div>
@@ -4214,6 +4329,224 @@ function monitorSecurityThreats(text) {
 
 // --- END terminator.js ---
 
+// --- START auth.js ---
+// Wiseman Analytics - Cyberpunk Authentication & Session Controller
+
+let isRegisterMode = false;
+
+const authTranslations = {
+  en: {
+    titleLogin: "SECURED PORTAL ACCESS",
+    titleRegister: "CREATE OPERATOR CREDENTIALS",
+    btnLoginSubmit: "AUTHENTICATE SESSION",
+    btnRegisterSubmit: "INITIALIZE REGISTRATION",
+    toggleLoginText: "New Operator? ",
+    toggleLoginLink: "Register Credentials",
+    toggleRegisterText: "Existing Operator? ",
+    toggleRegisterLink: "Login",
+    usernameLabel: "Username",
+    passwordLabel: "Password"
+  },
+  mr: {
+    titleLogin: "सुरक्षित पोर्टल प्रवेश",
+    titleRegister: "नवीन ऑपरेटर खाते तयार करा",
+    btnLoginSubmit: "प्रवेश प्रमाणित करा (LOGIN)",
+    btnRegisterSubmit: "ऑपरेटर नोंदणी करा (REGISTER)",
+    toggleLoginText: "नवीन ऑपरेटर? ",
+    toggleLoginLink: "रजिस्टर करा",
+    toggleRegisterText: "आधीच खाते आहे? ",
+    toggleRegisterLink: "लॉगिन करा",
+    usernameLabel: "वापरकर्तानाव (Username)",
+    passwordLabel: "पासवर्ड (Password)"
+  },
+  hi: {
+    titleLogin: "सुरक्षित पोर्टल एक्सेस",
+    titleRegister: "नया ऑपरेटर खाता बनाएं",
+    btnLoginSubmit: "लॉगिन प्रमाणित करें",
+    btnRegisterSubmit: "खाता पंजीकृत करें",
+    toggleLoginText: "नए ऑपरेटर? ",
+    toggleLoginLink: "पंजीकरण करें",
+    toggleRegisterText: "पहले से खाता है? ",
+    toggleRegisterLink: "लॉगिन करें",
+    usernameLabel: "यूज़रनेम (Username)",
+    passwordLabel: "पासवर्ड (Password)"
+  },
+  es: {
+    titleLogin: "ACCESO AL PORTAL SEGURO",
+    titleRegister: "CREAR CREDENCIALES",
+    btnLoginSubmit: "AUTENTICAR SESIÓN",
+    btnRegisterSubmit: "REGISTRAR OPERADOR",
+    toggleLoginText: "¿Nuevo operador? ",
+    toggleLoginLink: "Registrar credenciales",
+    toggleRegisterText: "¿Operador existente? ",
+    toggleRegisterLink: "Iniciar sesión",
+    usernameLabel: "Usuario",
+    passwordLabel: "Contraseña"
+  }
+};
+
+function toggleAuthMode(e) {
+  if (e) e.preventDefault();
+  isRegisterMode = !isRegisterMode;
+  renderAuthLabels();
+}
+
+function renderAuthLabels() {
+  const lang = typeof currentLang !== 'undefined' ? currentLang : 'en';
+  const dict = authTranslations[lang] || authTranslations['en'];
+  
+  const elTitle = document.getElementById('lblAuthPortalTitle');
+  const elBtnSubmit = document.getElementById('btnAuthSubmit');
+  const elToggleText = document.getElementById('lblAuthToggleText');
+  const elToggleLink = document.getElementById('btnAuthToggle');
+  const elUserLabel = document.getElementById('lblUsername');
+  const elPassLabel = document.getElementById('lblPassword');
+  const elUsernameInput = document.getElementById('authUsername');
+  const elPasswordInput = document.getElementById('authPassword');
+
+  if (elTitle) elTitle.innerText = isRegisterMode ? dict.titleRegister : dict.titleLogin;
+  if (elBtnSubmit) elBtnSubmit.innerText = isRegisterMode ? dict.btnRegisterSubmit : dict.btnLoginSubmit;
+  if (elToggleText) elToggleText.innerText = isRegisterMode ? dict.toggleRegisterText : dict.toggleLoginText;
+  if (elToggleLink) elToggleLink.innerText = isRegisterMode ? dict.toggleRegisterLink : dict.toggleLoginLink;
+  if (elUserLabel) elUserLabel.innerText = dict.usernameLabel;
+  if (elPassLabel) elPassLabel.innerText = dict.passwordLabel;
+
+  if (elUsernameInput) elUsernameInput.placeholder = lang === 'mr' ? 'नाव प्रविष्ट करा...' : 'Enter username...';
+  if (elPasswordInput) elPasswordInput.placeholder = lang === 'mr' ? 'पासवर्ड प्रविष्ट करा...' : 'Enter password...';
+}
+
+async function handleAuthSubmit(e) {
+  if (e) e.preventDefault();
+  
+  const userEl = document.getElementById('authUsername');
+  const passEl = document.getElementById('authPassword');
+  const alertEl = document.getElementById('authAlert');
+
+  if (!userEl || !passEl || !alertEl) return;
+
+  const username = userEl.value.trim();
+  const password = passEl.value.trim();
+
+  // Hide alert first
+  alertEl.style.display = 'none';
+
+  if (!username || !password) {
+    showAlert("All security parameters are required.", "var(--red-neon)");
+    return;
+  }
+
+  const endpoint = isRegisterMode ? 'register' : 'login';
+  
+  try {
+    const response = await fetch(`${BACKEND_API_URL}/${endpoint}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Security authentication failed.");
+    }
+
+    if (isRegisterMode) {
+      // Auto-login upon successful registration
+      isRegisterMode = false;
+      showAlert("Registration successful. Authenticating session...", "var(--green-neon)");
+      setTimeout(() => {
+        loginUser(username, password);
+      }, 1000);
+    } else {
+      // Login success
+      localStorage.setItem('wiseman_token', data.token);
+      showAlert("Session authorized. Loading terminal feeds...", "var(--green-neon)");
+      setTimeout(() => {
+        checkSession();
+      }, 1000);
+    }
+
+  } catch (err) {
+    console.error("Auth error:", err);
+    showAlert(err.message, "var(--red-neon)");
+  }
+}
+
+async function loginUser(username, password) {
+  const alertEl = document.getElementById('authAlert');
+  try {
+    const response = await fetch(`${BACKEND_API_URL}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error);
+    
+    localStorage.setItem('wiseman_token', data.token);
+    checkSession();
+  } catch (err) {
+    if (alertEl) {
+      showAlert("Auto-login failed. Please enter credentials to continue.", "var(--red-neon)");
+    }
+  }
+}
+
+function showAlert(message, color) {
+  const alertEl = document.getElementById('authAlert');
+  if (!alertEl) return;
+  alertEl.innerText = message;
+  alertEl.style.color = color;
+  alertEl.style.borderColor = color.replace('var(--', 'rgba(').replace(')', ', 0.35)').replace('red-neon', '255, 23, 68').replace('green-neon', '0, 230, 118');
+  alertEl.style.background = color.replace('var(--', 'rgba(').replace(')', ', 0.04)').replace('red-neon', '255, 23, 68').replace('green-neon', '0, 230, 118');
+  alertEl.style.display = 'block';
+}
+
+function checkSession() {
+  const token = localStorage.getItem('wiseman_token');
+  const loginPortal = document.getElementById('loginPortalContainer');
+  const dashboard = document.getElementById('mainDashboardContainer');
+  const ticker = document.getElementById('mainTickerContainer');
+
+  if (token) {
+    if (loginPortal) loginPortal.style.display = 'none';
+    if (dashboard) dashboard.style.display = 'block';
+    if (ticker) ticker.style.display = 'flex';
+    
+    // Trigger canvas resizing once visible to prevent distortion
+    if (typeof resizeCanvas === 'function') {
+      setTimeout(resizeCanvas, 100);
+    }
+  } else {
+    if (loginPortal) loginPortal.style.display = 'flex';
+    if (dashboard) dashboard.style.display = 'none';
+    if (ticker) ticker.style.display = 'none';
+    
+    // Set initial login labels
+    renderAuthLabels();
+  }
+}
+
+function handleLogout() {
+  localStorage.removeItem('wiseman_token');
+  window.location.reload();
+}
+
+// Intercept translateUI call to reload auth labels if login is active
+const originalTranslateUI = window.translateUI;
+window.translateUI = function(lang) {
+  if (typeof originalTranslateUI === 'function') {
+    originalTranslateUI(lang);
+  }
+  renderAuthLabels();
+};
+
+// --- END auth.js ---
+
 // --- START app.js ---
 // Wiseman Analytics Core Orchestrator & Coordinator
 
@@ -4270,6 +4603,11 @@ function init() {
   
   // Set initial canvas sizing
   setTimeout(resizeCanvas, 150);
+
+  // Authenticate session check
+  if (typeof checkSession === 'function') {
+    checkSession();
+  }
 }
 
 function resizeCanvas() {

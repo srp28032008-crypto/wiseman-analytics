@@ -4,7 +4,7 @@ $css = Get-Content -Path "css\style.css" -Raw -Encoding utf8
 
 $content = $index.Replace('<link rel="stylesheet" href="css/style.css">', "<style>`n$css`n</style>")
 
-$jsFiles = @("config.js", "risk.js", "ai.js", "chart.js", "terminator.js", "app.js")
+$jsFiles = @("config.js", "risk.js", "ai.js", "chart.js", "terminator.js", "auth.js", "app.js")
 $jsCombined = ""
 
 foreach ($file in $jsFiles) {
@@ -18,7 +18,7 @@ foreach ($file in $jsFiles) {
 }
 
 # Regex to match the scripts block
-$pattern = '(?s)<script src="js/config.js"></script>\s*<script src="js/risk.js"></script>\s*<script src="js/ai.js"></script>\s*<script src="js/chart.js"></script>\s*<script src="js/terminator.js"></script>\s*<script src="js/app.js"></script>'
+$pattern = '(?s)<script src="js/config.js"></script>\s*<script src="js/risk.js"></script>\s*<script src="js/ai.js"></script>\s*<script src="js/chart.js"></script>\s*<script src="js/terminator.js"></script>\s*<script src="js/auth.js"></script>\s*<script src="js/app.js"></script>'
 
 if ($content -match $pattern) {
     $content = $content -replace $pattern, "<script>`n$jsCombined`n</script>"
@@ -28,6 +28,7 @@ if ($content -match $pattern) {
     $content = $content.Replace('<script src="js/ai.js"></script>', "")
     $content = $content.Replace('<script src="js/chart.js"></script>', "")
     $content = $content.Replace('<script src="js/terminator.js"></script>', "")
+    $content = $content.Replace('<script src="js/auth.js"></script>', "")
     $content = $content.Replace('<script src="js/app.js"></script>', "<script>`n$jsCombined`n</script>")
 }
 

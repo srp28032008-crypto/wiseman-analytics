@@ -53,6 +53,11 @@ function init() {
   
   // Set initial canvas sizing
   setTimeout(resizeCanvas, 150);
+
+  // Authenticate session check
+  if (typeof checkSession === 'function') {
+    checkSession();
+  }
 }
 
 function resizeCanvas() {

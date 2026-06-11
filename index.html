@@ -19,14 +19,14 @@
 <body>
 
   <!-- News Ticker -->
-  <div class="news-ticker-container">
+  <div class="news-ticker-container" id="mainTickerContainer" style="display: none;">
     <div class="news-ticker-label" id="tickerLabel">ALPHA FEED</div>
     <div class="news-ticker-content" id="newsTicker">
       <!-- Populated Dynamically by app.js -->
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" id="mainDashboardContainer" style="display: none;">
     <!-- Header -->
     <header>
       <div class="brand">
@@ -49,6 +49,11 @@
             <option value="es">ES (Español)</option>
           </select>
         </div>
+
+        <!-- Logout Button -->
+        <button class="tool-btn" id="btnLogout" onclick="handleLogout()" style="border-color: rgba(255,23,68,0.4); color: var(--red-neon); padding: 6px 12px; font-family: 'Orbitron'; font-size: 9px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+          LOGOUT &times;
+        </button>
 
         <div class="live-ticker-info">
           <div class="active-symbol-title-row">
@@ -422,12 +427,51 @@
     </div>
   </div>
 
+  <!-- Premium Cyberpunk Login/Registration Portal -->
+  <div id="loginPortalContainer" class="login-portal-overlay">
+    <div class="login-grid-bg"></div>
+    <div class="panel-card login-card">
+      <div class="brand" style="justify-content: center; margin-bottom: 12px;">
+        <div class="brand-accent-bar" style="height: 24px;"></div>
+        <div>
+          <div style="font-family: 'Orbitron', sans-serif; font-size: 8px; font-weight: 900; color: var(--gold-accent); letter-spacing: 1.5px; margin-bottom: 1px; text-transform: uppercase;">BLACK DRAGON</div>
+          <div style="font-family: 'Orbitron', sans-serif; font-size: 15px; font-weight: 900; color: var(--text-primary); letter-spacing: 1.5px;">WISEMAN SECURITIES</div>
+        </div>
+      </div>
+      
+      <h2 id="lblAuthPortalTitle" style="font-family: 'Orbitron', sans-serif; font-size: 11px; text-align: center; color: var(--cyan); letter-spacing: 1px; margin-bottom: 20px; text-transform: uppercase;">SECURED PORTAL ACCESS</h2>
+      
+      <!-- Feedback notification -->
+      <div id="authAlert" style="display: none; font-size: 9.5px; padding: 8px 12px; border-radius: 6px; margin-bottom: 16px; border: 1px solid transparent; text-align: center;"></div>
+      
+      <form id="authForm" onsubmit="handleAuthSubmit(event)">
+        <div class="input-label" id="lblUsername">Username</div>
+        <div class="input-wrapper" style="margin-bottom: 16px;">
+          <input type="text" id="authUsername" class="price-input" style="padding-left: 12px;" required placeholder="Enter username...">
+        </div>
+        
+        <div class="input-label" id="lblPassword">Password</div>
+        <div class="input-wrapper" style="margin-bottom: 24px;">
+          <input type="password" id="authPassword" class="price-input" style="padding-left: 12px;" required placeholder="Enter password...">
+        </div>
+        
+        <button type="submit" id="btnAuthSubmit" class="chat-send-btn" style="width: 100%; height: 36px; font-size: 10.5px; letter-spacing: 1px; margin-bottom: 16px;">AUTHENTICATE SESSION</button>
+      </form>
+      
+      <div style="text-align: center; font-size: 10px;">
+        <span id="lblAuthToggleText" style="color: var(--text-muted);">New Operator? </span>
+        <a href="#" id="btnAuthToggle" onclick="toggleAuthMode(event)" style="color: var(--gold-accent); text-decoration: none; font-weight: bold; font-family: 'Orbitron'; letter-spacing: 0.5px;">Register Credentials</a>
+      </div>
+    </div>
+  </div>
+
   <!-- Loading Scripts in Correct Order -->
   <script src="js/config.js"></script>
   <script src="js/risk.js"></script>
   <script src="js/ai.js"></script>
   <script src="js/chart.js"></script>
   <script src="js/terminator.js"></script>
+  <script src="js/auth.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
