@@ -877,6 +877,7 @@ function initTradingViewWidget(symbol) {
   else if (sym === "ETH_USDT" || sym === "ETH") tvSymbol = "BINANCE:ETHUSDT";
   else if (sym === "SOL_USDT" || sym === "SOL") tvSymbol = "BINANCE:SOLUSDT";
   else if (sym === "SOL_JUP") tvSymbol = "BINANCE:JUPSOL";
+  else if (sym.endsWith('_USDT')) tvSymbol = "BINANCE:" + sym.replace('_', '');
   else if (sym === "EUR_USD" || sym === "EUR") tvSymbol = "FX:EURUSD";
   else if (sym === "GBP_USD" || sym === "GBP") tvSymbol = "FX:GBPUSD";
   else if (sym === "USD_JPY" || sym === "JPY") tvSymbol = "FX:USDJPY";
