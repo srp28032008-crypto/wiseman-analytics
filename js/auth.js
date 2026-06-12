@@ -189,6 +189,11 @@ function checkSession() {
     if (typeof resizeCanvas === 'function') {
       setTimeout(resizeCanvas, 100);
     }
+
+    // Connect to trusted backend WebSocket server
+    if (typeof connectBackendWebsocket === 'function') {
+      connectBackendWebsocket();
+    }
   } else {
     if (loginPortal) loginPortal.style.display = 'flex';
     if (dashboard) dashboard.style.display = 'none';

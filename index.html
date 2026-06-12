@@ -97,6 +97,10 @@
             <span id="lblTickers">Market Tickers</span>
             <span class="scan-status-indicator" id="scanLabel">SCANNING LIVE</span>
           </div>
+          <!-- Watchlist Search Bar -->
+          <div style="padding: 6px 12px; border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.2); display: flex; align-items: center; gap: 6px;">
+            <input type="text" id="watchlistSearchInput" placeholder="Filter tickers..." oninput="filterWatchlist()" style="width: 100%; background: transparent; border: none; font-size: 10px; font-family: 'Orbitron', monospace; color: white; outline: none;">
+          </div>
           <div class="watchlist-list" id="watchlistContainer">
             <!-- Populated dynamically by app.js -->
           </div>
@@ -304,6 +308,13 @@
                 <div style="font-size: 8.5px; color: var(--text-muted); font-family: 'Orbitron'; margin-top: 2px;">REAL-TIME AI ANALYTICS & MARKET AUDITS</div>
               </div>
               <span class="scan-status-indicator" id="lblScannerLiveBadge">SCANNING NSE/BSE LIVE</span>
+            </div>
+
+            <!-- Symbol Search and Add Bar -->
+            <div style="display: flex; gap: 8px; margin-bottom: 12px; background: rgba(255, 255, 255, 0.02); padding: 8px; border: 1.5px solid var(--border); border-radius: 8px; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+              <span style="font-family: 'Orbitron', sans-serif; font-size: 9px; font-weight: bold; color: var(--gold-accent); letter-spacing: 0.5px; text-transform: uppercase;">Add Stock:</span>
+              <input type="text" id="addStockInput" placeholder="e.g. INFY, TATASTEEL, ITC" style="flex: 1; background: rgba(5, 5, 10, 0.8); border: 1px solid var(--border); border-radius: 4px; padding: 5px 8px; font-size: 10px; font-family: 'Orbitron', monospace; color: white; outline: none; text-transform: uppercase;" onkeydown="if(event.key==='Enter') addStockSymbol()">
+              <button id="addStockBtn" onclick="addStockSymbol()" style="background: linear-gradient(135deg, var(--gold-accent), #f39c12); color: #000; border: none; border-radius: 4px; padding: 5px 12px; font-family: 'Orbitron', sans-serif; font-size: 9px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: all 0.2s; box-shadow: var(--neon-gold-glow);">+ ADD</button>
             </div>
 
             <!-- Scrollable Grid Container -->

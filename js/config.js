@@ -482,8 +482,21 @@ const tickerNamesTranslated = {
 const marketTickers = {
   indianStocks: [
     { key: 'nifty', symbol: 'NIFTY_50', name: 'Nifty 50 Index', basePrice: 22450.00, decimals: 2, currentPrice: 22450.00, change: 0.25, wsStream: null },
-    { key: 'reliance', symbol: 'RELIANCE', name: 'Reliance Industries', basePrice: 2890.00, decimals: 2, currentPrice: 2890.00, change: -0.42, wsStream: null },
-    { key: 'tata', symbol: 'TATA_MOTORS', name: 'Tata Motors Limited', basePrice: 945.00, decimals: 2, currentPrice: 945.00, change: 1.85, wsStream: null }
+    { key: 'reliance', symbol: 'RELIANCE', name: 'Reliance Industries', basePrice: 2890.00, decimals: 2, currentPrice: 2890.00, change: 1.25, wsStream: null },
+    { key: 'tata', symbol: 'TATA_MOTORS', name: 'Tata Motors Limited', basePrice: 375.90, decimals: 2, currentPrice: 375.90, change: -0.85, wsStream: null },
+    { key: 'tata_tech', symbol: 'TATATECH', name: 'Tata Tech Limited', basePrice: 880.00, decimals: 2, currentPrice: 880.00, change: 0.15, wsStream: null },
+    { key: 'hdfc', symbol: 'HDFCBANK', name: 'HDFC Bank Limited', basePrice: 1450.00, decimals: 2, currentPrice: 1450.00, change: 1.85, wsStream: null },
+    { key: 'sbin', symbol: 'SBIN', name: 'State Bank of India', basePrice: 815.00, decimals: 2, currentPrice: 815.00, change: 2.15, wsStream: null },
+    { key: 'tcs', symbol: 'TCS', name: 'Tata Consultancy Services', basePrice: 3820.00, decimals: 2, currentPrice: 3820.00, change: -1.45, wsStream: null },
+    { key: 'adanient', symbol: 'ADANIENT', name: 'Adani Enterprises', basePrice: 3120.00, decimals: 2, currentPrice: 3120.00, change: 4.80, wsStream: null },
+    { key: 'coalindia', symbol: 'COALINDIA', name: 'Coal India Limited', basePrice: 470.00, decimals: 2, currentPrice: 470.00, change: 0.65, wsStream: null },
+    { key: 'infy', symbol: 'INFY', name: 'Infosys Limited', basePrice: 1420.00, decimals: 2, currentPrice: 1420.00, change: -0.50, wsStream: null },
+    { key: 'icicibank', symbol: 'ICICIBANK', name: 'ICICI Bank Limited', basePrice: 1120.00, decimals: 2, currentPrice: 1120.00, change: 1.20, wsStream: null },
+    { key: 'itc', symbol: 'ITC', name: 'ITC Limited', basePrice: 430.00, decimals: 2, currentPrice: 430.00, change: 0.80, wsStream: null },
+    { key: 'bhartiartl', symbol: 'BHARTIARTL', name: 'Bharti Airtel Limited', basePrice: 1380.00, decimals: 2, currentPrice: 1380.00, change: 2.10, wsStream: null },
+    { key: 'lt', symbol: 'LT', name: 'Larsen & Toubro Limited', basePrice: 3550.00, decimals: 2, currentPrice: 3550.00, change: -1.10, wsStream: null },
+    { key: 'maruti', symbol: 'MARUTI', name: 'Maruti Suzuki Limited', basePrice: 12100.00, decimals: 2, currentPrice: 12100.00, change: 0.50, wsStream: null },
+    { key: 'axisbank', symbol: 'AXISBANK', name: 'Axis Bank Limited', basePrice: 1180.00, decimals: 2, currentPrice: 1180.00, change: 1.40, wsStream: null }
   ],
   crypto: [
     { key: 'btc', symbol: 'BTC_USDT', name: 'Bitcoin / US Dollar', basePrice: 67500.00, decimals: 2, currentPrice: 67500.00, change: 1.15, wsStream: 'btcusdt@ticker' },
