@@ -12,7 +12,7 @@ try {
     exit
 }
 
-$currentDir = "C:\Users\Shardul Patil\.gemini\antigravity\scratch\wiseman_analytics"
+$currentDir = "C:\Users\Shardul Patil\.gemini\antigravity\scratch\wiseman_analytics\frontend\dist"
 while ($listener.IsListening) {
     try {
         $context = $listener.GetContext()

@@ -1,0 +1,902 @@
+{
+  "corePairs": [
+    {
+      "key": "usdeur",
+      "symbol": "USD_EUR",
+      "yahooSymbol": "USDEUR=X",
+      "name": "US Dollar / Euro",
+      "basePrice": 0.92,
+      "decimals": 5
+    },
+    {
+      "key": "usdgbp",
+      "symbol": "USD_GBP",
+      "yahooSymbol": "USDGBP=X",
+      "name": "US Dollar / Pound Sterling",
+      "basePrice": 0.78,
+      "decimals": 5
+    },
+    {
+      "key": "usdjpy",
+      "symbol": "USD_JPY",
+      "yahooSymbol": "USDJPY=X",
+      "name": "US Dollar / Japanese Yen",
+      "basePrice": 156.4,
+      "decimals": 3
+    },
+    {
+      "key": "usdaud",
+      "symbol": "USD_AUD",
+      "yahooSymbol": "USDAUD=X",
+      "name": "US Dollar / Australian Dollar",
+      "basePrice": 1.5,
+      "decimals": 5
+    },
+    {
+      "key": "usdcad",
+      "symbol": "USD_CAD",
+      "yahooSymbol": "USDCAD=X",
+      "name": "US Dollar / Canadian Dollar",
+      "basePrice": 1.36,
+      "decimals": 5
+    },
+    {
+      "key": "usdchf",
+      "symbol": "USD_CHF",
+      "yahooSymbol": "USDCHF=X",
+      "name": "US Dollar / Swiss Franc",
+      "basePrice": 0.89,
+      "decimals": 5
+    },
+    {
+      "key": "usdnzd",
+      "symbol": "USD_NZD",
+      "yahooSymbol": "USDNZD=X",
+      "name": "US Dollar / New Zealand Dollar",
+      "basePrice": 1.63,
+      "decimals": 5
+    },
+    {
+      "key": "eurusd",
+      "symbol": "EUR_USD",
+      "yahooSymbol": "EURUSD=X",
+      "name": "Euro / US Dollar",
+      "basePrice": 1.08696,
+      "decimals": 5
+    },
+    {
+      "key": "eurgbp",
+      "symbol": "EUR_GBP",
+      "yahooSymbol": "EURGBP=X",
+      "name": "Euro / Pound Sterling",
+      "basePrice": 0.84783,
+      "decimals": 5
+    },
+    {
+      "key": "eurjpy",
+      "symbol": "EUR_JPY",
+      "yahooSymbol": "EURJPY=X",
+      "name": "Euro / Japanese Yen",
+      "basePrice": 170,
+      "decimals": 3
+    },
+    {
+      "key": "euraud",
+      "symbol": "EUR_AUD",
+      "yahooSymbol": "EURAUD=X",
+      "name": "Euro / Australian Dollar",
+      "basePrice": 1.63043,
+      "decimals": 5
+    },
+    {
+      "key": "eurcad",
+      "symbol": "EUR_CAD",
+      "yahooSymbol": "EURCAD=X",
+      "name": "Euro / Canadian Dollar",
+      "basePrice": 1.47826,
+      "decimals": 5
+    },
+    {
+      "key": "eurchf",
+      "symbol": "EUR_CHF",
+      "yahooSymbol": "EURCHF=X",
+      "name": "Euro / Swiss Franc",
+      "basePrice": 0.96739,
+      "decimals": 5
+    },
+    {
+      "key": "eurnzd",
+      "symbol": "EUR_NZD",
+      "yahooSymbol": "EURNZD=X",
+      "name": "Euro / New Zealand Dollar",
+      "basePrice": 1.77174,
+      "decimals": 5
+    },
+    {
+      "key": "gbpusd",
+      "symbol": "GBP_USD",
+      "yahooSymbol": "GBPUSD=X",
+      "name": "Pound Sterling / US Dollar",
+      "basePrice": 1.28205,
+      "decimals": 5
+    },
+    {
+      "key": "gbpeur",
+      "symbol": "GBP_EUR",
+      "yahooSymbol": "GBPEUR=X",
+      "name": "Pound Sterling / Euro",
+      "basePrice": 1.17949,
+      "decimals": 5
+    },
+    {
+      "key": "gbpjpy",
+      "symbol": "GBP_JPY",
+      "yahooSymbol": "GBPJPY=X",
+      "name": "Pound Sterling / Japanese Yen",
+      "basePrice": 200.513,
+      "decimals": 3
+    },
+    {
+      "key": "gbpaud",
+      "symbol": "GBP_AUD",
+      "yahooSymbol": "GBPAUD=X",
+      "name": "Pound Sterling / Australian Dollar",
+      "basePrice": 1.92308,
+      "decimals": 5
+    },
+    {
+      "key": "gbpcad",
+      "symbol": "GBP_CAD",
+      "yahooSymbol": "GBPCAD=X",
+      "name": "Pound Sterling / Canadian Dollar",
+      "basePrice": 1.74359,
+      "decimals": 5
+    },
+    {
+      "key": "gbpchf",
+      "symbol": "GBP_CHF",
+      "yahooSymbol": "GBPCHF=X",
+      "name": "Pound Sterling / Swiss Franc",
+      "basePrice": 1.14103,
+      "decimals": 5
+    },
+    {
+      "key": "gbpnzd",
+      "symbol": "GBP_NZD",
+      "yahooSymbol": "GBPNZD=X",
+      "name": "Pound Sterling / New Zealand Dollar",
+      "basePrice": 2.08974,
+      "decimals": 5
+    },
+    {
+      "key": "jpyusd",
+      "symbol": "JPY_USD",
+      "yahooSymbol": "JPYUSD=X",
+      "name": "Japanese Yen / US Dollar",
+      "basePrice": 0.00639,
+      "decimals": 5
+    },
+    {
+      "key": "jpyeur",
+      "symbol": "JPY_EUR",
+      "yahooSymbol": "JPYEUR=X",
+      "name": "Japanese Yen / Euro",
+      "basePrice": 0.00588,
+      "decimals": 5
+    },
+    {
+      "key": "jpygbp",
+      "symbol": "JPY_GBP",
+      "yahooSymbol": "JPYGBP=X",
+      "name": "Japanese Yen / Pound Sterling",
+      "basePrice": 0.00499,
+      "decimals": 5
+    },
+    {
+      "key": "jpyaud",
+      "symbol": "JPY_AUD",
+      "yahooSymbol": "JPYAUD=X",
+      "name": "Japanese Yen / Australian Dollar",
+      "basePrice": 0.00959,
+      "decimals": 5
+    },
+    {
+      "key": "jpycad",
+      "symbol": "JPY_CAD",
+      "yahooSymbol": "JPYCAD=X",
+      "name": "Japanese Yen / Canadian Dollar",
+      "basePrice": 0.0087,
+      "decimals": 5
+    },
+    {
+      "key": "jpychf",
+      "symbol": "JPY_CHF",
+      "yahooSymbol": "JPYCHF=X",
+      "name": "Japanese Yen / Swiss Franc",
+      "basePrice": 0.00569,
+      "decimals": 5
+    },
+    {
+      "key": "jpynzd",
+      "symbol": "JPY_NZD",
+      "yahooSymbol": "JPYNZD=X",
+      "name": "Japanese Yen / New Zealand Dollar",
+      "basePrice": 0.01042,
+      "decimals": 5
+    },
+    {
+      "key": "audusd",
+      "symbol": "AUD_USD",
+      "yahooSymbol": "AUDUSD=X",
+      "name": "Australian Dollar / US Dollar",
+      "basePrice": 0.66667,
+      "decimals": 5
+    },
+    {
+      "key": "audeur",
+      "symbol": "AUD_EUR",
+      "yahooSymbol": "AUDEUR=X",
+      "name": "Australian Dollar / Euro",
+      "basePrice": 0.61333,
+      "decimals": 5
+    },
+    {
+      "key": "audgbp",
+      "symbol": "AUD_GBP",
+      "yahooSymbol": "AUDGBP=X",
+      "name": "Australian Dollar / Pound Sterling",
+      "basePrice": 0.52,
+      "decimals": 5
+    },
+    {
+      "key": "audjpy",
+      "symbol": "AUD_JPY",
+      "yahooSymbol": "AUDJPY=X",
+      "name": "Australian Dollar / Japanese Yen",
+      "basePrice": 104.267,
+      "decimals": 3
+    },
+    {
+      "key": "audcad",
+      "symbol": "AUD_CAD",
+      "yahooSymbol": "AUDCAD=X",
+      "name": "Australian Dollar / Canadian Dollar",
+      "basePrice": 0.90667,
+      "decimals": 5
+    },
+    {
+      "key": "audchf",
+      "symbol": "AUD_CHF",
+      "yahooSymbol": "AUDCHF=X",
+      "name": "Australian Dollar / Swiss Franc",
+      "basePrice": 0.59333,
+      "decimals": 5
+    },
+    {
+      "key": "audnzd",
+      "symbol": "AUD_NZD",
+      "yahooSymbol": "AUDNZD=X",
+      "name": "Australian Dollar / New Zealand Dollar",
+      "basePrice": 1.08667,
+      "decimals": 5
+    },
+    {
+      "key": "cadusd",
+      "symbol": "CAD_USD",
+      "yahooSymbol": "CADUSD=X",
+      "name": "Canadian Dollar / US Dollar",
+      "basePrice": 0.73529,
+      "decimals": 5
+    },
+    {
+      "key": "cadeur",
+      "symbol": "CAD_EUR",
+      "yahooSymbol": "CADEUR=X",
+      "name": "Canadian Dollar / Euro",
+      "basePrice": 0.67647,
+      "decimals": 5
+    },
+    {
+      "key": "cadgbp",
+      "symbol": "CAD_GBP",
+      "yahooSymbol": "CADGBP=X",
+      "name": "Canadian Dollar / Pound Sterling",
+      "basePrice": 0.57353,
+      "decimals": 5
+    },
+    {
+      "key": "cadjpy",
+      "symbol": "CAD_JPY",
+      "yahooSymbol": "CADJPY=X",
+      "name": "Canadian Dollar / Japanese Yen",
+      "basePrice": 115,
+      "decimals": 3
+    },
+    {
+      "key": "cadaud",
+      "symbol": "CAD_AUD",
+      "yahooSymbol": "CADAUD=X",
+      "name": "Canadian Dollar / Australian Dollar",
+      "basePrice": 1.10294,
+      "decimals": 5
+    },
+    {
+      "key": "cadchf",
+      "symbol": "CAD_CHF",
+      "yahooSymbol": "CADCHF=X",
+      "name": "Canadian Dollar / Swiss Franc",
+      "basePrice": 0.65441,
+      "decimals": 5
+    },
+    {
+      "key": "cadnzd",
+      "symbol": "CAD_NZD",
+      "yahooSymbol": "CADNZD=X",
+      "name": "Canadian Dollar / New Zealand Dollar",
+      "basePrice": 1.19853,
+      "decimals": 5
+    },
+    {
+      "key": "chfusd",
+      "symbol": "CHF_USD",
+      "yahooSymbol": "CHFUSD=X",
+      "name": "Swiss Franc / US Dollar",
+      "basePrice": 1.1236,
+      "decimals": 5
+    },
+    {
+      "key": "chfeur",
+      "symbol": "CHF_EUR",
+      "yahooSymbol": "CHFEUR=X",
+      "name": "Swiss Franc / Euro",
+      "basePrice": 1.03371,
+      "decimals": 5
+    },
+    {
+      "key": "chfgbp",
+      "symbol": "CHF_GBP",
+      "yahooSymbol": "CHFGBP=X",
+      "name": "Swiss Franc / Pound Sterling",
+      "basePrice": 0.8764,
+      "decimals": 5
+    },
+    {
+      "key": "chfjpy",
+      "symbol": "CHF_JPY",
+      "yahooSymbol": "CHFJPY=X",
+      "name": "Swiss Franc / Japanese Yen",
+      "basePrice": 175.73,
+      "decimals": 3
+    },
+    {
+      "key": "chfaud",
+      "symbol": "CHF_AUD",
+      "yahooSymbol": "CHFAUD=X",
+      "name": "Swiss Franc / Australian Dollar",
+      "basePrice": 1.68539,
+      "decimals": 5
+    },
+    {
+      "key": "chfcad",
+      "symbol": "CHF_CAD",
+      "yahooSymbol": "CHFCAD=X",
+      "name": "Swiss Franc / Canadian Dollar",
+      "basePrice": 1.52809,
+      "decimals": 5
+    },
+    {
+      "key": "chfnzd",
+      "symbol": "CHF_NZD",
+      "yahooSymbol": "CHFNZD=X",
+      "name": "Swiss Franc / New Zealand Dollar",
+      "basePrice": 1.83146,
+      "decimals": 5
+    },
+    {
+      "key": "nzdusd",
+      "symbol": "NZD_USD",
+      "yahooSymbol": "NZDUSD=X",
+      "name": "New Zealand Dollar / US Dollar",
+      "basePrice": 0.6135,
+      "decimals": 5
+    },
+    {
+      "key": "nzdeur",
+      "symbol": "NZD_EUR",
+      "yahooSymbol": "NZDEUR=X",
+      "name": "New Zealand Dollar / Euro",
+      "basePrice": 0.56442,
+      "decimals": 5
+    },
+    {
+      "key": "nzdgbp",
+      "symbol": "NZD_GBP",
+      "yahooSymbol": "NZDGBP=X",
+      "name": "New Zealand Dollar / Pound Sterling",
+      "basePrice": 0.47853,
+      "decimals": 5
+    },
+    {
+      "key": "nzdjpy",
+      "symbol": "NZD_JPY",
+      "yahooSymbol": "NZDJPY=X",
+      "name": "New Zealand Dollar / Japanese Yen",
+      "basePrice": 95.951,
+      "decimals": 3
+    },
+    {
+      "key": "nzdaud",
+      "symbol": "NZD_AUD",
+      "yahooSymbol": "NZDAUD=X",
+      "name": "New Zealand Dollar / Australian Dollar",
+      "basePrice": 0.92025,
+      "decimals": 5
+    },
+    {
+      "key": "nzdcad",
+      "symbol": "NZD_CAD",
+      "yahooSymbol": "NZDCAD=X",
+      "name": "New Zealand Dollar / Canadian Dollar",
+      "basePrice": 0.83436,
+      "decimals": 5
+    },
+    {
+      "key": "nzdchf",
+      "symbol": "NZD_CHF",
+      "yahooSymbol": "NZDCHF=X",
+      "name": "New Zealand Dollar / Swiss Franc",
+      "basePrice": 0.54601,
+      "decimals": 5
+    },
+    {
+      "key": "usdinr",
+      "symbol": "USD_INR",
+      "yahooSymbol": "USDINR=X",
+      "name": "US Dollar / Indian Rupee",
+      "basePrice": 83.5,
+      "decimals": 4
+    },
+    {
+      "key": "usdcny",
+      "symbol": "USD_CNY",
+      "yahooSymbol": "USDCNY=X",
+      "name": "US Dollar / Chinese Yuan",
+      "basePrice": 7.25,
+      "decimals": 5
+    },
+    {
+      "key": "usdhkd",
+      "symbol": "USD_HKD",
+      "yahooSymbol": "USDHKD=X",
+      "name": "US Dollar / Hong Kong Dollar",
+      "basePrice": 7.8,
+      "decimals": 5
+    },
+    {
+      "key": "usdsgd",
+      "symbol": "USD_SGD",
+      "yahooSymbol": "USDSGD=X",
+      "name": "US Dollar / Singapore Dollar",
+      "basePrice": 1.35,
+      "decimals": 5
+    },
+    {
+      "key": "usdsek",
+      "symbol": "USD_SEK",
+      "yahooSymbol": "USDSEK=X",
+      "name": "US Dollar / Swedish Krona",
+      "basePrice": 10.45,
+      "decimals": 4
+    },
+    {
+      "key": "usdnok",
+      "symbol": "USD_NOK",
+      "yahooSymbol": "USDNOK=X",
+      "name": "US Dollar / Norwegian Krone",
+      "basePrice": 10.6,
+      "decimals": 4
+    },
+    {
+      "key": "usddkk",
+      "symbol": "USD_DKK",
+      "yahooSymbol": "USDDKK=X",
+      "name": "US Dollar / Danish Krone",
+      "basePrice": 6.85,
+      "decimals": 5
+    },
+    {
+      "key": "usdmxn",
+      "symbol": "USD_MXN",
+      "yahooSymbol": "USDMXN=X",
+      "name": "US Dollar / Mexican Peso",
+      "basePrice": 18.2,
+      "decimals": 4
+    },
+    {
+      "key": "usdzar",
+      "symbol": "USD_ZAR",
+      "yahooSymbol": "USDZAR=X",
+      "name": "US Dollar / South African Rand",
+      "basePrice": 18.1,
+      "decimals": 4
+    },
+    {
+      "key": "usdtry",
+      "symbol": "USD_TRY",
+      "yahooSymbol": "USDTRY=X",
+      "name": "US Dollar / Turkish Lira",
+      "basePrice": 32.8,
+      "decimals": 4
+    },
+    {
+      "key": "usdaed",
+      "symbol": "USD_AED",
+      "yahooSymbol": "USDAED=X",
+      "name": "US Dollar / UAE Dirham",
+      "basePrice": 3.67,
+      "decimals": 5
+    },
+    {
+      "key": "usdsar",
+      "symbol": "USD_SAR",
+      "yahooSymbol": "USDSAR=X",
+      "name": "US Dollar / Saudi Riyal",
+      "basePrice": 3.75,
+      "decimals": 5
+    },
+    {
+      "key": "usdthb",
+      "symbol": "USD_THB",
+      "yahooSymbol": "USDTHB=X",
+      "name": "US Dollar / Thai Baht",
+      "basePrice": 36.6,
+      "decimals": 4
+    },
+    {
+      "key": "usdkrw",
+      "symbol": "USD_KRW",
+      "yahooSymbol": "USDKRW=X",
+      "name": "US Dollar / South Korean Won",
+      "basePrice": 1385,
+      "decimals": 3
+    },
+    {
+      "key": "eurinr",
+      "symbol": "EUR_INR",
+      "yahooSymbol": "EURINR=X",
+      "name": "Euro / Indian Rupee",
+      "basePrice": 90.7609,
+      "decimals": 4
+    },
+    {
+      "key": "eurcny",
+      "symbol": "EUR_CNY",
+      "yahooSymbol": "EURCNY=X",
+      "name": "Euro / Chinese Yuan",
+      "basePrice": 7.88043,
+      "decimals": 5
+    },
+    {
+      "key": "eurhkd",
+      "symbol": "EUR_HKD",
+      "yahooSymbol": "EURHKD=X",
+      "name": "Euro / Hong Kong Dollar",
+      "basePrice": 8.47826,
+      "decimals": 5
+    },
+    {
+      "key": "eursgd",
+      "symbol": "EUR_SGD",
+      "yahooSymbol": "EURSGD=X",
+      "name": "Euro / Singapore Dollar",
+      "basePrice": 1.46739,
+      "decimals": 5
+    },
+    {
+      "key": "eursek",
+      "symbol": "EUR_SEK",
+      "yahooSymbol": "EURSEK=X",
+      "name": "Euro / Swedish Krona",
+      "basePrice": 11.3587,
+      "decimals": 4
+    },
+    {
+      "key": "eurnok",
+      "symbol": "EUR_NOK",
+      "yahooSymbol": "EURNOK=X",
+      "name": "Euro / Norwegian Krone",
+      "basePrice": 11.5217,
+      "decimals": 4
+    },
+    {
+      "key": "eurdkk",
+      "symbol": "EUR_DKK",
+      "yahooSymbol": "EURDKK=X",
+      "name": "Euro / Danish Krone",
+      "basePrice": 7.44565,
+      "decimals": 5
+    },
+    {
+      "key": "eurmxn",
+      "symbol": "EUR_MXN",
+      "yahooSymbol": "EURMXN=X",
+      "name": "Euro / Mexican Peso",
+      "basePrice": 19.7826,
+      "decimals": 4
+    },
+    {
+      "key": "eurzar",
+      "symbol": "EUR_ZAR",
+      "yahooSymbol": "EURZAR=X",
+      "name": "Euro / South African Rand",
+      "basePrice": 19.6739,
+      "decimals": 4
+    },
+    {
+      "key": "eurtry",
+      "symbol": "EUR_TRY",
+      "yahooSymbol": "EURTRY=X",
+      "name": "Euro / Turkish Lira",
+      "basePrice": 35.6522,
+      "decimals": 4
+    },
+    {
+      "key": "euraed",
+      "symbol": "EUR_AED",
+      "yahooSymbol": "EURAED=X",
+      "name": "Euro / UAE Dirham",
+      "basePrice": 3.98913,
+      "decimals": 5
+    },
+    {
+      "key": "eursar",
+      "symbol": "EUR_SAR",
+      "yahooSymbol": "EURSAR=X",
+      "name": "Euro / Saudi Riyal",
+      "basePrice": 4.07609,
+      "decimals": 5
+    },
+    {
+      "key": "eurthb",
+      "symbol": "EUR_THB",
+      "yahooSymbol": "EURTHB=X",
+      "name": "Euro / Thai Baht",
+      "basePrice": 39.7826,
+      "decimals": 4
+    },
+    {
+      "key": "eurkrw",
+      "symbol": "EUR_KRW",
+      "yahooSymbol": "EURKRW=X",
+      "name": "Euro / South Korean Won",
+      "basePrice": 1505.435,
+      "decimals": 3
+    },
+    {
+      "key": "gbpinr",
+      "symbol": "GBP_INR",
+      "yahooSymbol": "GBPINR=X",
+      "name": "Pound Sterling / Indian Rupee",
+      "basePrice": 107.051,
+      "decimals": 3
+    },
+    {
+      "key": "gbpcny",
+      "symbol": "GBP_CNY",
+      "yahooSymbol": "GBPCNY=X",
+      "name": "Pound Sterling / Chinese Yuan",
+      "basePrice": 9.29487,
+      "decimals": 5
+    },
+    {
+      "key": "gbphkd",
+      "symbol": "GBP_HKD",
+      "yahooSymbol": "GBPHKD=X",
+      "name": "Pound Sterling / Hong Kong Dollar",
+      "basePrice": 10,
+      "decimals": 5
+    },
+    {
+      "key": "gbpsgd",
+      "symbol": "GBP_SGD",
+      "yahooSymbol": "GBPSGD=X",
+      "name": "Pound Sterling / Singapore Dollar",
+      "basePrice": 1.73077,
+      "decimals": 5
+    },
+    {
+      "key": "gbpsek",
+      "symbol": "GBP_SEK",
+      "yahooSymbol": "GBPSEK=X",
+      "name": "Pound Sterling / Swedish Krona",
+      "basePrice": 13.3974,
+      "decimals": 4
+    },
+    {
+      "key": "gbpnok",
+      "symbol": "GBP_NOK",
+      "yahooSymbol": "GBPNOK=X",
+      "name": "Pound Sterling / Norwegian Krone",
+      "basePrice": 13.5897,
+      "decimals": 4
+    },
+    {
+      "key": "gbpdkk",
+      "symbol": "GBP_DKK",
+      "yahooSymbol": "GBPDKK=X",
+      "name": "Pound Sterling / Danish Krone",
+      "basePrice": 8.78205,
+      "decimals": 5
+    },
+    {
+      "key": "gbpmxn",
+      "symbol": "GBP_MXN",
+      "yahooSymbol": "GBPMXN=X",
+      "name": "Pound Sterling / Mexican Peso",
+      "basePrice": 23.3333,
+      "decimals": 4
+    },
+    {
+      "key": "gbpzar",
+      "symbol": "GBP_ZAR",
+      "yahooSymbol": "GBPZAR=X",
+      "name": "Pound Sterling / South African Rand",
+      "basePrice": 23.2051,
+      "decimals": 4
+    },
+    {
+      "key": "gbptry",
+      "symbol": "GBP_TRY",
+      "yahooSymbol": "GBPTRY=X",
+      "name": "Pound Sterling / Turkish Lira",
+      "basePrice": 42.0513,
+      "decimals": 4
+    },
+    {
+      "key": "gbpaed",
+      "symbol": "GBP_AED",
+      "yahooSymbol": "GBPAED=X",
+      "name": "Pound Sterling / UAE Dirham",
+      "basePrice": 4.70513,
+      "decimals": 5
+    },
+    {
+      "key": "gbpsar",
+      "symbol": "GBP_SAR",
+      "yahooSymbol": "GBPSAR=X",
+      "name": "Pound Sterling / Saudi Riyal",
+      "basePrice": 4.80769,
+      "decimals": 5
+    },
+    {
+      "key": "gbpthb",
+      "symbol": "GBP_THB",
+      "yahooSymbol": "GBPTHB=X",
+      "name": "Pound Sterling / Thai Baht",
+      "basePrice": 46.9231,
+      "decimals": 4
+    },
+    {
+      "key": "gbpkrw",
+      "symbol": "GBP_KRW",
+      "yahooSymbol": "GBPKRW=X",
+      "name": "Pound Sterling / South Korean Won",
+      "basePrice": 1775.641,
+      "decimals": 3
+    },
+    {
+      "key": "inrjpy",
+      "symbol": "INR_JPY",
+      "yahooSymbol": "INRJPY=X",
+      "name": "Indian Rupee / Japanese Yen",
+      "basePrice": 1.873,
+      "decimals": 3
+    },
+    {
+      "key": "cnyjpy",
+      "symbol": "CNY_JPY",
+      "yahooSymbol": "CNYJPY=X",
+      "name": "Chinese Yuan / Japanese Yen",
+      "basePrice": 21.572,
+      "decimals": 3
+    }
+  ],
+  "discoveryPairs": [
+    {
+      "key": "hkdjpy",
+      "symbol": "HKD_JPY",
+      "yahooSymbol": "HKDJPY=X",
+      "name": "Hong Kong Dollar / Japanese Yen",
+      "basePrice": 20.051,
+      "decimals": 3
+    },
+    {
+      "key": "sgdjpy",
+      "symbol": "SGD_JPY",
+      "yahooSymbol": "SGDJPY=X",
+      "name": "Singapore Dollar / Japanese Yen",
+      "basePrice": 115.852,
+      "decimals": 3
+    },
+    {
+      "key": "sekjpy",
+      "symbol": "SEK_JPY",
+      "yahooSymbol": "SEKJPY=X",
+      "name": "Swedish Krona / Japanese Yen",
+      "basePrice": 14.967,
+      "decimals": 3
+    },
+    {
+      "key": "nokjpy",
+      "symbol": "NOK_JPY",
+      "yahooSymbol": "NOKJPY=X",
+      "name": "Norwegian Krone / Japanese Yen",
+      "basePrice": 14.755,
+      "decimals": 3
+    },
+    {
+      "key": "dkkjpy",
+      "symbol": "DKK_JPY",
+      "yahooSymbol": "DKKJPY=X",
+      "name": "Danish Krone / Japanese Yen",
+      "basePrice": 22.832,
+      "decimals": 3
+    },
+    {
+      "key": "mxnjpy",
+      "symbol": "MXN_JPY",
+      "yahooSymbol": "MXNJPY=X",
+      "name": "Mexican Peso / Japanese Yen",
+      "basePrice": 8.593,
+      "decimals": 3
+    },
+    {
+      "key": "zarjpy",
+      "symbol": "ZAR_JPY",
+      "yahooSymbol": "ZARJPY=X",
+      "name": "South African Rand / Japanese Yen",
+      "basePrice": 8.641,
+      "decimals": 3
+    },
+    {
+      "key": "tryjpy",
+      "symbol": "TRY_JPY",
+      "yahooSymbol": "TRYJPY=X",
+      "name": "Turkish Lira / Japanese Yen",
+      "basePrice": 4.768,
+      "decimals": 3
+    },
+    {
+      "key": "aedjpy",
+      "symbol": "AED_JPY",
+      "yahooSymbol": "AEDJPY=X",
+      "name": "UAE Dirham / Japanese Yen",
+      "basePrice": 42.616,
+      "decimals": 3
+    },
+    {
+      "key": "sarjpy",
+      "symbol": "SAR_JPY",
+      "yahooSymbol": "SARJPY=X",
+      "name": "Saudi Riyal / Japanese Yen",
+      "basePrice": 41.707,
+      "decimals": 3
+    },
+    {
+      "key": "thbjpy",
+      "symbol": "THB_JPY",
+      "yahooSymbol": "THBJPY=X",
+      "name": "Thai Baht / Japanese Yen",
+      "basePrice": 4.273,
+      "decimals": 3
+    },
+    {
+      "key": "krwjpy",
+      "symbol": "KRW_JPY",
+      "yahooSymbol": "KRWJPY=X",
+      "name": "South Korean Won / Japanese Yen",
+      "basePrice": 0.113,
+      "decimals": 3
+    }
+  ]
+}
