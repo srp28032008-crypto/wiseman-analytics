@@ -128,6 +128,29 @@ const initialSeedResults = [
   }
 ];
 
+const getTradingViewSymbol = (market, symbol) => {
+  const cleanSymbol = (symbol || '').toUpperCase().replace('_', '');
+  if (market === 'indianStocks') {
+    return 'NSE:' + (symbol || '');
+  } else if (market === 'crypto') {
+    return 'BINANCE:' + cleanSymbol;
+  } else if (market === 'globalMarket') {
+    const symMap = {
+      'GOLD': 'TVC:GOLD',
+      'SILVER': 'TVC:SILVER',
+      'CRUDEOIL': 'TVC:USOIL',
+      'NATGAS': 'TVC:NATGAS',
+      'SP500': 'SP:SPX',
+      'NASDAQ100': 'NASDAQ:NDX',
+      'DOWJONES': 'INDEX:DJI'
+    };
+    return symMap[cleanSymbol] || 'TVC:GOLD';
+  } else {
+    // forex
+    return 'FX_IDC:' + cleanSymbol;
+  }
+};
+
 export default function App() {
   const [token, setToken] = useState(null);
   const [currentLang, setCurrentLang] = useState(localStorage.getItem('wiseman_lang') || 'en');
@@ -1617,7 +1640,7 @@ export default function App() {
                   ) : (
                     <div id="tradingview_chart_container" style={{ width: '100%', height: '100%', display: 'block' }}>
                       <iframe
-                        src={`https://s.tradingview.com/widgetembed/?frameElementId=tradingview_chart&symbol=${activeMarket === 'indianStocks' ? 'NSE%3A' + activeConfig.symbol : (activeMarket === 'crypto' ? 'BINANCE%3A' + activeConfig.symbol.replace('_', '') : 'FX_IDC%3A' + activeConfig.symbol.replace('_', ''))}&interval=D&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=%5B%5D&theme=dark&style=1&timezone=Exchange&studies_overrides=%7B%7D&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=en&utm_source=localhost&utm_medium=widget&utm_campaign=chart&utm_term=NSE%3ANIFTY`}
+                        src={`https://s.tradingview.com/widgetembed/?frameElementId=tradingview_chart&symbol=${encodeURIComponent(getTradingViewSymbol(activeMarket, activeConfig.symbol))}&interval=D&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=%5B%5D&theme=dark&style=1&timezone=Exchange&studies_overrides=%7B%7D&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=en&utm_source=localhost&utm_medium=widget&utm_campaign=chart&utm_term=NSE%3ANIFTY`}
                         style={{ width: '100%', height: '100%', border: 'none' }}
                         title="TradingView Widget"
                       />

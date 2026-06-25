@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -4110,20 +4110,38 @@ function initTradingViewWidget(symbol) {
   
   // Map standard symbols to TradingView symbols
   let tvSymbol = "FOREXCOM:IN50";
-  const sym = (symbol || '').toUpperCase();
-  if (sym === "NIFTY_50" || sym === "NIFTY") tvSymbol = "FOREXCOM:IN50";
-  else if (sym === "RELIANCE") tvSymbol = "BSE:RELIANCE";
-  else if (sym === "TATA_MOTORS" || sym === "TATA") tvSymbol = "BSE:TATAMOTORS";
-  else if (sym === "TATA_TECH") tvSymbol = "BSE:TATATECH";
-  else if (sym === "BTC_USDT" || sym === "BTC") tvSymbol = "BINANCE:BTCUSDT";
-  else if (sym === "ETH_USDT" || sym === "ETH") tvSymbol = "BINANCE:ETHUSDT";
-  else if (sym === "SOL_USDT" || sym === "SOL") tvSymbol = "BINANCE:SOLUSDT";
-  else if (sym === "SOL_JUP") tvSymbol = "BINANCE:JUPSOL";
-  else if (sym.endsWith('_USDT')) tvSymbol = "BINANCE:" + sym.replace('_', '');
-  else if (sym === "EUR_USD" || sym === "EUR") tvSymbol = "FX:EURUSD";
-  else if (sym === "GBP_USD" || sym === "GBP") tvSymbol = "FX:GBPUSD";
-  else if (sym === "USD_JPY" || sym === "JPY") tvSymbol = "FX:USDJPY";
-  else if (sym === "USD_CHF" || sym === "CHF") tvSymbol = "FX:USDCHF";
+  const sym = (symbol || '').toUpperCase().trim();
+  const symClean = sym.replace('_', '');
+  
+  if (sym === "NIFTY_50" || sym === "NIFTY") {
+    tvSymbol = "FOREXCOM:IN50";
+  } else if (sym === "RELIANCE") {
+    tvSymbol = "BSE:RELIANCE";
+  } else if (sym === "TATA_MOTORS" || sym === "TATA") {
+    tvSymbol = "BSE:TATAMOTORS";
+  } else if (sym === "TATA_TECH") {
+    tvSymbol = "BSE:TATATECH";
+  } else if (sym === "GOLD") {
+    tvSymbol = "TVC:GOLD";
+  } else if (sym === "SILVER") {
+    tvSymbol = "TVC:SILVER";
+  } else if (sym === "CRUDE_OIL" || sym === "CRUDE") {
+    tvSymbol = "TVC:USOIL";
+  } else if (sym === "NAT_GAS" || sym === "NATGAS") {
+    tvSymbol = "TVC:NATGAS";
+  } else if (sym === "S&P_500" || sym === "SP500") {
+    tvSymbol = "SP:SPX";
+  } else if (sym === "NASDAQ_100" || sym === "NASDAQ") {
+    tvSymbol = "NASDAQ:NDX";
+  } else if (sym === "DOW_JONES" || sym === "DOW") {
+    tvSymbol = "INDEX:DJI";
+  } else if (sym === "BTC" || sym === "ETH" || sym === "SOL" || sym.endsWith('_USDT')) {
+    const coin = sym.endsWith('_USDT') ? symClean : sym + "USDT";
+    tvSymbol = "BINANCE:" + coin;
+  } else {
+    // default/forex fallback
+    tvSymbol = "FX_IDC:" + symClean;
+  }
 
   // Update the symbol indicator badge in the UI
   const indicator = document.getElementById('tvSymbolIndicator');
