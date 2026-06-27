@@ -1617,4 +1617,63 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Analyzer Workspace Selector Tabs */
+.workspace-switcher {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.workspace-tab-btn {
+  flex: 1;
+  padding: 10px 16px;
+  background: rgba(13, 14, 21, 0.45);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: 10px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.workspace-tab-btn:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.workspace-tab-btn.active {
+  background: rgba(0, 240, 255, 0.06);
+  border-color: var(--cyan);
+  color: var(--cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+/* Backtest Simulator Loader */
+@keyframes progressAnim {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.backtest-progress-bar div {
+  background: linear-gradient(90deg, var(--green-neon), #00b0ff, var(--green-neon));
+  background-size: 200% 200%;
+  animation: progressAnim 1.5s ease infinite;
+}
+
+/* Sizer Sizing Input Highlights */
+.price-input:focus {
+  border-color: var(--cyan);
+  box-shadow: var(--glow-cyan);
+}
+
 
