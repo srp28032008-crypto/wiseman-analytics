@@ -227,6 +227,17 @@ export default function App() {
 
   const decimals = activeConfig.decimals;
 
+  // Stable hash code of active symbol for deterministic backtester curves
+  const hash = useMemo(() => {
+    const symbol = activeConfig.symbol || '';
+    let h = 0;
+    for (let i = 0; i < symbol.length; i++) {
+      h = (h << 5) - h + symbol.charCodeAt(i);
+      h |= 0;
+    }
+    return Math.abs(h);
+  }, [activeConfig.symbol]);
+
   // Memoize AI Equities Intelligence (98% tips & analyzed news)
   const equitiesIntel = useMemo(() => {
     if (activeMarket !== 'indianStocks') return null;
@@ -1799,7 +1810,7 @@ export default function App() {
                             {currentLang === 'mr' ? 'योग्य पोझिशन साईझ' : (currentLang === 'hi' ? 'इष्टतम पोजीशन आकार' : (currentLang === 'es' ? 'Tamaño Óptimo' : 'Optimal Position Size'))}
                           </span>
                           <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--green-neon)', fontFamily: 'monospace' }}>
-                            {optimalSize.toFixed(market === 'forex' ? 0 : 2)} UNITS
+                            {optimalSize.toFixed(activeMarket === 'forex' ? 0 : 2)} UNITS
                           </span>
                           <span style={{ fontSize: '8px', color: 'var(--text-muted)', display: 'block', marginTop: '2px' }}>Max Loss Limit Cap</span>
                         </div>
