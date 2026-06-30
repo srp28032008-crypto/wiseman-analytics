@@ -194,6 +194,8 @@ export default function AuthGate({ children, currentLang, setCurrentLang, onAuth
   return (
     <div className="login-portal-overlay">
       <div className="login-grid-bg"></div>
+      <div className="login-orb orb-1"></div>
+      <div className="login-orb orb-2"></div>
 
       <div className="login-split-wrapper">
         {/* Left Side: Modern Premium Stock Terminal Promos & Live Indexes */}
@@ -225,7 +227,7 @@ export default function AuthGate({ children, currentLang, setCurrentLang, onAuth
           {/* Interactive Index Tickers Grid */}
           <div style={styles.cardsGrid}>
             {/* Nifty 50 */}
-            <div style={styles.glassCard}>
+            <div className="glass-card-animated" style={styles.glassCard}>
               <div style={styles.cardHeader}>
                 <span style={styles.cardTag}>NSE INDEX</span>
                 <span style={styles.liveBadge}><span style={styles.pulseDot}></span>LIVE</span>
@@ -246,7 +248,7 @@ export default function AuthGate({ children, currentLang, setCurrentLang, onAuth
             </div>
 
             {/* Sensex */}
-            <div style={styles.glassCard}>
+            <div className="glass-card-animated" style={styles.glassCard}>
               <div style={styles.cardHeader}>
                 <span style={styles.cardTag}>BSE INDEX</span>
                 <span style={styles.liveBadge}><span style={styles.pulseDot}></span>LIVE</span>
@@ -267,7 +269,7 @@ export default function AuthGate({ children, currentLang, setCurrentLang, onAuth
             </div>
 
             {/* Bank Nifty */}
-            <div style={styles.glassCard}>
+            <div className="glass-card-animated" style={styles.glassCard}>
               <div style={styles.cardHeader}>
                 <span style={styles.cardTag}>NSE DERIVATIVES</span>
                 <span style={styles.liveBadge}><span style={styles.pulseDot}></span>LIVE</span>
@@ -425,7 +427,7 @@ export default function AuthGate({ children, currentLang, setCurrentLang, onAuth
               </div>
 
               {/* Submit Button */}
-              <button type="submit" style={styles.submitBtn}>
+              <button type="submit" className="login-btn-animated" style={styles.submitBtn}>
                 {isRegisterMode ? dict.btnRegisterSubmit : dict.btnLoginSubmit}
               </button>
             </form>

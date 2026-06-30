@@ -246,6 +246,13 @@ export default function App() {
 
   const dict = langDb[currentLang] || langDb['en'];
 
+  // Auto-redirect from Analysis Terminal tab if Indian Stocks are selected
+  useEffect(() => {
+    if (activeMarket === 'indianStocks' && activeWorkspaceTab === 'analysis') {
+      setActiveWorkspaceTab('quant');
+    }
+  }, [activeMarket, activeWorkspaceTab]);
+
   // Initialize equities catalog and chat welcome message
   useEffect(() => {
     // Populate equities catalog state
@@ -1453,28 +1460,30 @@ export default function App() {
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
             {/* Workspace switcher tab navigation */}
             <div className="workspace-switcher" style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
-              <button
-                className={`workspace-tab-btn ${activeWorkspaceTab === 'analysis' ? 'active' : ''}`}
-                onClick={() => setActiveWorkspaceTab('analysis')}
-                style={{
-                  flex: 1,
-                  padding: '8px 12px',
-                  background: activeWorkspaceTab === 'analysis' ? 'rgba(0, 240, 255, 0.08)' : 'rgba(13, 14, 21, 0.45)',
-                  border: '1px solid',
-                  borderColor: activeWorkspaceTab === 'analysis' ? 'var(--cyan)' : 'var(--border)',
-                  color: activeWorkspaceTab === 'analysis' ? 'var(--cyan)' : 'var(--text-secondary)',
-                  borderRadius: '8px',
-                  fontFamily: "'Orbitron', sans-serif",
-                  fontSize: '9.5px',
-                  fontWeight: 'bold',
-                  letterSpacing: '1px',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  boxShadow: activeWorkspaceTab === 'analysis' ? 'var(--glow-cyan)' : 'none'
-                }}
-              >
-                📊 {currentLang === 'mr' ? 'ॲनालिसिस टर्मिनल' : (currentLang === 'hi' ? 'एनालिसिस टर्मिनल' : (currentLang === 'es' ? 'TERMINAL DE ANÁLISIS' : 'ANALYSIS TERMINAL'))}
-              </button>
+              {activeMarket !== 'indianStocks' && (
+                <button
+                  className={`workspace-tab-btn ${activeWorkspaceTab === 'analysis' ? 'active' : ''}`}
+                  onClick={() => setActiveWorkspaceTab('analysis')}
+                  style={{
+                    flex: 1,
+                    padding: '8px 12px',
+                    background: activeWorkspaceTab === 'analysis' ? 'rgba(0, 240, 255, 0.08)' : 'rgba(13, 14, 21, 0.45)',
+                    border: '1px solid',
+                    borderColor: activeWorkspaceTab === 'analysis' ? 'var(--cyan)' : 'var(--border)',
+                    color: activeWorkspaceTab === 'analysis' ? 'var(--cyan)' : 'var(--text-secondary)',
+                    borderRadius: '8px',
+                    fontFamily: "'Orbitron', sans-serif",
+                    fontSize: '9.5px',
+                    fontWeight: 'bold',
+                    letterSpacing: '1px',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                    boxShadow: activeWorkspaceTab === 'analysis' ? 'var(--glow-cyan)' : 'none'
+                  }}
+                >
+                  📊 {currentLang === 'mr' ? 'ॲनालिसिस टर्मिनल' : (currentLang === 'hi' ? 'एनालिसिस टर्मिनल' : (currentLang === 'es' ? 'TERMINAL DE ANÁLISIS' : 'ANALYSIS TERMINAL'))}
+                </button>
+              )}
               <button
                 className={`workspace-tab-btn ${activeWorkspaceTab === 'quant' ? 'active' : ''}`}
                 onClick={() => setActiveWorkspaceTab('quant')}
@@ -1522,7 +1531,7 @@ export default function App() {
             </div>
 
             {/* TAB 1: ANALYSIS TERMINAL WORKSPACE */}
-            {activeWorkspaceTab === 'analysis' && (
+            {activeMarket !== 'indianStocks' && activeWorkspaceTab === 'analysis' && (
               <div id="chartPanelWrapper">
                 {/* Chart container card */}
                 <div className="panel-card">

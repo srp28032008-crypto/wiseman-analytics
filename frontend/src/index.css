@@ -1676,4 +1676,90 @@ footer {
   box-shadow: var(--glow-cyan);
 }
 
+/* Floating Ambient Orbs Keyframes & Classes */
+@keyframes floatOrb1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, 40px) scale(1.15); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes floatOrb2 {
+  0% { transform: translate(0, 0) scale(1.2); }
+  50% { transform: translate(-70px, -30px) scale(0.95); }
+  100% { transform: translate(0, 0) scale(1.2); }
+}
+
+.login-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  z-index: 2;
+  opacity: 0.15;
+  pointer-events: none;
+}
+.orb-1 {
+  width: 350px;
+  height: 350px;
+  background: #10b981;
+  top: -5%;
+  left: -5%;
+  animation: floatOrb1 18s infinite ease-in-out;
+}
+.orb-2 {
+  width: 450px;
+  height: 450px;
+  background: #00f0ff;
+  bottom: -10%;
+  right: -5%;
+  animation: floatOrb2 24s infinite ease-in-out;
+}
+
+/* Staggered entry delay and glows for index cards */
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.glass-card-animated {
+  animation: cardEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.glass-card-animated:nth-child(1) { animation-delay: 0.15s; }
+.glass-card-animated:nth-child(2) { animation-delay: 0.3s; }
+.glass-card-animated:nth-child(3) { animation-delay: 0.45s; }
+
+.glass-card-animated:hover {
+  transform: translateY(-4px) scale(1.02) !important;
+  border-color: rgba(16, 185, 129, 0.25) !important;
+  box-shadow: 
+    0 12px 25px -10px rgba(0, 0, 0, 0.5),
+    0 0 15px rgba(16, 185, 129, 0.08) !important;
+}
+
+/* Animated gradient submit button */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.login-btn-animated {
+  background: linear-gradient(-45deg, #10b981, #00f0ff, #059669, #0891b2) !important;
+  background-size: 300% 300% !important;
+  animation: gradientMove 5s infinite ease-in-out !important;
+  transition: all 0.3s ease !important;
+}
+
+.login-btn-animated:hover {
+  transform: scale(1.02);
+  box-shadow: 
+    0 6px 20px rgba(16, 185, 129, 0.35),
+    0 0 15px rgba(0, 240, 255, 0.2) !important;
+}
+
 
