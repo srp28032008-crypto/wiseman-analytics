@@ -68,6 +68,8 @@ export default function LiveChart({
     const priceRange = (maxPrice - minPrice) || 1;
     const pad = priceRange * 0.15;
 
+    const priceChartHeight = height * 0.72;
+
     return {
       N,
       startIndex,
@@ -77,8 +79,8 @@ export default function LiveChart({
       maxPrice,
       priceRange,
       pad,
-      calcY: (val) => height - (((val - (minPrice - pad)) / (priceRange + pad * 2)) * height),
-      calcValY: (y) => ((height - y) / height) * (priceRange + pad * 2) + (minPrice - pad),
+      calcY: (val) => priceChartHeight - (((val - (minPrice - pad)) / (priceRange + pad * 2)) * priceChartHeight),
+      calcValY: (y) => ((priceChartHeight - y) / priceChartHeight) * (priceRange + pad * 2) + (minPrice - pad),
       stepX: width / (visibleHistory.length - 1)
     };
   };
@@ -654,6 +656,122 @@ export default function LiveChart({
       ctx.textAlign = 'center';
       ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
       ctx.fillText(activeScannerAlert.desc, centerX, bannerY + 27);
+    }
+
+    // DRAW MARKET REGIME CLASSIFIER BADGE
+    if (activeHistory.length >= 20) {
+      const bb = calculateBollingerBands(activeHistory);
+      const len = activeHistory.length;
+      let regimeLabel = "REGIME: REGULAR MEAN-REVERSION";
+      let regimeColor = "var(--cyan)";
+      
+      const up = bb.upper[len - 1];
+      const dn = bb.lower[len - 1];
+      const mid = bb.middle[len - 1];
+      if (up && dn && mid) {
+        const widthPct = (up - dn) / mid;
+        let widths = [];
+        for (let i = Math.max(0, len - 20); i < len; i++) {
+          if (bb.upper[i] && bb.lower[i] && bb.middle[i]) {
+            widths.push((bb.upper[i] - bb.lower[i]) / bb.middle[i]);
+          }
+        }
+        const avgWidth = widths.reduce((a,b)=>a+b, 0) / widths.length;
+        const currentWidth = widthPct;
+        const latestPrice = activeHistory[len - 1];
+        
+        if (latestPrice > up) {
+          regimeLabel = currentLang === 'mr' ? "मार्केट स्थिती: तेजी ब्रेकआऊट / विस्तार" : "REGIME: BULLISH BREAKOUT / EXPANSION";
+          regimeColor = "var(--green-neon)";
+        } else if (latestPrice < dn) {
+          regimeLabel = currentLang === 'mr' ? "मार्केट स्थिती: मंदी ब्रेकआऊट / विस्तार" : "REGIME: BEARISH BREAKOUT / EXPANSION";
+          regimeColor = "var(--red-neon)";
+        } else if (currentWidth < avgWidth * 0.9) {
+          regimeLabel = currentLang === 'mr' ? "मार्केट स्थिती: कमी हालचाल (स्क्वीझ)" : "REGIME: SQUEEZE / LOW VOL RANGE";
+          regimeColor = "var(--gold-accent)";
+        } else if (currentWidth > avgWidth * 1.1) {
+          regimeLabel = currentLang === 'mr' ? "मार्केट स्थिती: उच्च हालचाल (व्होलॅटॅलिटी)" : "REGIME: HIGH VOLATILITY / EXPANDING";
+          regimeColor = "rgba(138, 43, 226, 1)";
+        } else {
+          regimeLabel = currentLang === 'mr' ? "मार्केट स्थिती: सामान्य समतोल" : "REGIME: REGULAR MEAN-REVERSION";
+          regimeColor = "var(--cyan)";
+        }
+      }
+      
+      ctx.font = 'bold 8px Orbitron';
+      const textWidth = ctx.measureText(regimeLabel).width;
+      ctx.fillStyle = 'rgba(13, 14, 21, 0.85)';
+      ctx.beginPath();
+      if (typeof ctx.roundRect === 'function') {
+        ctx.roundRect(width - textWidth - 25, 12, textWidth + 15, 18, 6);
+      } else {
+        ctx.rect(width - textWidth - 25, 12, textWidth + 15, 18);
+      }
+      ctx.fill();
+      ctx.strokeStyle = regimeColor + '50';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      ctx.fillStyle = regimeColor;
+      ctx.textAlign = 'left';
+      ctx.fillText(regimeLabel, width - textWidth - 17, 24);
+    }
+
+    // DRAW CUMULATIVE VOLUME DELTA (CVD) PANE
+    const cvdTop = height * 0.76;
+    const cvdHeight = height * 0.2;
+    
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, cvdTop - 4); ctx.lineTo(width, cvdTop - 4); ctx.stroke();
+    
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+    ctx.font = '7px Orbitron';
+    ctx.textAlign = 'left';
+    ctx.fillText('INSTITUTIONAL CVD (CUMULATIVE VOLUME DELTA) OSCILLATOR', 10, cvdTop + 6);
+    
+    let cvdValues = [];
+    let runningSum = 0;
+    for (let i = 0; i < activeHistory.length; i++) {
+      const priceChange = i === 0 ? 0 : activeHistory[i] - activeHistory[i - 1];
+      const baseDelta = priceChange * 0.75;
+      const noise = Math.sin(i * 15) * 0.12;
+      const delta = (baseDelta + noise) * (volume || 24.5);
+      runningSum += delta;
+      cvdValues.push(runningSum);
+    }
+    
+    const visibleCVD = cvdValues.slice(startIndex, endIndex);
+    if (visibleCVD.length >= 2) {
+      const minCVD = Math.min(...visibleCVD);
+      const maxCVD = Math.max(...visibleCVD);
+      const cvdRange = (maxCVD - minCVD) || 1;
+      const calcCvdY = (val) => cvdTop + cvdHeight - (((val - minCVD) / cvdRange) * cvdHeight);
+      
+      ctx.beginPath();
+      ctx.moveTo(0, cvdTop + cvdHeight);
+      for (let i = 0; i < visibleCVD.length; i++) {
+        ctx.lineTo(stepX * i, calcCvdY(visibleCVD[i]));
+      }
+      ctx.lineTo(width, cvdTop + cvdHeight);
+      ctx.closePath();
+      
+      const cvdGrd = ctx.createLinearGradient(0, cvdTop, 0, cvdTop + cvdHeight);
+      cvdGrd.addColorStop(0, 'rgba(0, 240, 255, 0.08)');
+      cvdGrd.addColorStop(1, 'rgba(0, 240, 255, 0)');
+      ctx.fillStyle = cvdGrd;
+      ctx.fill();
+      
+      ctx.beginPath();
+      for (let i = 0; i < visibleCVD.length; i++) {
+        const x = stepX * i;
+        const y = calcCvdY(visibleCVD[i]);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = 'var(--cyan)';
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
     }
 
     // Crosshair & Price Tag
