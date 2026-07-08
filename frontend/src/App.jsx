@@ -16,7 +16,7 @@ import {
 import { evaluateAICoach, getLocalHeuristicResponse } from './utils/aiCoach';
 import { cleanInputString, checkThreatSignature, securityChecklist } from './utils/terminator';
 import { calculateRiskParams } from './utils/riskCheck';
-import { detectPatternAndTraps } from './utils/indicators';
+import { detectPatternAndTraps, calculateRSI, calculateMACD, calculateStochastic, calculateATR, calculateVWAP } from './utils/indicators';
 import { getEquitiesIntelligence } from './utils/equitiesIntelligence';
 
 // Pre-seeded historical logs for the scanner on mount
@@ -164,6 +164,19 @@ export default function App() {
   const [macd, setMacd] = useState(0.12);
   const [signalLine, setSignalLine] = useState(0.08);
   const [chartHistory, setChartHistory] = useState([]);
+
+  // Price flash animation: 'up' | 'down' | null
+  const [priceFlash, setPriceFlash] = useState(null);
+  const prevPriceRef = useRef(null);
+
+  // Precision computed indicator states
+  const [stochK, setStochK] = useState(50);
+  const [stochD, setStochD] = useState(50);
+  const [atrValue, setAtrValue] = useState(0);
+  const [vwapValue, setVwapValue] = useState(0);
+
+  // Live NSE price fetch states
+  const nseTimerRef = useRef(null);
 
   // UI styling / view selections
   const [chartType, setChartType] = useState('line');
@@ -313,6 +326,19 @@ export default function App() {
         config.currentPrice * (1 + (i - 130) * 0.00015 + (Math.sin(i / 8) * 0.0008))
       );
       setChartHistory(startHist);
+
+      // Compute initial indicators from seeded history
+      const rsiSeed = calculateRSI(startHist, 14);
+      if (rsiSeed !== null) setRsi(rsiSeed);
+      const { macd: m0, signal: s0 } = calculateMACD(startHist);
+      setMacd(m0);
+      setSignalLine(s0);
+      const { k: k0, d: d0 } = calculateStochastic(startHist, 14, 3);
+      setStochK(k0);
+      setStochD(d0);
+      setAtrValue(parseFloat(calculateATR(startHist, 14).toFixed(config.decimals)));
+      setVwapValue(calculateVWAP(startHist));
+      prevPriceRef.current = config.currentPrice;
     }
   }, [activeMarket, activeTickerKey]);
 
@@ -489,6 +515,74 @@ export default function App() {
     return () => clearInterval(bgScanner);
   }, [tickersState, activeTickerKey]);
 
+
+  // ── Live NSE price polling (Indian stocks — Groww public API, no auth required) ──
+  useEffect(() => {
+    const fetchNSEPrices = async () => {
+      if (activeMarket !== 'indianStocks') return;
+      try {
+        const symbols = (tickersState['indianStocks'] || []).map(t => t.symbol).join(',');
+        const res = await fetch(
+          `https://api.groww.in/v1/api/stocks/search/v3/query/exchange/NSE?query=${symbols}&page=0&size=20&isMFAllowed=false`,
+          { headers: { 'Accept': 'application/json' } }
+        );
+        if (!res.ok) return;
+        const json = await res.json();
+        const results = json?.data?.content || [];
+        if (results.length === 0) return;
+
+        setTickersState(prev => {
+          const next = { ...prev };
+          next['indianStocks'] = (next['indianStocks'] || []).map(ticker => {
+            const hit = results.find(r =>
+              r.nseScriptCode === ticker.symbol || r.bseScriptCode === ticker.symbol
+            );
+            if (hit && hit.ltp && hit.ltp > 0) {
+              const livePrice = parseFloat(hit.ltp);
+              const prevClose = parseFloat(hit.previousClose) || livePrice;
+              const chg = prevClose > 0 ? parseFloat(((livePrice - prevClose) / prevClose * 100).toFixed(2)) : 0;
+              // If this is active ticker, update main price state
+              if (ticker.key === activeTickerKey) {
+                setPrice(livePrice);
+                setChartHistory(prev => {
+                  const updated = [...prev, livePrice].slice(-300);
+                  const rsiV = calculateRSI(updated, 14);
+                  if (rsiV !== null) setRsi(rsiV);
+                  const { macd: mV, signal: sV } = calculateMACD(updated);
+                  setMacd(mV); setSignalLine(sV);
+                  const { k, d } = calculateStochastic(updated, 14, 3);
+                  setStochK(k); setStochD(d);
+                  setAtrValue(parseFloat(calculateATR(updated, 14).toFixed(ticker.decimals || 2)));
+                  setVwapValue(calculateVWAP(updated));
+                  // Flash
+                  if (prevPriceRef.current !== null && livePrice !== prevPriceRef.current) {
+                    const dir = livePrice > prevPriceRef.current ? 'up' : 'down';
+                    setPriceFlash(dir);
+                    setTimeout(() => setPriceFlash(null), 600);
+                  }
+                  prevPriceRef.current = livePrice;
+                  return updated;
+                });
+              }
+              return { ...ticker, currentPrice: livePrice, change: chg };
+            }
+            return ticker;
+          });
+          return next;
+        });
+      } catch (e) {
+        // Silently ignore network errors — sim data continues
+      }
+    };
+
+    // Fetch immediately on market switch, then every 20 seconds
+    fetchNSEPrices();
+    nseTimerRef.current = setInterval(fetchNSEPrices, 20000);
+    return () => {
+      if (nseTimerRef.current) clearInterval(nseTimerRef.current);
+    };
+  }, [activeMarket, activeTickerKey]);
+
   // High performance throttle update watchlist prices (every 1.5 seconds)
   useEffect(() => {
     const watchlistTimer = setInterval(() => {
@@ -586,10 +680,44 @@ export default function App() {
                 return next.slice(-300);
               });
 
-              // Fluctuate indicators slightly with price
-              setRsi(prev => Math.max(10, Math.min(90, prev + (Math.random() - 0.5) * 1.5)));
-              setMacd(prev => prev + (Math.random() - 0.5) * 0.02);
-              setSignalLine(prev => prev + (Math.random() - 0.5) * 0.01);
+              // Compute real indicators from actual price history
+              setChartHistory(prev => {
+                const updated = [...prev, lastPrice].slice(-300);
+
+                // RSI from actual price data (Wilder's smoothing)
+                const rsiVal = calculateRSI(updated, 14);
+                if (rsiVal !== null) setRsi(rsiVal);
+
+                // MACD from EMA12 - EMA26 with signal line
+                const { macd: macdVal, signal: sigVal } = calculateMACD(updated);
+                setMacd(macdVal);
+                setSignalLine(sigVal);
+
+                // Stochastic %K/%D
+                const { k, d } = calculateStochastic(updated, 14, 3);
+                setStochK(k);
+                setStochD(d);
+
+                // ATR (volatility measure)
+                const atr = calculateATR(updated, 14);
+                setAtrValue(parseFloat(atr.toFixed(decimals)));
+
+                // VWAP (price mean)
+                const vwap = calculateVWAP(updated);
+                setVwapValue(vwap);
+
+                return updated;
+              });
+
+              // Price flash direction
+              if (prevPriceRef.current !== null) {
+                const dir = lastPrice > prevPriceRef.current ? 'up' : lastPrice < prevPriceRef.current ? 'down' : null;
+                if (dir) {
+                  setPriceFlash(dir);
+                  setTimeout(() => setPriceFlash(null), 600);
+                }
+              }
+              prevPriceRef.current = lastPrice;
             }
           }
         } catch(err) {
@@ -1190,11 +1318,28 @@ export default function App() {
                 <div className="active-symbol-title" id="activeSymbol">{activeConfig.symbol}</div>
               </div>
               <div className="live-price-wrapper">
-                <span className="live-price" id="livePrice">
+                <span
+                  className={`live-price ${priceFlash === 'up' ? 'price-flash-up' : priceFlash === 'down' ? 'price-flash-down' : ''}`}
+                  id="livePrice"
+                >
                   {price.toFixed(activeConfig.decimals)}
                 </span>
                 <span className={`price-change-badge ${activeConfig.change >= 0 ? 'positive' : 'negative'}`} id="priceChange">
                   {activeConfig.change >= 0 ? '+' : ''}{activeConfig.change.toFixed(2)}%
+                </span>
+              </div>
+              <div style={{ display: 'flex', gap: '6px', marginTop: '4px', flexWrap: 'wrap', justifyContent: 'flex-end', alignItems: 'center' }}>
+                <span className="stat-pill cyan">
+                  <span className="stat-pill-label">STOCH</span>
+                  <span className="stat-pill-val">{stochK.toFixed(1)}/<span style={{color:'var(--gold-accent)'}}>{stochD.toFixed(1)}</span></span>
+                </span>
+                <span className="stat-pill green">
+                  <span className="stat-pill-label">ATR</span>
+                  <span className="stat-pill-val">{atrValue > 0 ? atrValue.toFixed(activeConfig.decimals) : '—'}</span>
+                </span>
+                <span className="stat-pill gold">
+                  <span className="stat-pill-label">VWAP</span>
+                  <span className="stat-pill-val">{vwapValue > 0 ? vwapValue.toFixed(activeConfig.decimals) : '—'}</span>
                 </span>
               </div>
               <div id="volumeText" style={{ fontSize: '9px', color: 'var(--text-muted)', fontFamily: "'Orbitron', sans-serif", marginTop: '2px', textTransform: 'uppercase', textAlign: 'right' }}>
@@ -1703,22 +1848,51 @@ export default function App() {
 
                   {/* Dashboard live indicators overlay */}
                   <div className="indicators-row">
+                    {/* RSI with visual bar */}
                     <div className="indicator-badge">
                       <div className="indicator-label" id="lblRsi">{dict.lblRsi || "RSI (14)"}</div>
                       <div className="indicator-value" id="rsiVal" style={{ color: rsi > 70 ? 'var(--red-neon)' : (rsi < 30 ? 'var(--green-neon)' : 'var(--cyan)') }}>
                         {rsi.toFixed(1)}
                       </div>
+                      <div className="rsi-bar-track" style={{ marginTop: '4px' }}>
+                        <div
+                          className={`rsi-bar-fill ${rsi > 70 ? 'overbought' : rsi < 30 ? 'oversold' : 'neutral'}`}
+                          style={{ width: `${Math.min(100, Math.max(0, rsi))}%` }}
+                        ></div>
+                      </div>
+                      <div style={{ fontSize: '8px', color: rsi > 70 ? 'var(--red-neon)' : rsi < 30 ? 'var(--green-neon)' : 'var(--text-muted)', marginTop: '2px', textAlign: 'center' }}>
+                        {rsi > 70 ? 'OVERBOUGHT' : rsi < 30 ? 'OVERSOLD' : 'NEUTRAL'}
+                      </div>
                     </div>
+                    {/* MACD with histogram color */}
                     <div className="indicator-badge">
                       <div className="indicator-label" id="lblMacd">{dict.lblMacd || "MACD"}</div>
                       <div className="indicator-value" id="macdVal" style={{ color: macd >= signalLine ? 'var(--green-neon)' : 'var(--red-neon)' }}>
-                        {macd.toFixed(3)}
+                        {macd.toFixed(4)}
+                      </div>
+                      <div style={{ display: 'flex', gap: '2px', alignItems: 'flex-end', justifyContent: 'center', marginTop: '4px', height: '18px' }}>
+                        {[...Array(7)].map((_, i) => {
+                          const hist = macd - signalLine;
+                          const h = Math.min(18, Math.abs(hist) * 800 + 2);
+                          return <div key={i} className="macd-hist-bar" style={{ height: `${h}px`, background: hist >= 0 ? 'var(--green-neon)' : 'var(--red-neon)', opacity: 0.5 + i * 0.07 }}></div>;
+                        })}
+                      </div>
+                      <div style={{ fontSize: '8px', color: macd >= signalLine ? 'var(--green-neon)' : 'var(--red-neon)', marginTop: '2px', textAlign: 'center' }}>
+                        {macd >= signalLine ? '▲ BULL' : '▼ BEAR'}
                       </div>
                     </div>
+                    {/* Stochastic %K/%D */}
                     <div className="indicator-badge">
-                      <div className="indicator-label" id="lblSignal">{dict.lblSignal || "SIGNAL"}</div>
-                      <div className="indicator-value" id="signalVal" style={{ color: 'var(--text-secondary)' }}>
-                        {signalLine.toFixed(3)}
+                      <div className="indicator-label" id="lblSignal">STOCH</div>
+                      <div className="indicator-value" id="signalVal" style={{ color: stochK > 80 ? 'var(--red-neon)' : stochK < 20 ? 'var(--green-neon)' : 'var(--cyan)' }}>
+                        {stochK.toFixed(1)}
+                      </div>
+                      <div className="stoch-track" style={{ marginTop: '6px' }}>
+                        <div className="stoch-k-dot" style={{ left: `${stochK}%` }}></div>
+                        <div className="stoch-d-dot" style={{ left: `${stochD}%` }}></div>
+                      </div>
+                      <div style={{ fontSize: '8px', color: 'var(--text-muted)', marginTop: '8px', textAlign: 'center' }}>
+                        %K <span style={{color:'var(--cyan)'}}>{stochK.toFixed(0)}</span> / %D <span style={{color:'var(--gold-accent)'}}>{stochD.toFixed(0)}</span>
                       </div>
                     </div>
                   </div>

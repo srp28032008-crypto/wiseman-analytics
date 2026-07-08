@@ -193,9 +193,20 @@ export default function AuthGate({ children, currentLang, setCurrentLang, onAuth
 
   return (
     <div className="login-portal-overlay">
+      {/* Premium animated background layers */}
+      <div className="neon-grid"></div>
+      <div className="scanline-overlay"></div>
       <div className="login-grid-bg"></div>
       <div className="login-orb orb-1"></div>
       <div className="login-orb orb-2"></div>
+
+      {/* Floating particles */}
+      <div className="particle p1"></div>
+      <div className="particle p2"></div>
+      <div className="particle p3"></div>
+      <div className="particle p4"></div>
+      <div className="particle p5"></div>
+      <div className="particle p6"></div>
 
       <div className="login-split-wrapper">
         {/* Left Side: Modern Premium Stock Terminal Promos & Live Indexes */}
