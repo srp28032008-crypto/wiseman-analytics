@@ -1,7 +1,7 @@
 // Wiseman Analytics AI Coach & Advisor Heuristics - Modular Utility
 import { marketVols, langDb } from '../config/marketData';
 
-export function evaluateAICoach({ vol, rsi, macd, signalLine, activeMarket, activeTickerKey, currentLang, marketTickers }) {
+export function evaluateAICoach({ vol, rsi, macd, signalLine, stochK, stochD, atr, masterSignal, activeMarket, activeTickerKey, currentLang, marketTickers }) {
   const activeConfig = marketTickers[activeMarket]?.find(t => t.key === activeTickerKey);
   if (!activeConfig) return null;
 
@@ -9,6 +9,30 @@ export function evaluateAICoach({ vol, rsi, macd, signalLine, activeMarket, acti
   const dict = langDb[currentLang] || langDb['en'];
   const macdHist = macd - signalLine;
   const isLowVol = vol < (activeMarket === 'crypto' ? 50 : 15);
+
+  // If masterSignal from signalEngine is available, use it for confidence
+  if (masterSignal && masterSignal.score !== undefined && Math.abs(masterSignal.score) >= 2) {
+    const msDir = masterSignal.direction;
+    const isBullish = ['STRONG_BUY','BUY','MILD_BUY'].includes(msDir);
+    const isBearish = ['STRONG_SELL','SELL','MILD_SELL'].includes(msDir);
+    const conf = masterSignal.confidence;
+    const confStr = conf.toFixed(1) + '%';
+    const statusKey = isBullish ? (dict.statusApproved || 'APPROVED') : isBearish ? (dict.statusApproved || 'APPROVED') : (dict.statusAvoid || 'AVOID');
+    const reasons = masterSignal.reasons || [];
+    const topReasons = reasons.filter(r => r.type !== 'neutral').slice(0, 3);
+    const name = (activeConfig && activeConfig.symbol) ? activeConfig.symbol.replace('_',' ') : activeTickerKey;
+    const trapText = masterSignal.trap ? ' | ' + masterSignal.trap.desc : '';
+    return {
+      status: statusKey,
+      statusClass: isBullish ? 'status-approved' : isBearish ? 'status-approved' : 'status-avoid',
+      glowClass: isBullish ? 'buy-glow' : isBearish ? 'sell-glow' : 'neutral-glow',
+      confidence: confStr,
+      confidenceFill: confStr,
+      confidenceColor: isBullish ? 'var(--green-neon)' : isBearish ? 'var(--red-neon)' : 'var(--cyan)',
+      quote: '"' + name + ' — ' + msDir.replace('_',' ') + ' (Score: ' + masterSignal.score + ')' + trapText + '. R:R = ' + masterSignal.rrRatio + '. SL: ' + masterSignal.stopLoss + ' T1: ' + masterSignal.target1 + ' T2: ' + masterSignal.target2 + '"',
+      rationales: topReasons.map(r => r.text)
+    };
+  }
 
   if (isLowVol) {
     return {

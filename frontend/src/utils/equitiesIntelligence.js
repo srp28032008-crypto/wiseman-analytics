@@ -1,5 +1,5 @@
 // AI Equities & Assets Intelligence Board Analyzer & Tip Generator
-export function getEquitiesIntelligence(tickerKey, symbol, price, lang) {
+export function getEquitiesIntelligence(tickerKey, symbol, price, lang, liveRsi, liveMacd, liveSignal, liveStochK, liveAtr, masterSignal) {
   const symUpper = (symbol || '').toUpperCase().trim();
   let market = 'indianStocks';
   
@@ -21,14 +21,26 @@ export function getEquitiesIntelligence(tickerKey, symbol, price, lang) {
   hash = Math.abs(hash);
 
   const decimals = (market === 'forex') ? 5 : ((symUpper === 'SILVER' || symUpper === 'NAT_GAS') ? 3 : 2);
-  const isBuy = hash % 2 === 0;
+  // Use real signal if available, else fall back to hash
+  let isBuy;
+  if (masterSignal && masterSignal.score !== undefined) {
+    isBuy = masterSignal.score >= 0;
+  } else if (liveRsi !== undefined && liveRsi !== null) {
+    // RSI-based bias: oversold = buy, overbought = sell, neutral = hash
+    isBuy = liveRsi < 50 ? true : liveRsi > 60 ? false : hash % 2 === 0;
+  } else {
+    isBuy = hash % 2 === 0;
+  }
   
-  // 98% target confidence (e.g. 98.15% to 98.98%)
-  const confidence = (98.15 + (hash % 84) / 100).toFixed(2);
+  // Use masterSignal confidence if available, otherwise deterministic
+  const confidence = (masterSignal && masterSignal.confidence > 0)
+    ? masterSignal.confidence.toFixed(2)
+    : (98.15 + (hash % 84) / 100).toFixed(2);
   
   // Volatility buffer ATR (Average True Range) - usually 0.8% to 3.5%
+  // Use real ATR if provided, otherwise hash-based approximation
   const atrPercent = 0.008 + (hash % 27) / 1000;
-  const ATR = price * atrPercent;
+  const ATR = (liveAtr && liveAtr > 0) ? liveAtr : (price * atrPercent);
   
   const entry = price;
   const stopLoss = isBuy ? price - ATR * 1.5 : price + ATR * 1.5;
@@ -55,9 +67,9 @@ export function getEquitiesIntelligence(tickerKey, symbol, price, lang) {
   const resistanceBlockMax = price + ATR * 1.8;
 
   // Dynamic Oscillator stats
-  const rsiValue = isBuy ? 38 + (hash % 18) : 58 + (hash % 18); // Buy: oversold/neutral. Sell: overbought/neutral
-  const macdVal = isBuy ? 0.02 + (hash % 50) / 1000 : -0.02 - (hash % 50) / 1000;
-  const signalVal = isBuy ? macdVal * 0.7 : macdVal * 1.3;
+  const rsiValue = (liveRsi !== undefined && liveRsi !== null) ? liveRsi : (isBuy ? 38 + (hash % 18) : 58 + (hash % 18));
+  const macdVal = (liveMacd !== undefined) ? liveMacd : (isBuy ? 0.02 + (hash % 50) / 1000 : -0.02 - (hash % 50) / 1000);
+  const signalVal = (liveSignal !== undefined) ? liveSignal : (isBuy ? macdVal * 0.7 : macdVal * 1.3);
 
   // Localized recommendations
   const actionText = {

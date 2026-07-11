@@ -17,6 +17,7 @@ import { evaluateAICoach, getLocalHeuristicResponse } from './utils/aiCoach';
 import { cleanInputString, checkThreatSignature, securityChecklist } from './utils/terminator';
 import { calculateRiskParams } from './utils/riskCheck';
 import { detectPatternAndTraps, calculateRSI, calculateMACD, calculateStochastic, calculateATR, calculateVWAP } from './utils/indicators';
+import { computeSignal, detectFVG, detectLiquidityZones, detectTrendStrength } from './utils/signalEngine';
 import { getEquitiesIntelligence } from './utils/equitiesIntelligence';
 
 // Pre-seeded historical logs for the scanner on mount
@@ -178,6 +179,13 @@ export default function App() {
   // Live NSE price fetch states
   const nseTimerRef = useRef(null);
 
+  // Rolling history for divergence detection (last 60 RSI values, last 60 MACD values)
+  const rsiHistoryRef = useRef([]);
+  const macdHistoryRef = useRef([]);
+
+  // Computed master signal from signalEngine
+  const [masterSignal, setMasterSignal] = useState(null);
+
   // UI styling / view selections
   const [chartType, setChartType] = useState('line');
   const [activeDrawingTool, setActiveDrawingTool] = useState(null);
@@ -254,7 +262,7 @@ export default function App() {
   // Memoize AI Equities Intelligence (98% tips & analyzed news)
   const equitiesIntel = useMemo(() => {
     if (activeMarket !== 'indianStocks') return null;
-    return getEquitiesIntelligence(activeTickerKey, activeConfig.symbol, price, currentLang);
+    return getEquitiesIntelligence(activeTickerKey, activeConfig.symbol, price, currentLang, rsi, macd, signalLine, stochK, atrValue, masterSignal);
   }, [activeMarket, activeTickerKey, activeConfig.symbol, price, currentLang]);
 
   const dict = langDb[currentLang] || langDb['en'];
@@ -686,12 +694,16 @@ export default function App() {
 
                 // RSI from actual price data (Wilder's smoothing)
                 const rsiVal = calculateRSI(updated, 14);
-                if (rsiVal !== null) setRsi(rsiVal);
+                if (rsiVal !== null) {
+                  setRsi(rsiVal);
+                  rsiHistoryRef.current = [...rsiHistoryRef.current, rsiVal].slice(-60);
+                }
 
                 // MACD from EMA12 - EMA26 with signal line
                 const { macd: macdVal, signal: sigVal } = calculateMACD(updated);
                 setMacd(macdVal);
                 setSignalLine(sigVal);
+                macdHistoryRef.current = [...macdHistoryRef.current, macdVal].slice(-60);
 
                 // Stochastic %K/%D
                 const { k, d } = calculateStochastic(updated, 14, 3);
@@ -705,6 +717,20 @@ export default function App() {
                 // VWAP (price mean)
                 const vwap = calculateVWAP(updated);
                 setVwapValue(vwap);
+
+                // Compute master signal from all real indicators
+                const sig = computeSignal({
+                  prices: updated,
+                  rsi: rsiVal !== null ? rsiVal : rsi,
+                  macd: macdVal, signalLine: sigVal,
+                  stochK: k, stochD: d,
+                  atr: atr, volume,
+                  rsiHistory: rsiHistoryRef.current,
+                  macdHistory: macdHistoryRef.current,
+                  market: activeMarket,
+                  decimals
+                });
+                setMasterSignal(sig);
 
                 return updated;
               });
@@ -1195,6 +1221,10 @@ export default function App() {
     rsi,
     macd,
     signalLine,
+    stochK,
+    stochD,
+    atr: atrValue,
+    masterSignal,
     activeMarket,
     activeTickerKey,
     currentLang,
